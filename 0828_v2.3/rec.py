@@ -1,19 +1,22 @@
-from scapy.all import *
+import socket
 import netfilterqueue
 import os
+from scapy.all import IP, Raw 
+import hashlib
+
+LS_IP = "10.0.0.3"
+RS_IP = "11.0.0.3"
 
 
-def packetParse(packet):
-
-    data = packet.get_payload()
+def packetParse(payload):
+    data = payload.get_payload()
     pkt = IP(data)
-    #Detail information
-    print(pkt.show())
-    #print(pkt[Raw].load.decode())
-    if IP in pkt:
 
+    if IP in pkt:
         DST_IP = pkt[IP].dst
         SRC_IP = pkt[IP].src
+
+        # if SRC_IP == LS_IP or SRC_IP == RS_IP:
 
         print(pkt.summary())
         print("src IP:", SRC_IP)
@@ -27,14 +30,7 @@ def packetParse(packet):
 
         print("=" * 40)
 
-    packet.accept()
-
-# def allowOrNotAllow():
-#     if packet == "goodpkt":
-#         allow = 1
-#     else 
-#         allow = 0
-#     return pkt
+    payload.accept()
 
 def main():
     os.system('iptables -A INPUT -j NFQUEUE --queue-num 0')
