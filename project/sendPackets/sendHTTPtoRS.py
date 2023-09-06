@@ -3,7 +3,7 @@ from scapy.all import *
 src_ip = "192.168.1.1"
 
 #Target machine
-dstIP = "12.0.0.4"
+dstIP = "10.0.0.3"
 dstPort = 80 
 
 #Packet Archi
