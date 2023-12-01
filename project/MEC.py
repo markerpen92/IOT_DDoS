@@ -1,19 +1,22 @@
 '''
-Intergrated All Functions by using threading
+Intergrated All Functions by using threading (MEC Interface)
 '''
 import os
 import netfilterqueue
+import threading
+import time
 from Forwarding import packetParse
 from MeasureConnectedTime import GetConnectedTime
-import threading
+from MeasureTraffic import GetTraffic
+from functools import partial
+
 
 IOTDevicesInfo = {}
-
 
 def ForwardpktAndGetService() : 
     os.system('iptables -I FORWARD -j NFQUEUE --queue-num 1')
     queue1 = netfilterqueue.NetfilterQueue()
-    queue1.bind(1, packetParse)
+    queue1.bind(1, partial(packetParse , IOTDevicesInfo=IOTDevicesInfo))
     try:
         queue1.run()  # Main loop for queue 1
     except KeyboardInterrupt : 
@@ -23,7 +26,14 @@ def ForwardpktAndGetService() :
 
 def GetIOTDevicesInfo() : 
     while 1 : 
-        GetConnectedTime(IOTDevicesInfo)
+        try : 
+            print("In Correct Function")
+            GetConnectedTime(IOTDevicesInfo)
+            GetTraffic(IOTDevicesInfo)
+        except Exception as e :
+            print(f"<Error> GetIOTDevicesInfo : {e}")
+            time.sleep(2.0)
+            continue
 
 
 def DetectAndDefenseSys() : 

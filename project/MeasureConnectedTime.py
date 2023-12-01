@@ -7,8 +7,9 @@ def GetConnectedTime(IOTDevicesInfo) :
     RecordFirstLine = ReadRecord(filename)
     srcip = AnalysisRecord(RecordFirstLine)
     if srcip == None : 
-        print("Read srcip is Nono")
+        print("Read srcip is None")
         exit(1)
+    print(IOTDevicesInfo)
     if IOTDevicesInfo[srcip]['StartTime'] == 0 : 
         if IOTDevicesInfo[srcip]['EndTime'] != 0 : 
             print("Error Endtime")
@@ -17,4 +18,7 @@ def GetConnectedTime(IOTDevicesInfo) :
     else : 
         IOTDevicesInfo[srcip]['EndTime'] = time.ctime()
 
-    IOTDevicesInfo[srcip]['ConnectedTime'] = time.strptime(IOTDevicesInfo["StartTime"], "%a %b %d %H:%M:%S %Y") - time.strptime(IOTDevicesInfo["EndTime"], "%a %b %d %H:%M:%S %Y")
+        startTime = time.strptime(IOTDevicesInfo[srcip]["StartTime"], "%a %b %d %H:%M:%S %Y")
+        endTime   = time.strptime(IOTDevicesInfo[srcip]["EndTime"], "%a %b %d %H:%M:%S %Y")
+        connectedTime = time.mktime(endTime)-time.mktime(startTime)
+        IOTDevicesInfo[srcip]['ConnectedTime'] = connectedTime
