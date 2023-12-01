@@ -6,6 +6,7 @@ import threading
 LS_IP = "10.0.0.3"
 RS_IP = "12.0.0.4"
 WhiteList = [RS_IP]
+ResponseList = []
 
 # Write Record in 'Connect time' file  &  'Traffic' file  &  'CPU usage rate' file
 ConnectedTimeRecord = "./MeasureConnectedTime.txt"
@@ -58,7 +59,7 @@ def packetParse(ThePacket , IOTDevicesInfo) :
         if DstIP in WhiteList : 
             CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP)
             PayloadData = "0"
-            if Raw in packet[Raw] : 
+            if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8')
             ReplyRequest = ServiceProvide(PayloadData)
             print(f"=====  The Payload Data : {PayloadData} =====")
@@ -71,14 +72,24 @@ def packetParse(ThePacket , IOTDevicesInfo) :
             append_string_to_file(TrafficInputstr , TrafficRecord)
             append_string_to_file(CPUUseRateInputstr , CPUOccupyRecord)
 
+            ResponseList.append(SrcIP)
+
             print(f"The ReplyRequest : {ReplyRequest} !!!!!")
             if ReplyRequest != None : 
+                print("~~~Send to LS~~~")
                 SendLSPkt = IP(src=SrcIP, dst=LS_IP) / TCP(dport=DstPort) / Raw(load=PayloadData)
                 send(SendLSPkt)
             else : 
                 print("~~~Send to RS~~~")
                 ThePacket.accept()
+            return
 
-    except Exception as e :
+        elif DstIP in ResponseList : 
+            print(f"Resopnse from SRC-{SrcIP} to DST-{DstIP}\n\n")
+            ResponseList.remove(DstIP)
+            ThePacket.accept()
+            return
+
+    except Exception as e : 
         print("Now In Exp")
         print(f'Error Msg : {e}')
