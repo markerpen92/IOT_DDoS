@@ -5,10 +5,10 @@ import os
 import netfilterqueue
 import threading
 import time
+from functools import partial
 from Forwarding import packetParse
 from MeasureConnectedTime import GetConnectedTime
 from MeasureTraffic import GetTraffic
-from functools import partial
 
 
 IOTDevicesInfo = {}

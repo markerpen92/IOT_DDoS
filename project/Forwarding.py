@@ -38,7 +38,8 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
                 "ConnectedTime" : 0 , 
                 "PktAmount" : 0 ,
                 "TotalRxBytes"  : 0 , 
-                "Throughput"    : 0
+                "Throughput"    : 0 , 
+                "TrustValue"    : 100
             }
         }
         IOTDevicesInfo.update(Info)
