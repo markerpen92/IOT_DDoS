@@ -27,7 +27,7 @@ def ForwardpktAndGetService() :
 def GetIOTDevicesInfo() : 
     while 1 : 
         try : 
-            print("In Correct Function")
+            # print("In Correct Function")
             GetConnectedTime(IOTDevicesInfo)
             GetTraffic(IOTDevicesInfo)
         except Exception as e :
