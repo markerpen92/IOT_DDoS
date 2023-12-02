@@ -7,9 +7,10 @@ import threading
 import time
 from functools import partial
 from Forwarding import packetParse
-from MeasureConnectedTime import GetConnectedTime
-from MeasureTraffic import GetTraffic
-
+from Measurement.MeasureConnectedTime import GetConnectedTime
+from Measurement.MeasureTraffic import GetTraffic
+from IDS.SimpleDetectionSys import SimpleDetectionSystem
+from IPS.Iptables import Iptables
 
 IOTDevicesInfo = {}
 
@@ -38,8 +39,13 @@ def GetIOTDevicesInfo() :
 
 def DetectAndDefenseSys() : 
     while 1 : 
-        pass
-
+        try : 
+            SimpleDetectionSystem(IOTDevicesInfo)
+            Iptables()
+        except Exception as e :
+            print(f"<Error> DetectAndDefenseSys : {e}")
+            time.sleep(2.0)
+            continue
 
 def main() : 
     os.system("sudo iptables-save > iptables.conf")

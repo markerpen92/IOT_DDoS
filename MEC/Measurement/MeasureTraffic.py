@@ -2,6 +2,8 @@ import re
 import time
 import traceback
 
+# Main Function : GetTraffic
+
 def ReadRecord(filename) : 
     with open(filename , 'r+') as file : 
         lines = file.readlines()
@@ -38,7 +40,7 @@ def GetPktsizeRecord(record) :
 
 def GetTraffic(IOTDevicesInfo) : 
     try : 
-        filename = "./MeasureTraffic.txt"
+        filename = "Measurement/Record/MeasureTraffic.txt"
         RecordFirstLine = ReadRecord(filename)
         if RecordFirstLine == None : 
             time.sleep(2)
@@ -51,7 +53,7 @@ def GetTraffic(IOTDevicesInfo) :
         IOTDevicesInfo[srcip]["PktAmount"] += 1
         IOTDevicesInfo[srcip]["TotalRxBytes"] += int(pktsize)
         if IOTDevicesInfo[srcip]["ConnectedTime"] == 0 : 
-            print(f"<Warning Event> SrcIP[{srcip}] ConnectedTime is 0\n\n\n")
+            print(f"<Warning Event> SrcIP[{srcip}] ConnectedTime is 0 -> {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount : {IOTDevicesInfo[srcip]['PktAmount']}\n\n\n")
             # print(f"Pktsize is : {pktsize}")
             IOTDevicesInfo[srcip]["Throughput"] = float(pktsize)*1.0*8.0/1000000
             return
