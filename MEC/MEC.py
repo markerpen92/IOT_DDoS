@@ -30,6 +30,7 @@ def GetIOTDevicesInfo() :
         try : 
             # print("In Correct Function")
             GetConnectedTime(IOTDevicesInfo)
+            # time.sleep(1.0)
             GetTraffic(IOTDevicesInfo)
         except Exception as e :
             print(f"<Error> GetIOTDevicesInfo : {e}")
@@ -39,13 +40,14 @@ def GetIOTDevicesInfo() :
 
 def DetectAndDefenseSys() : 
     while 1 : 
-        try : 
-            SimpleDetectionSystem(IOTDevicesInfo)
-            Iptables()
-        except Exception as e :
-            print(f"<Error> DetectAndDefenseSys : {e}")
-            time.sleep(2.0)
-            continue
+        pass
+        # try : 
+        #     SimpleDetectionSystem(IOTDevicesInfo)
+        #     Iptables()
+        # except Exception as e :
+        #     print(f"<Error> DetectAndDefenseSys : {e}")
+        #     time.sleep(2.0)
+        #     continue
 
 def main() : 
     os.system("sudo iptables-save > iptables.conf")

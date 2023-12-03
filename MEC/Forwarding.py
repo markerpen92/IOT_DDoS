@@ -21,9 +21,11 @@ def append_string_to_file(input_string, filename) :
     lock = threading.Lock()
     try :
         with lock : 
-            with open(filename, 'a') as file :
+            with open(filename, 'a+') as file :
                 file.write(input_string + '\n')
-            # print(f'String Add into end of file:{filename}!')
+                file.close()
+            # print(f'String Add into end of file:{filename}! || Content : {input_string}')
+
     except Exception as e :
         print(f'Error Msg : {e}')
 
@@ -34,7 +36,7 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
         Info = {
             SrcIP : {
                 "ProtocalType" : ProtocalType , 
-                "SynOrFin"     : SynOrFin     , 
+                # "SynOrFin"     : SynOrFin     , 
                 "StartTime" : 0 ,
                 "EndTime"   : 0 ,
                 "ConnectedTime" : 0 , 
@@ -48,7 +50,7 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
 
 '''
 File Record : 
-    Connected TIme Record - [srcip , dstip , dstport , protocaltype , SynOrFin]
+    Connected TIme Record - [srcip , protocaltype , SynOrFin , PktTime]
     Traffic Record - [srcip , dstip , dstport , pktsize]
     CPU Record - [srcip , dstip , dstport , service]
 '''
@@ -79,8 +81,7 @@ def packetParse(ThePacket , IOTDevicesInfo) :
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
             ReplyRequest = ServiceProvide(PayloadData)
             # print(f"=====  The Payload Data : {PayloadData} =====")
-            
-            ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}"
+            ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
             
