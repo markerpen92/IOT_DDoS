@@ -43,6 +43,7 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
                 "PktAmount" : 0 ,
                 "TotalRxBytes"  : 0 , 
                 "Throughput"    : 0 , 
+                "IOTInfoIsChanged" : False , 
                 "TrustValue"    : 100
             }
         }

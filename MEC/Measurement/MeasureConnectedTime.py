@@ -49,6 +49,7 @@ def GetConnectedTime(IOTDevicesInfo) :
             print("Read PktTime is None")
             time.sleep(2.0)
             return
+        IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
         # For TCP Connected Time
         # if IOTDevicesInfo[srcip]['StartTime'] == 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "TCP" and SYNorFIN == "SYN" : 
         # print(f"IOTDevicesInfo : {IOTDevicesInfo} || SYNFIN : {SYNorFIN} ||")

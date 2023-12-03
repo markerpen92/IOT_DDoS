@@ -9,6 +9,7 @@ def ReadSuspiciousFile(filename) :
         if lines : 
             FirstLine = lines.pop(0)
             file.seek(0)
+            file.writelines(lines)
             file.truncate()
             # print("Delete first line")
             file.close()

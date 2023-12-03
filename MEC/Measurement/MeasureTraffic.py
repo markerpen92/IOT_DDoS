@@ -58,6 +58,7 @@ def GetTraffic(IOTDevicesInfo) :
         if srcip == None : 
             print("Read srcip is None")
             exit(1)
+        IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
         IOTDevicesInfo[srcip]["PktAmount"] += 1
         IOTDevicesInfo[srcip]["TotalRxBytes"] += int(pktsize)
         if IOTDevicesInfo[srcip]["ConnectedTime"] == 0 : 
