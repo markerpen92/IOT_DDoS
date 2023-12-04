@@ -49,6 +49,8 @@ def GetConnectedTime(IOTDevicesInfo) :
             print("Read PktTime is None")
             time.sleep(2.0)
             return
+        if srcip not in IOTDevicesInfo : 
+            return
         IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
         # For TCP Connected Time
         # if IOTDevicesInfo[srcip]['StartTime'] == 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "TCP" and SYNorFIN == "SYN" : 
@@ -70,7 +72,7 @@ def GetConnectedTime(IOTDevicesInfo) :
             #     IOTDevicesInfo[srcip]['StartTime'] = 0
             #     IOTDevicesInfo[srcip]['EndTime'] = 0
             #     IOTDevicesInfo[srcip]['ConnectedTime'] = 0
-            print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']}\n\n\n\n\n\n")
+            print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
         
         # For UDP Connected Time (not real connected time , this function is easy to know thr)
         elif IOTDevicesInfo[srcip]['StartTime'] == 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "UDP" : 
@@ -84,7 +86,7 @@ def GetConnectedTime(IOTDevicesInfo) :
             endTime   = time.strptime(IOTDevicesInfo[srcip]["EndTime"], "%a %b %d %H:%M:%S %Y")
             connectedTime = time.mktime(endTime)-time.mktime(startTime)
             IOTDevicesInfo[srcip]['ConnectedTime'] = connectedTime
-            print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']}\n\n\n\n\n\n")
+            print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
 
     except Exception as e : 
         traceback_str = traceback.format_exc()

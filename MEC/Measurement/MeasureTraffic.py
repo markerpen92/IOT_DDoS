@@ -58,11 +58,13 @@ def GetTraffic(IOTDevicesInfo) :
         if srcip == None : 
             print("Read srcip is None")
             exit(1)
+        if srcip not in IOTDevicesInfo : 
+            return
         IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
         IOTDevicesInfo[srcip]["PktAmount"] += 1
         IOTDevicesInfo[srcip]["TotalRxBytes"] += int(pktsize)
         if IOTDevicesInfo[srcip]["ConnectedTime"] == 0 : 
-            print(f"<Warning Event> SrcIP[{srcip}] ConnectedTime is 0 -> {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount : {IOTDevicesInfo[srcip]['PktAmount']}\n\n\n")
+            print(f"<Warning Event> SrcIP[{srcip}] ConnectedTime is 0 -> {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount : {IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n")
             # print(f"Pktsize is : {pktsize}")
             IOTDevicesInfo[srcip]["Throughput"] = IOTDevicesInfo[srcip]["TotalRxBytes"]*8.0/1000000/1
             return

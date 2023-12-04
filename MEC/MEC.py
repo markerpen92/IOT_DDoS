@@ -15,7 +15,6 @@ from IPS.Iptables import Iptables
 IOTDevicesInfo = {}
 
 def ForwardpktAndGetService() : 
-    os.system('iptables -I FORWARD -j NFQUEUE --queue-num 1')
     queue1 = netfilterqueue.NetfilterQueue()
     queue1.bind(1, partial(packetParse , IOTDevicesInfo=IOTDevicesInfo))
     try:
@@ -30,7 +29,6 @@ def GetIOTDevicesInfo() :
         try : 
             # print("In Correct Function")
             GetConnectedTime(IOTDevicesInfo)
-            # time.sleep(1.0)
             GetTraffic(IOTDevicesInfo)
         except Exception as e :
             print(f"<Error> GetIOTDevicesInfo : {e}")
@@ -43,7 +41,8 @@ def DetectAndDefenseSys() :
         # pass
         try : 
             SimpleDetectionSystem(IOTDevicesInfo)
-            Iptables()
+            Iptables(IOTDevicesInfo)
+            time.sleep(1.0)
         except Exception as e :
             print(f"<Error> DetectAndDefenseSys : {e}")
             time.sleep(2.0)
@@ -55,5 +54,6 @@ def main() :
     threading.Thread(target=GetIOTDevicesInfo).start()
     threading.Thread(target=DetectAndDefenseSys).start()
 
-if __name__ == '__main__':
+if __name__ == '__main__' :
+    os.system('iptables -I FORWARD -j NFQUEUE --queue-num 1')
     main()
