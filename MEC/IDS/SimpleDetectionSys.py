@@ -36,11 +36,11 @@ def SimpleDetectionSystem(IOTDevicesInfo) :
             if ConnectedTime > 0 : 
                 # print("+++++++    2    +++++++\n\n\n")
                 SuspiciousLevel = (PktAmount/ConnectedTime)/200
-                IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*10
+                IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*15
             elif ConnectedTime == 0 : 
                 # print("-------    3    -------\n\n\n")
                 SuspiciousLevel = (PktAmount)/200
-                IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*10
+                IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*15
 
             IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = False
             

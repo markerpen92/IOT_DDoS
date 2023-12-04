@@ -5,6 +5,7 @@ import os
 import netfilterqueue
 import threading
 import time
+import signal
 from functools import partial
 from Forwarding import packetParse
 from Measurement.MeasureConnectedTime import GetConnectedTime
@@ -54,6 +55,35 @@ def main() :
     threading.Thread(target=GetIOTDevicesInfo).start()
     threading.Thread(target=DetectAndDefenseSys).start()
 
+def EndMEC(sig , frame) : 
+    try : 
+        fileAPath = './Measurement/Record/MeasureConnectedTime.txt'
+        fileBPath = './Measurement/Record/MeasureCPUOccupy.txt'
+        fileCPath = './Measurement/Record/MeasureTraffic.txt'
+        with open(fileAPath , 'w') as fileA : 
+            fileA.write('')
+            fileA.close()
+            print(f'\nClean file-{fileAPath}')
+
+        with open(fileBPath , 'w') as fileB : 
+            fileB.write('')
+            fileB.close()
+            print(f'\nClean file-{fileBPath}')
+
+        with open(fileCPath , 'w') as fileC : 
+            fileC.write('')
+            fileC.close()
+            print(f'\nClean file-{fileCPath}')
+
+        cmd = "sudo iptables -F"
+        os.system(cmd)
+        print("\n<End Msg> Clean Iptables || End of MEC Exiting...")
+        exit()
+    except Exception as e :
+            print(f"<Error> EndMEC : {e}")
+            exit()
+
 if __name__ == '__main__' :
     os.system('iptables -I FORWARD -j NFQUEUE --queue-num 1')
     main()
+    signal.signal(signal.SIGINT, EndMEC)
