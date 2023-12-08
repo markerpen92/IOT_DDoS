@@ -52,7 +52,7 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
             return
         IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
 
-        if (IOTDevicesInfo[srcip]["ProtocalType"] == "TCP" and SYNorFIN == "SYN") : # or (IOTDevicesInfo[srcip]['StartTime'] == 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "TCP") : 
+        if IOTDevicesInfo[srcip]["ProtocalType"] == "TCP" and SYNorFIN == "SYN" : # or (IOTDevicesInfo[srcip]['StartTime'] == 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "TCP") : 
             IOTDevicesInfo[srcip]['EndTime'] = 0
             IOTDevicesInfo[srcip]['ConnectedTime'] = 0
             IOTDevicesInfo[srcip]['StartTime'] = GetPktTime(RecordFirstLine)

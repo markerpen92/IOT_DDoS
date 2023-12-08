@@ -40,7 +40,7 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
                 "EndTime"   : 0 ,
                 "ConnectedTime" : 0 , 
                 "PktAmount" : 0 ,
-                "PktAmountHistory" : deque(maxlen=6) , 
+                "PktAmountHistory" : deque([0]*5+["time"] , maxlen=6) , 
                 "TotalRxBytes"  : 0 , 
                 "Throughput"    : 0 , 
                 "IOTInfoIsChanged" : False , 

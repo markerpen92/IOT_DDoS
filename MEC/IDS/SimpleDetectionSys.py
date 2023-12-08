@@ -42,7 +42,7 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList) :
             # To make sure is script attack or not ??
             PktAmountHistory = list(IOTDevicesInfo[srcip]['PktAmountHistory'])[:-1]
             AverageAmountEachSec = sum(PktAmountHistory) / 5.0
-            Dispersion = math.exp(sum(abs(AverageAmountEachSec-amount) for amount in PktAmountHistory))
+            Dispersion = math.exp(-1*sum(abs(AverageAmountEachSec-amount) for amount in PktAmountHistory))
             if Dispersion > 0.5 : 
                 IOTDevicesInfo[srcip]["TrustValue"] -= Dispersion*10
 
