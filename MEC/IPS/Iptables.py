@@ -12,20 +12,19 @@ def ReadSuspiciousFile(filename) :
             file.seek(0)
             file.writelines(lines)
             file.truncate()
-            # print("Delete first line")
             file.close()
             return FirstLine
         else : 
-            # print(f"<No line to read>{file} has no record")
             return
 
-def Iptables(IOTDevicesInfo) : 
+def Iptables(IOTDevicesInfo , BlockList) : 
     filename = "IPS/SuspiciousList.txt"
     BadIP = ReadSuspiciousFile(filename)
     if BadIP == None : 
         time.sleep(2.0)
         return
     print(f"Ban Bad User : {BadIP}")
+    BlockList.append(BadIP)
     del IOTDevicesInfo[BadIP]
     cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
     print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")

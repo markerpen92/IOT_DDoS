@@ -1,5 +1,8 @@
 import threading
 import sys
+import math
+import time
+import traceback
 sys.path.append("../IPS")
 
 def append_string_to_file(input_string, filename) :
@@ -9,46 +12,48 @@ def append_string_to_file(input_string, filename) :
             with open(filename, 'a+') as file :
                 file.write(input_string + '\n')
                 file.close()
-            # print(f'String Add into end of file:{filename}!')
     except Exception as e :
         print(f'Error Msg : {e}')
 
 
-def SimpleDetectionSystem(IOTDevicesInfo) : 
+def SimpleDetectionSystem(IOTDevicesInfo , BlockList) : 
     SuspiciousFile = "IPS/SuspiciousList.txt"
     # print("~"*20)
     if IOTDevicesInfo == {} : 
         return
     try : 
         for srcip in IOTDevicesInfo : 
-            if IOTDevicesInfo[srcip]["IOTInfoIsChanged"] == False : 
-                # time.sleep(0.1)
+            if IOTDevicesInfo[srcip]["IOTInfoIsChanged"] == False or srcip in BlockList : 
                 continue
-            # if IOTDevicesInfo[srcip]["TrustValue"] < 30 : 
-            #     # print("=======    5    =======\n\n\n")
-            #     append_string_to_file(srcip , SuspiciousFile)
-            #     continue
             ConnectedTime = IOTDevicesInfo[srcip]["ConnectedTime"]
             PktAmount = IOTDevicesInfo[srcip]["PktAmount"]
+
             if ConnectedTime%100 < 0.001 and ConnectedTime/100 > 1 :  
-                # print("@@@@@@@   1    @@@@@@@\n\n\n")
                 IOTDevicesInfo[srcip]["TrustValue"] -= 10
+
             if ConnectedTime > 0 : 
-                # print("+++++++    2    +++++++\n\n\n")
                 SuspiciousLevel = (PktAmount/ConnectedTime)/200
                 IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*15
+
             elif ConnectedTime == 0 : 
-                # print("-------    3    -------\n\n\n")
                 SuspiciousLevel = (PktAmount)/200
                 IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*15
 
+            # To make sure is script attack or not ??
+            PktAmountHistory = list(IOTDevicesInfo[srcip]['PktAmountHistory'])[:-1]
+            AverageAmountEachSec = sum(PktAmountHistory) / 5.0
+            Dispersion = math.exp(sum(abs(AverageAmountEachSec-amount) for amount in PktAmountHistory))
+            if Dispersion > 0.5 : 
+                IOTDevicesInfo[srcip]["TrustValue"] -= Dispersion*10
+
             IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = False
             
-            # print("*******    4    *******\n\n\n")
             if IOTDevicesInfo[srcip]["TrustValue"] < 30 : 
-                # print("=======    5    =======\n\n\n")
                 append_string_to_file(srcip , SuspiciousFile)
                 continue
+                
     except Exception as e : 
-        print(f"<Error> MeasureTraffic : {e}")
+        traceback_str = traceback.format_exc()
+        print(f"<Error> IDS : {e}")
+        print(f"Traceback: {traceback_str}")
         time.sleep(2.0)

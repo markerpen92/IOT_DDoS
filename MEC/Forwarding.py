@@ -1,5 +1,6 @@
 from ServiceProviding import ServiceProvide
 from scapy.all import *
+from collections import deque
 import threading
 import traceback
 
@@ -24,7 +25,6 @@ def append_string_to_file(input_string, filename) :
             with open(filename, 'a+') as file :
                 file.write(input_string + '\n')
                 file.close()
-            # print(f'String Add into end of file:{filename}! || Content : {input_string}')
 
     except Exception as e :
         print(f'Error Msg : {e}')
@@ -36,11 +36,11 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
         Info = {
             SrcIP : {
                 "ProtocalType" : ProtocalType , 
-                # "SynOrFin"     : SynOrFin     , 
                 "StartTime" : 0 ,
                 "EndTime"   : 0 ,
                 "ConnectedTime" : 0 , 
                 "PktAmount" : 0 ,
+                "PktAmountHistory" : deque(maxlen=6) , 
                 "TotalRxBytes"  : 0 , 
                 "Throughput"    : 0 , 
                 "IOTInfoIsChanged" : False , 
@@ -56,7 +56,7 @@ File Record :
     CPU Record - [srcip , dstip , dstport , service]
 '''
 
-def packetParse(ThePacket , IOTDevicesInfo) : 
+def packetParse(ThePacket , IOTDevicesInfo , BlockList) : 
     try : 
         data = ThePacket.get_payload()
         packet = IP(data)
@@ -81,7 +81,6 @@ def packetParse(ThePacket , IOTDevicesInfo) :
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
             ReplyRequest = ServiceProvide(PayloadData)
-            # print(f"=====  The Payload Data : {PayloadData} =====")
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
@@ -92,7 +91,6 @@ def packetParse(ThePacket , IOTDevicesInfo) :
 
             ResponseList.append(SrcIP)
 
-            # print(f"The ReplyRequest : {ReplyRequest} !!!!!")
             if ReplyRequest != None : 
                 # print("~~~Send to LS~~~")
                 SendLSPkt = IP(src=SrcIP, dst=LS_IP) / TCP(dport=DstPort) / Raw(load=PayloadData)

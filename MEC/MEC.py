@@ -14,10 +14,11 @@ from IDS.SimpleDetectionSys import SimpleDetectionSystem
 from IPS.Iptables import Iptables
 
 IOTDevicesInfo = {}
+BlockList = []
 
 def ForwardpktAndGetService() : 
     queue1 = netfilterqueue.NetfilterQueue()
-    queue1.bind(1, partial(packetParse , IOTDevicesInfo=IOTDevicesInfo))
+    queue1.bind(1, partial(packetParse , IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList))
     try:
         queue1.run()  # Main loop for queue 1
     except KeyboardInterrupt : 
@@ -28,9 +29,8 @@ def ForwardpktAndGetService() :
 def GetIOTDevicesInfo() : 
     while 1 : 
         try : 
-            # print("In Correct Function")
-            GetConnectedTime(IOTDevicesInfo)
-            GetTraffic(IOTDevicesInfo)
+            GetConnectedTime(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
+            GetTraffic(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
         except Exception as e :
             print(f"<Error> GetIOTDevicesInfo : {e}")
             time.sleep(2.0)
@@ -41,8 +41,8 @@ def DetectAndDefenseSys() :
     while 1 : 
         # pass
         try : 
-            SimpleDetectionSystem(IOTDevicesInfo)
-            Iptables(IOTDevicesInfo)
+            SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
+            Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
             time.sleep(1.0)
         except Exception as e :
             print(f"<Error> DetectAndDefenseSys : {e}")
