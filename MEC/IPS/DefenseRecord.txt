@@ -1,0 +1,64 @@
+IP:192.168.1.1 - ConnectTime:1.0 - DecreaseTrust(SuspiciousLevel*5):24.32701894317049|(Pkt:976) - NowTrust:75.67298105682951
+IP:192.168.1.1 - ConnectTime:6.0 - DecreaseTrust(SuspiciousLevel*5):4.897551224387805|(Pkt:1176) - NowTrust:70.7754298324417
+IP:192.168.1.1 - ConnectTime:11.0 - DecreaseTrust(SuspiciousLevel*5):3.0605289466509134|(Pkt:1347) - NowTrust:67.71490088579078
+IP:192.168.1.1 - ConnectTime:16.0 - DecreaseTrust(SuspiciousLevel*5):2.9228894582265825|(Pkt:1871) - NowTrust:64.7920114275642
+IP:192.168.1.1 - ConnectTime:21.0 - DecreaseTrust(SuspiciousLevel*5):2.5853449507213258|(Pkt:2172) - NowTrust:62.20666647684288
+IP:192.168.1.1 - ConnectTime:26.0 - DecreaseTrust(SuspiciousLevel*5):2.280506095450525|(Pkt:2372) - NowTrust:59.92616038139235
+IP:192.168.1.1 - ConnectTime:31.0 - DecreaseTrust(SuspiciousLevel*5):2.0739928394026386|(Pkt:2572) - NowTrust:57.852167541989715
+IP:192.168.1.1 - ConnectTime:36.0 - DecreaseTrust(SuspiciousLevel*5):1.9248395967002752|(Pkt:2772) - NowTrust:55.92732794528944
+IP:192.168.1.1 - ConnectTime:41.0 - DecreaseTrust(SuspiciousLevel*5):1.812062532009853|(Pkt:2972) - NowTrust:54.11526541327959
+IP:192.168.1.1 - ConnectTime:46.0 - DecreaseTrust(SuspiciousLevel*5):1.7238006216985848|(Pkt:3172) - NowTrust:52.391464791581
+IP:192.168.1.1 - ConnectTime:51.0 - DecreaseTrust(SuspiciousLevel*5):1.6528439503558614|(Pkt:3372) - NowTrust:50.73862084122514
+IP:192.168.1.1 - ConnectTime:56.0 - DecreaseTrust(SuspiciousLevel*5):1.5137581915254539|(Pkt:3391) - NowTrust:49.22486264969969
+IP:192.168.1.1 - ConnectTime:61.0 - DecreaseTrust(SuspiciousLevel*5):1.545825615133682|(Pkt:3772) - NowTrust:47.67903703456601
+IP:192.168.1.1 - ConnectTime:66.0 - DecreaseTrust(SuspiciousLevel*5):1.504477069224126|(Pkt:3972) - NowTrust:46.174559965341885
+IP:192.168.1.1 - ConnectTime:71.0 - DecreaseTrust(SuspiciousLevel*5):1.4689520161119953|(Pkt:4172) - NowTrust:44.705607949229886
+IP:192.168.1.1 - ConnectTime:71.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:34.705607949229886
+IP:192.168.1.1 - ConnectTime:76.0 - DecreaseTrust(SuspiciousLevel*5):1.4038919516334882|(Pkt:4268) - NowTrust:33.301715997596396
+IP:192.168.1.1 - ConnectTime:81.0 - DecreaseTrust(SuspiciousLevel*5):1.4110588496722343|(Pkt:4572) - NowTrust:31.890657147924163
+IP:192.168.1.1 - ConnectTime:81.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:21.890657147924163
+
+IP:192.168.1.1 - ConnectTime:5.0 - DecreaseTrust(SuspiciousLevel*10):5.0469718169098545|(Pkt:1010) - NowTrust:89.9060563661803
+IP:192.168.1.1 - ConnectTime:10.0 - DecreaseTrust(SuspiciousLevel*10):3.448965310406878|(Pkt:1380) - NowTrust:83.00812574536654
+IP:192.168.1.1 - ConnectTime:15.0 - DecreaseTrust(SuspiciousLevel*10):2.632806771978937|(Pkt:1580) - NowTrust:77.74251220140867
+IP:192.168.1.1 - ConnectTime:20.0 - DecreaseTrust(SuspiciousLevel*10):2.224666300054992|(Pkt:1780) - NowTrust:73.29317960129869
+IP:192.168.1.1 - ConnectTime:25.0 - DecreaseTrust(SuspiciousLevel*10):1.9237691477022756|(Pkt:1924) - NowTrust:69.44564130589414
+IP:192.168.1.1 - ConnectTime:30.0 - DecreaseTrust(SuspiciousLevel*10):1.8164850181648502|(Pkt:2180) - NowTrust:65.81267126956445
+IP:192.168.1.1 - ConnectTime:30.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:55.81267126956445
+IP:192.168.1.1 - ConnectTime:35.0 - DecreaseTrust(SuspiciousLevel*10):1.6998542982030114|(Pkt:2380) - NowTrust:52.412962673158425
+IP:192.168.1.1 - ConnectTime:35.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:42.412962673158425
+IP:192.168.1.1 - ConnectTime:40.0 - DecreaseTrust(SuspiciousLevel*10):1.6123790715696322|(Pkt:2580) - NowTrust:39.18820453001916
+IP:192.168.1.1 - ConnectTime:40.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:29.188204530019163
+
+IP:192.168.1.1 - ConnectTime:3.0 - DecreaseTrust(SuspiciousLevel*15):12.803862803862804|(Pkt:1538) - NowTrust:61.58841158841159
+IP:192.168.1.1 - ConnectTime:5.0 - DecreaseTrust(SuspiciousLevel*15):8.689786128323005|(Pkt:1739) - NowTrust:35.51905320344257
+IP:192.168.1.1 - ConnectTime:10.0 - DecreaseTrust(SuspiciousLevel*15):4.853543936818954|(Pkt:1942) - NowTrust:20.958421392985706
+
+IP:192.168.1.1 - ConnectTime:5.0 - DecreaseTrust(SuspiciousLevel*15):5.8614831101339195|(Pkt:1173) - NowTrust:82.41555066959825
+IP:192.168.1.1 - ConnectTime:10.0 - DecreaseTrust(SuspiciousLevel*15):3.438968309507148|(Pkt:1376) - NowTrust:72.09864574107681
+IP:192.168.1.1 - ConnectTime:15.0 - DecreaseTrust(SuspiciousLevel*15):2.6294741051789643|(Pkt:1578) - NowTrust:64.21022342553991
+IP:192.168.1.1 - ConnectTime:20.0 - DecreaseTrust(SuspiciousLevel*15):2.224666300054992|(Pkt:1780) - NowTrust:57.536224525374934
+IP:192.168.1.1 - ConnectTime:25.0 - DecreaseTrust(SuspiciousLevel*15):1.9797624285085789|(Pkt:1980) - NowTrust:51.5969372398492
+IP:192.168.1.1 - ConnectTime:25.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:41.5969372398492
+IP:192.168.1.1 - ConnectTime:30.0 - DecreaseTrust(SuspiciousLevel*15):1.8164850181648502|(Pkt:2180) - NowTrust:36.14748218535465
+IP:192.168.1.1 - ConnectTime:30.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:26.147482185354647
+
+IP:192.168.1.1 - ConnectTime:0.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:90.0
+IP:192.168.1.1 - ConnectTime:3.0 - DecreaseTrust(SuspiciousLevel*15):12.545787545787546|(Pkt:1507) - NowTrust:52.362637362637365
+IP:192.168.1.1 - ConnectTime:5.0 - DecreaseTrust(SuspiciousLevel*15):8.529882070757546|(Pkt:1707) - NowTrust:26.772991150364724
+IP:192.168.1.1 - ConnectTime:1.0 - DecreaseTrust(SuspiciousLevel*15):26.94416749750748|(Pkt:1081) - NowTrust:19.167497507477563
+IP:192.168.1.1 - ConnectTime:2.0 - DecreaseTrust(SuspiciousLevel*15):16.05092361457813|(Pkt:1286) - NowTrust:51.847229156265605
+IP:192.168.1.1 - ConnectTime:5.0 - DecreaseTrust(SuspiciousLevel*15):8.64481311213272|(Pkt:1730) - NowTrust:25.91278981986744
+IP:192.168.1.1 - ConnectTime:12.0 - DecreaseTrust(SuspiciousLevel*15):3.8261268016329253|(Pkt:1837) - NowTrust:14.434409414968666
+IP:192.168.1.1 - ConnectTime:15.0 - DecreaseTrust(SuspiciousLevel*15):3.890888488968873|(Pkt:2335) - NowTrust:2.7617439480620476
+IP:192.168.1.1 - ConnectTime:20.0 - DecreaseTrust(SuspiciousLevel*15):3.1720241963705442|(Pkt:2538) - NowTrust:-6.754328641049586
+
+IP:192.168.1.1 - ConnectTime:0.0 - DecreaseTrust(Dispersion*10):10.0 - NowTrust:90.0
+IP:192.168.1.1 - ConnectTime:1.0 - DecreaseTrust(SuspiciousLevel*15):23.00598205383849|(Pkt:923) - NowTrust:20.982053838484532
+IP:192.168.1.1 - ConnectTime:6.0 - DecreaseTrust(SuspiciousLevel*15):7.013160086623356|(Pkt:1684) - NowTrust:-0.057426421385535775
+IP:192.168.1.1 - ConnectTime:2.0 - DecreaseTrust(SuspiciousLevel*15):19.058911632551172|(Pkt:1527) - NowTrust:42.82326510234648
+IP:192.168.1.1 - ConnectTime:5.0 - DecreaseTrust(SuspiciousLevel*15):8.629822106735958|(Pkt:1727) - NowTrust:16.93379878213861
+IP:192.168.1.1 - ConnectTime:10.0 - DecreaseTrust(SuspiciousLevel*15):4.816055183444966|(Pkt:1927) - NowTrust:2.4856332318037104
+
+IP:192.168.1.1 - ConnectTime:0.0 - DecreaseTrust(connection_count*5):995 - NowTrust:-895
+

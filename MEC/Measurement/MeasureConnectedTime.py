@@ -50,7 +50,7 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
             return
         if srcip not in IOTDevicesInfo or srcip in BlockList : 
             return
-        IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
+
 
         if IOTDevicesInfo[srcip]["ProtocalType"] == "TCP" and SYNorFIN == "SYN" : # or (IOTDevicesInfo[srcip]['StartTime'] == 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "TCP") : 
             IOTDevicesInfo[srcip]['EndTime'] = 0
@@ -83,12 +83,16 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
             IOTDevicesInfo[srcip]['ConnectedTime'] = connectedTime
             print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
 
+
+
         # these condition is to check distribution of pktamount in each sec
         if time.mktime(time.strptime(PktTime))-time.mktime(time.strptime(IOTDevicesInfo[srcip]['PktAmountHistory'][-1])) < 1 : 
             IOTDevicesInfo[srcip]['PktAmountHistory'][-2] += 1
         else : 
             IOTDevicesInfo[srcip]['PktAmountHistory'].pop()
             IOTDevicesInfo[srcip]['PktAmountHistory'].extend([0,PktTime])
+            '''Because IDS Detect per 1 sec'''
+            IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
 
     except Exception as e : 
         traceback_str = traceback.format_exc()
