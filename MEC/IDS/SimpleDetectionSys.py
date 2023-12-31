@@ -34,14 +34,13 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList) :
             if ConnectedTime > 0 : 
                 SuspiciousLevel = (PktAmount/ConnectedTime)/200
                 IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*15
-
-            elif ConnectedTime == 0 : 
-                SuspiciousLevel = (PktAmount)/200
-                IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*15
+            # elif ConnectedTime == 0 : 
+            #     SuspiciousLevel = (PktAmount)/200
+            #     IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*15
 
             # To make sure is script attack or not ??
             PktAmountHistory = list(IOTDevicesInfo[srcip]['PktAmountHistory'])[:-1]
-            AverageAmountEachSec = sum(PktAmountHistory) / 5.0
+            AverageAmountEachSec = sum(PktAmountHistory) / len(PktAmountHistory)
             Dispersion = math.exp(-1*sum(abs(AverageAmountEachSec-amount) for amount in PktAmountHistory))
             if Dispersion > 0.5 : 
                 IOTDevicesInfo[srcip]["TrustValue"] -= Dispersion*10

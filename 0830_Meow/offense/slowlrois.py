@@ -4,7 +4,7 @@ import sys
 import ssl
 import socket 
 
-targetIP = "127.0.0.1"
+targetIP = "12.0.0.4"
 targetPort= 80
 targetHostName = None
 socketExistsList = []
