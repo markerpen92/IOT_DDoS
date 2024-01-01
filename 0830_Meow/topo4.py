@@ -4,7 +4,7 @@ from mininet.node import Docker
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info
 from mininet.link import TCLink, Link
- 
+#
 def topology():
  
     "Create a network with some docker containers acting as hosts."
