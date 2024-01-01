@@ -4,7 +4,7 @@ import sys
 import ssl
 import socket 
 
-targetIP = "12.0.0.4"
+targetIP = "10.0.0.1"
 targetPort= 80
 targetHostName = None
 socketExistsList = []
@@ -17,7 +17,7 @@ pythonAgent = pythonVersion + osInfo
 
 
 
-def sendHttpEncoding(self,payload):
+def sendHttpEncoding(self,payload) :
     self.send(payload.encode("utf-8"))
 setattr(socket.socket,'sendHttpEncoding', sendHttpEncoding) # Adding New Methods 
 
@@ -72,6 +72,7 @@ if __name__ == "__main__":
         try:
             #Connetct to Target 
             malSocket = CreaetingSocket(targetIP,targetPort)
+            time.sleep(0.1)
             #print(malSocket)
         except Exception as e:
             print("Error",str(e))

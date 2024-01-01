@@ -6,12 +6,19 @@ import netfilterqueue
 import threading
 import time
 import signal
+from collections import deque
+from datetime import datetime
 from functools import partial
 from Forwarding import packetParse
 from Measurement.MeasureConnectedTime import GetConnectedTime
 from Measurement.MeasureTraffic import GetTraffic
 from IDS.SimpleDetectionSys import SimpleDetectionSystem
 from IPS.Iptables import Iptables
+
+NetworkTimeInfo = {
+    'NetworkTimeArray' : deque([datetime.now()] , maxlen=2) ,  # real time array
+    'MECtotalExeTime'  : 0.0    # 0.0 sec
+}
 
 IOTDevicesInfo = {}
 BlockList = []
@@ -41,9 +48,9 @@ def DetectAndDefenseSys() :
     while 1 : 
         # pass
         try : 
-            SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
+            SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
             Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
-            time.sleep(1.0)
+            # time.sleep(0.5)
         except Exception as e :
             print(f"<Error> DetectAndDefenseSys : {e}")
             time.sleep(2.0)

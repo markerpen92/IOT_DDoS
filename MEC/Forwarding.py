@@ -9,7 +9,7 @@ import traceback
 # Forwarding
 LS_IP = "10.0.0.3"
 RS_IP = "12.0.0.4"
-WhiteList = [RS_IP]
+WhiteList = [RS_IP,"10.0.0.1"]
 ResponseList = []
 
 # Write Record in 'Connect time' file  &  'Traffic' file  &  'CPU usage rate' file
