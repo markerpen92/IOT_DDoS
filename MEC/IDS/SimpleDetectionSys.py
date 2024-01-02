@@ -39,8 +39,8 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
                 input_string = f'IP:{srcip} - ConnectTime:{ConnectedTime} - DecreaseTrust:{10} - NowTrust:{IOTDevicesInfo[srcip]["TrustValue"]}'
                 append_string_to_file(input_string , DefenseRecord)
 
-            if ConnectedTime > 0 : 
-                SuspiciousLevel = (PktAmount/(ConnectedTime+0.003))/200
+            if NetworkTimeInfo['MECtotalExeTime'] > 0 : 
+                SuspiciousLevel = (PktAmount/NetworkTimeInfo['MECtotalExeTime'])/200
                 LevelArg = 5
                 IOTDevicesInfo[srcip]["TrustValue"] -= SuspiciousLevel*LevelArg
                 input_string = f'IP:{srcip} - ConnectTime:{ConnectedTime} - DecreaseTrust(SuspiciousLevel*{LevelArg}):{SuspiciousLevel*5}|(Pkt:{PktAmount}) - NowTrust:{IOTDevicesInfo[srcip]["TrustValue"]}'
