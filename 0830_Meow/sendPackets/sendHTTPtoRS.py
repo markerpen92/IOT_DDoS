@@ -11,7 +11,7 @@ ipHeader = IP(src=src_ip, dst=dstIP)
 tcpHeader = TCP(sport=RandShort(), dport=dstPort)
 httpGetRequest = "GET / HTTP/1.1\r\nHost: 127.0.0.1\r\n\r\n"
 
-packet = ipHeader/tcpHeader/Raw(load=httpGetRequest) 
+packet = ipHeader/tcpHeader/Raw(load='aaa') 
 
 #str() : wating the response (and save the response info to response variable)
 

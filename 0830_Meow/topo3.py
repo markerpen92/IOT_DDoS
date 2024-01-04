@@ -31,6 +31,7 @@ def topology():
     r1.cmd("echo 1 > /proc/sys/net/ipv4/ip_forward")
     r1.cmd("iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -o r1-eth1 -j MASQUERADE")
     h1.cmd("ip route add default via 192.168.0.254")
+    h2.cmd("ip route add default via 192.168.0.254")
     br1.cmd("ifconfig br1-eth0 0")
     br1.cmd("ifconfig br1-eth1 0")
     br1.cmd("ifconfig br1-eth2 0")
