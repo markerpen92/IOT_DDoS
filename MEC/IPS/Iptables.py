@@ -25,6 +25,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
         return
     print(f"Ban Bad User : {BadIP}")
     BlockList.append(BadIP)
+    print(IOTDevicesInfo[BadIP]['TrustValue'])
     del IOTDevicesInfo[BadIP]
     cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
     print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")

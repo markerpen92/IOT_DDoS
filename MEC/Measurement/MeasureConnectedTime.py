@@ -1,5 +1,6 @@
 from .MeasureTraffic import ReadRecord
 from .MeasureTraffic import AnalysisRecord
+from datetime import datetime
 import sys
 sys.path.append("Measurement/Record")
 import traceback
@@ -50,7 +51,7 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
             return
         if srcip not in IOTDevicesInfo or srcip in BlockList : 
             return
-        IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
+
 
         if IOTDevicesInfo[srcip]["ProtocalType"] == "TCP" and SYNorFIN == "SYN" : # or (IOTDevicesInfo[srcip]['StartTime'] == 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "TCP") : 
             IOTDevicesInfo[srcip]['EndTime'] = 0
@@ -63,9 +64,9 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
             IOTDevicesInfo[srcip]['PktAmountHistory'].extend([0, PktTime])
         elif IOTDevicesInfo[srcip]['StartTime'] != 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "TCP" : 
             IOTDevicesInfo[srcip]['EndTime'] = GetPktTime(RecordFirstLine)
-            startTime = time.strptime(IOTDevicesInfo[srcip]["StartTime"], "%a %b %d %H:%M:%S %Y")
-            endTime   = time.strptime(IOTDevicesInfo[srcip]["EndTime"], "%a %b %d %H:%M:%S %Y")
-            connectedTime = time.mktime(endTime)-time.mktime(startTime)
+            startTime = datetime.strptime(IOTDevicesInfo[srcip]["StartTime"], "%a %b %d %H:%M:%S %Y")
+            endTime = datetime.strptime(IOTDevicesInfo[srcip]["EndTime"], "%a %b %d %H:%M:%S %Y")
+            connectedTime = (endTime-startTime).total_seconds()
             IOTDevicesInfo[srcip]['ConnectedTime'] = connectedTime
             print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
         
@@ -77,18 +78,22 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
             IOTDevicesInfo[srcip]['StartTime'] = time.ctime()
         elif IOTDevicesInfo[srcip]['StartTime'] != 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "UDP" : 
             IOTDevicesInfo[srcip]['EndTime'] = time.ctime()
-            startTime = time.strptime(IOTDevicesInfo[srcip]["StartTime"], "%a %b %d %H:%M:%S %Y")
-            endTime   = time.strptime(IOTDevicesInfo[srcip]["EndTime"], "%a %b %d %H:%M:%S %Y")
-            connectedTime = time.mktime(endTime)-time.mktime(startTime)
+            startTime = datetime.strptime(IOTDevicesInfo[srcip]["StartTime"], "%a %b %d %H:%M:%S %Y")
+            endTime = datetime.strptime(IOTDevicesInfo[srcip]["EndTime"], "%a %b %d %H:%M:%S %Y")
+            connectedTime = (endTime-startTime).total_seconds()
             IOTDevicesInfo[srcip]['ConnectedTime'] = connectedTime
             print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
 
+
+
         # these condition is to check distribution of pktamount in each sec
-        if time.mktime(time.strptime(PktTime))-time.mktime(time.strptime(IOTDevicesInfo[srcip]['PktAmountHistory'][-1])) < 1 : 
+        if (datetime.strptime(PktTime, "%a %b %d %H:%M:%S %Y") - datetime.strptime(IOTDevicesInfo[srcip]['PktAmountHistory'][-1], "%a %b %d %H:%M:%S %Y")).total_seconds() < 0.5 : 
             IOTDevicesInfo[srcip]['PktAmountHistory'][-2] += 1
         else : 
             IOTDevicesInfo[srcip]['PktAmountHistory'].pop()
             IOTDevicesInfo[srcip]['PktAmountHistory'].extend([0,PktTime])
+            '''Because IDS Detect per 1 sec'''
+            IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = True
 
     except Exception as e : 
         traceback_str = traceback.format_exc()

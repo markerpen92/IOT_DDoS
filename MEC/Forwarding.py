@@ -9,7 +9,7 @@ import traceback
 # Forwarding
 LS_IP = "10.0.0.3"
 RS_IP = "12.0.0.4"
-WhiteList = [RS_IP]
+WhiteList = [RS_IP,"10.0.0.1"]
 ResponseList = []
 
 # Write Record in 'Connect time' file  &  'Traffic' file  &  'CPU usage rate' file
@@ -44,7 +44,8 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
                 "TotalRxBytes"  : 0 , 
                 "Throughput"    : 0 , 
                 "IOTInfoIsChanged" : False , 
-                "TrustValue"    : 100
+                "TrustValue"    : 100 , 
+                "connection_count" : {}
             }
         }
         IOTDevicesInfo.update(Info)
@@ -55,6 +56,24 @@ File Record :
     Traffic Record - [srcip , dstip , dstport , pktsize]
     CPU Record - [srcip , dstip , dstport , service]
 '''
+
+def GetConnectedCount(srcip , dstip , IOTDevicesInfo , SynOrFin) : 
+    if SynOrFin == "None" : 
+        return
+    if dstip not in IOTDevicesInfo[srcip]["connection_count"] : 
+        ConnectedCountInfo = {
+            dstip : 0
+        }
+        IOTDevicesInfo[srcip]["connection_count"].update(ConnectedCountInfo)
+    else : 
+        # print("INININININ\n\n\n")
+        if SynOrFin == "SYN" : 
+            IOTDevicesInfo[srcip]["connection_count"][dstip] += 1
+        if SynOrFin == "FIN" : 
+            IOTDevicesInfo[srcip]["connection_count"][dstip] -= 1
+
+    # print(f"Connection count from {srcip} to {dstip} : {IOTDevicesInfo[srcip]['connection_count'][dstip]}\n\n\n")
+
 
 def packetParse(ThePacket , IOTDevicesInfo , BlockList) : 
     try : 
@@ -77,6 +96,9 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             elif UDP in packet : 
                 ProtocalType = "UDP"
             CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin)
+
+            GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)
+
             PayloadData = "0"
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
