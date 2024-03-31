@@ -96,5 +96,6 @@ ATTACKER2.cmd("ip address add 192.168.40.2/24 dev ATTACKER2-eth0")
 USER2.cmd("ip route add default via 192.168.30.254 dev USER2-eth0")
 ATTACKER2.cmd("ip route add default via 192.168.40.254 dev ATTACKER2-eth0")
 
+
 CLI(net)
 net.stop()

@@ -1,18 +1,33 @@
 # Applying_Multi-Access_Edge_Computing_to_IoT_Malicious_Attack_Detection
 
-python3.5 topo1.py 
+python3.5 topov2.py 
+
+# Image Setting
+docker pull kathara/quagga
 
 
-python3.7
-安裝所需的開發庫和頭文件
-sudo apt-get update
+docker run --privileged -it kathara/quagga:latest bash
+docker run --privileged -it kathara/quagga:v1.1 bash
+
+
+# Update repository Source $ Install requre Software 
+echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+apt update 
+
 sudo apt-get install libnetfilter-queue-dev
+
+
+# Install MiniCOnda
+wget -c https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+./Miniconda3-latest-Linux-x86_64.sh
+
 
 //查看ENV
 conda info --envs
 
-conda create --name scapyPythonEnv3.7 python=3.7
-source activate scapyPythonEnv3.7
+
 
 pip install netfilterqueue
 pip install scapy
+pip install numpy
