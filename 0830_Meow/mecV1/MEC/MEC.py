@@ -99,16 +99,12 @@ def DefenseSys() :
     while 1 : 
         # pass
         try : 
-            print("Meowhacker")
             SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
-            print("11111111111111111111222222222222")
             BadIP , GoodIP = Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
-            print("1111111111111111111")
             GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP)
-            print("222222222222222222222222")
             # time.sleep(0.5)
         except Exception as e :
-            print(f"<Error> DetectAndDefenseSys : {e}")
+            print(f"<Error> DetectAndDefenseSys : {e}")#n0 vul3 ????????????
             time.sleep(2.0)
             continue
 

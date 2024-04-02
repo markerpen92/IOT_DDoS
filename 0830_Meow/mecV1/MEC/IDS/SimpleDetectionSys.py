@@ -24,12 +24,9 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
     Now = datetime.now()
     TimeInterval = (Now - NetworkTimeInfo['NetworkTimeArray'][-1]).total_seconds()
     # print("~"*20)
-    print("return1")
-    if IOTDevicesInfo == {}: #or TimeInterval<1.0 : 
+    if IOTDevicesInfo == {} or TimeInterval<1.0 : 
         return
-    print("returnEnd")
     try : 
-        print("forloop 1")
         for srcip in IOTDevicesInfo : 
             print("tetetetetetetetettetetette")
             # if IOTDevicesInfo[srcip]["IOTInfoIsChanged"] == False or srcip in BlockList : 
@@ -56,22 +53,18 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
             # To make sure is script attack or not ??
             PktAmountHistory = list(IOTDevicesInfo[srcip]['PktAmountHistory'])[:-1]
             AverageAmountEachSec = sum(PktAmountHistory) / len(PktAmountHistory)
-            print("forloop 2")
             Dispersion = math.exp(-1*sum(abs(AverageAmountEachSec-amount) for amount in PktAmountHistory))
-            print("forloop 2 END")
             if Dispersion > 0.5 and IOTDevicesInfo[srcip]["IOTInfoIsChanged"] : 
                 IOTDevicesInfo[srcip]["TrustValue"] -= Dispersion*10
                 input_string = f'IP:{srcip} - ConnectTime:{ConnectedTime} - DecreaseTrust(Dispersion*10):{Dispersion*10} - NowTrust:{IOTDevicesInfo[srcip]["TrustValue"]}'
                 append_string_to_file(input_string , DefenseRecord)
                 IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = False
-            print("forloop 3")
             for dstip, connection_count in IOTDevicesInfo[srcip]['connection_count'].items():
                 if connection_count >= 5 :
                     ConnectionCountArg = 10
                     IOTDevicesInfo[srcip]["TrustValue"] -= ConnectionCountArg * connection_count
                     input_string = f'IP:{srcip} - ConnectTime:{ConnectedTime} - DecreaseTrust(connection_count*{ConnectionCountArg}):{5 * connection_count} - NowTrust:{IOTDevicesInfo[srcip]["TrustValue"]}'
                     append_string_to_file(input_string, DefenseRecord)
-            print("forloop 3 END")
             # print(f"Exe Time : {NetworkTimeInfo['MECtotalExeTime']}\n\n\n\n")
             if int(NetworkTimeInfo['MECtotalExeTime']%20)<0.001 and NetworkTimeInfo['MECtotalExeTime']>20 and IOTDevicesInfo[srcip]["TrustValue"]>=60 : 
                 print(f"SrcIP:{srcip} - TrustValue Back to 100\n\n\n")
@@ -86,7 +79,6 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
             if IOTDevicesInfo[srcip]["TrustValue"] < 30 : 
                 append_string_to_file(srcip , SuspiciousFile)
                 continue
-        print("forloop 1 END")
                 
     except Exception as e : 
         traceback_str = traceback.format_exc()
