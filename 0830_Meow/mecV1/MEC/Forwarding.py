@@ -87,10 +87,6 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
         DstPort = packet[IP].dport
         
         if DstIP in WhiteList : 
-            print(f'==Show packet features==')
-            print(f'packet windows size: {packet[TCP].window}')
-            print(f'packet paylaod data: {packet[Raw].load.decode("utf-8")}')
-            print("-------------------------------------------------------------------------------------")
             ProtocalType = SynOrFin = "None"
             if TCP in packet : 
                 ProtocalType = "TCP"
@@ -100,8 +96,16 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                     SynOrFin = "FIN"
             elif UDP in packet : 
                 ProtocalType = "UDP"
-            CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin)
 
+            print(f'==Show packet features==')
+            print(f'packet windows size: {packet[TCP].window}')
+            if Raw in packet : 
+                print(f'packet paylaod data: {packet[Raw].load.decode("utf-8")}')
+            else : 
+                print(f'None payload data')
+            print("-------------------------------------------------------------------------------------")
+
+            CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin)
             GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)
 
             PayloadData = "0"
