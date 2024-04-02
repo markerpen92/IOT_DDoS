@@ -88,7 +88,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
     print(f'meow ------------{IOTDevicesInfo}')
     print(IOTDevicesInfo[BadIP]['TrustValue'])
     print(f'start ------------{IOTDevicesInfo}')
-    del IOTDevicesInfo[IOTDevicesInfo.index(BadIP)]#?
+    del IOTDevicesInfo[BadIP]#?
     print(f'End ------------{IOTDevicesInfo}')
     cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
     print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")
