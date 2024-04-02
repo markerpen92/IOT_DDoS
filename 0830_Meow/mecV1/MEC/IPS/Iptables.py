@@ -81,6 +81,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
         time.sleep(1.0)
         return None ,None 
     print(f"Ban Bad User : {BadIP}")
+    print(1)
     BlockList.append(BadIP)
     print(IOTDevicesInfo[BadIP]['TrustValue'])
     print(f'start ------------{IOTDevicesInfo}')
