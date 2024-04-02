@@ -7,9 +7,9 @@ import traceback
 # main function : packetParse
 
 # Forwarding
-LS_IP = "10.0.0.3"
-RS_IP = "12.0.0.4"
-WhiteList = [RS_IP,"10.0.0.1"]
+#LS_IP = "10.0.0.3"
+#RS_IP = "12.0.0.4"
+WhiteList = ["140.1.1.2","140.1.2.2","192.168.10.1","192.168.20.2","192.168.30.1","192.168.40.2"]
 ResponseList = []
 
 # Write Record in 'Connect time' file  &  'Traffic' file  &  'CPU usage rate' file
@@ -81,11 +81,16 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
         packet = IP(data)
         # print("Receive Packet info : " , end="")
         # print(packet.summary())
+        # pirnt(packet.show())
         DstIP = packet[IP].dst
         SrcIP = packet[IP].src
         DstPort = packet[IP].dport
         
         if DstIP in WhiteList : 
+            print(f'==Show packet features==')
+            print(f'packet windows size: {packet[TCP].window}')
+            print(f'packet paylaod data: {packet[Raw].load.decode("utf-8")}')
+            print("-------------------------------------------------------------------------------------")
             ProtocalType = SynOrFin = "None"
             if TCP in packet : 
                 ProtocalType = "TCP"
