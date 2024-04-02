@@ -24,6 +24,7 @@ def append_string_to_file(input_string, filename) :
     try :
         with lock : 
             with open(filename, 'a+') as file :
+                input_string = input_string.replace('\n', '')
                 input_string = input_string.replace('\r\n', '') # Data processing(HTML) 
                 file.write(input_string + '\n')
                 file.close()
