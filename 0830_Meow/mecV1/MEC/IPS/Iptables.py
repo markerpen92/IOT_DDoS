@@ -79,7 +79,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
     GoodIP = RemoveOneRecord(cln_filename , 0)
     if BadIP == None and GoodIP == None : 
         time.sleep(1.0)
-        return None
+        return None ,None 
     print(f"Ban Bad User : {BadIP}")
     BlockList.append(BadIP)
     print(IOTDevicesInfo[BadIP]['TrustValue'])
