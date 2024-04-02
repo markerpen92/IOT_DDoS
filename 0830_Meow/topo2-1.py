@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 # docker images(Checker Images), docker pull kathara/quagga (Download Images)
 # Defaut accout password zebra / (meow)
  
