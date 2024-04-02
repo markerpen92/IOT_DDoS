@@ -16,6 +16,7 @@ ResponseList = []
 ConnectedTimeRecord = "./Measurement/Record/MeasureConnectedTime.txt"
 TrafficRecord = "./Measurement/Record/MeasureTraffic.txt"
 CPUOccupyRecord = "./Measurement/Record/MeasureCPUOccupy.txt"
+PacketFeatureRecord = "/traficFeaturesForTranning.txt"
 
 
 def append_string_to_file(input_string, filename) :
@@ -115,11 +116,14 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
+            PacketFeatureInptstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[WindowSize]-{packet[TCP].window}\t[PayloadData]-{PayloadData}"
             
+            append_string_to_file (PacketFeatureInptstr, PacketFeatureRecord)
+            append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(TrafficInputstr , TrafficRecord)
             append_string_to_file(CPUUseRateInputstr , CPUOccupyRecord)
-
+            
             ResponseList.append(SrcIP)
 
             if ReplyRequest != None : 
