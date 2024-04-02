@@ -27,7 +27,8 @@ def append_string_to_file(input_string, filename) :
                 input_string = input_string.replace('\r', '')   # Data processing(HTML)
                 input_string = input_string.replace('\t', '')   # Data processing(HTML)
                 input_string = input_string.replace('\n', '')   # Data processing(HTML) 
-                input_string = input_string.replace('\r\n', '') # Data processing(HTML) 
+                input_string = input_string.replace('\r\n', '') # Data processing(HTML)
+                input_string = input_string.replace('\n\r', '') # Data processing(HTML) 
                 file.write(input_string + '\n')
                 file.close()
 
@@ -120,9 +121,9 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
-            PacketFeatureInptstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[WindowSize]-{packet[TCP].window}\t[PayloadData]-{PayloadData}"
+            PacketFeatureInptstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[WindowSize]-{packet[TCP].window}\t[PayloadData]-{packet[Raw].load.decode('utf-8')}"
             
-            append_string_to_file (PacketFeatureInptstr, PacketFeatureRecord)
+            append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(TrafficInputstr , TrafficRecord)
