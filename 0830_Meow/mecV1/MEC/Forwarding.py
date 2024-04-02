@@ -8,7 +8,7 @@ import traceback
 
 # Forwarding
 #LS_IP = "10.0.0.3"
-#RS_IP = "12.0.0.4"
+RS_IP = ["140.1.1.2","140.1.2.2"]
 WhiteList = ["140.1.1.2","140.1.2.2","192.168.10.1","192.168.20.2","192.168.30.1","192.168.40.2"]
 ResponseList = []
 
@@ -121,9 +121,11 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
+
+
             PacketFeatureInptstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[WindowSize]-{packet[TCP].window}\t[PayloadData]-{PayloadData}"
             
-            append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
+            if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(TrafficInputstr , TrafficRecord)
