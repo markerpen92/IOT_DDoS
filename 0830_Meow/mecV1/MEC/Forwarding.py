@@ -16,7 +16,7 @@ ResponseList = []
 ConnectedTimeRecord = "./Measurement/Record/MeasureConnectedTime.txt"
 TrafficRecord = "./Measurement/Record/MeasureTraffic.txt"
 CPUOccupyRecord = "./Measurement/Record/MeasureCPUOccupy.txt"
-PacketFeatureRecord = "/traficFeaturesForTranning.txt"
+PacketFeatureRecord = "./traficFeaturesForTranning.txt"
 
 
 def append_string_to_file(input_string, filename) :
