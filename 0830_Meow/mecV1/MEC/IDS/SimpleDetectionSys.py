@@ -28,7 +28,6 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
         return
     try : 
         for srcip in IOTDevicesInfo : 
-            print("tetetetetetetetettetetette")
             # if IOTDevicesInfo[srcip]["IOTInfoIsChanged"] == False or srcip in BlockList : 
             if srcip in BlockList : 
                 continue
