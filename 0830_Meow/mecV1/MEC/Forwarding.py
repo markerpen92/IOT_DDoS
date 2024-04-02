@@ -121,7 +121,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
-            PacketFeatureInptstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[WindowSize]-{packet[TCP].window}\t[PayloadData]-{packet[Raw].load.decode('utf-8')}"
+            PacketFeatureInptstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[WindowSize]-{packet[TCP].window}\t[PayloadData]-{PayloadData}"
             
             append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
