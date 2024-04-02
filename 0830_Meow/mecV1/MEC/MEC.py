@@ -118,7 +118,7 @@ def main() :
     threading.Thread(target=ForwardpktAndGetService).start()
     threading.Thread(target=GetIOTDevicesInfo).start()
     #threading.Thread(target=DetectSys).start()
-    threading.Thread(target=DefenseSys).start()
+    #threading.Thread(target=DefenseSys).start()
 
 
 
