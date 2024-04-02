@@ -106,9 +106,9 @@ def GetRecordToTrain(BadIP=None , GoodIP=None) :
     elif GoodIP!= None :
         GoodRole = 'GOOD '
         GoodTargetIP = GoodIP
-
+    print("meowmeowmeowmeow")
     filename = "./TraficFeaturesForTranning.txt"
-
+    print("endendendne")
     line_num = 0
     OneRecord = ''
     while OneRecord != None : 
