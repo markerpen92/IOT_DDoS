@@ -97,8 +97,10 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 
 
-def GetRecordToTrain(BadIP=None , GoodIP=None) : 
+def GetRecordToTrain(BadIP=None , GoodIP=None):
+
     if BadIP == None and GoodIP == None : 
+        print("retrunnnnn1")
         return
     elif BadIP != None : 
         BadRole = 'BAD '
