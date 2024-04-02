@@ -24,6 +24,7 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
     Now = datetime.now()
     TimeInterval = (Now - NetworkTimeInfo['NetworkTimeArray'][-1]).total_seconds()
     # print("~"*20)
+    print(IOTDevicesInfo)
     if IOTDevicesInfo == {} or TimeInterval<1.0 : 
         return
     try : 
