@@ -101,6 +101,7 @@ def DefenseSys() :
         try : 
             print("Meowhacker")
             SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
+            input("a")
             BadIP , GoodIP = Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
             print("1111111111111111111")
             GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP)
