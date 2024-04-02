@@ -83,6 +83,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
     print(f"Ban Bad User : {BadIP}")
     print(1)
     #BlockList.append(BadIP)
+    print(f'meow ------------{IOTDevicesInfo}')
     print(IOTDevicesInfo[BadIP]['TrustValue'])
     print(f'start ------------{IOTDevicesInfo}')
     del IOTDevicesInfo[IOTDevicesInfo.index(BadIP)]#?
