@@ -107,7 +107,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None) :
         GoodRole = 'GOOD '
         GoodTargetIP = GoodIP
 
-    filename = "IPS/record.txt"
+    filename = "./TraficFeaturesForTranning.txt"
 
     line_num = 0
     OneRecord = ''
