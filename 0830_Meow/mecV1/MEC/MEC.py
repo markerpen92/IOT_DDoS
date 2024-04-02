@@ -99,6 +99,7 @@ def DefenseSys() :
     while 1 : 
         # pass
         try : 
+            print("Meowhacker")
             SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
             BadIP , GoodIP = Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
             print("1111111111111111111")
