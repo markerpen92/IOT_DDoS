@@ -68,11 +68,6 @@ def WriteRecordIntoFile(filename , record) :
 
 
 
-    
-
-
-
-
 def Iptables(IOTDevicesInfo , BlockList) : 
     sus_filename = "IPS/SuspiciousList.txt"
     cln_filename = "IPS/CleanerList.txt"
@@ -131,7 +126,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         OneRecord = ReadOneRecord(filename , line_num)
         patterns = OneRecord.split(' ')
 
-        print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
+        #print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
         if BadTargetIP == patterns[0] : 
             record = RemoveOneRecord(filename , line_num)
             record = BadRole + record
