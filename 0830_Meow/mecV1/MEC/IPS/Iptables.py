@@ -1,3 +1,4 @@
+import re
 import os
 import time
 import threading
@@ -66,7 +67,8 @@ def WriteRecordIntoFile(filename , record) :
         file.close()
 
 
-
+def addBadString(filename):
+    
 
 
 
@@ -81,10 +83,22 @@ def Iptables(IOTDevicesInfo , BlockList) :
         time.sleep(1.0)
         return None ,None 
     print(f"Ban Bad User : {BadIP}")
+
+    #BAD IP
+    with open("./TraficFeaturesForTranning.txt", 'r') as file:
+        lines = file.readlines()
+    with open("./ADDrole.txt", 'w') as output_file:
+        for line in lines:
+            if BadIP in line:
+                output_file.write('BAD ' + line)
+            else:
+                output_file.write('GOOD ' + line)
+        
+
     print(1)
     BlockList.append(BadIP)
     
-    BadIP = BadIP.replace('\n','')
+    BadIP = BadIP.replace('\n','')  #fix IP./r error!
     print(f'meow ------------{IOTDevicesInfo}')
     print(IOTDevicesInfo[BadIP]['TrustValue'])
     print(f'start ------------{IOTDevicesInfo}')
