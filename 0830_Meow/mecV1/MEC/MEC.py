@@ -102,7 +102,7 @@ def DefenseSys() :
             SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
             BadIP , GoodIP = Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
             GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP)
-            # time.sleep(0.5)
+            time.sleep(0.5)
         except Exception as e :
             #print(f"<Error> DetectAndDefenseSys : {e}")#n0 vul3 ????????????
             
