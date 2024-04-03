@@ -126,8 +126,9 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         if OneRecord == None : 
             return
         patterns = OneRecord.split(' ')
-
+        print(patterns[0])
         print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
+        
         if  BadTargetIP == patterns[0] : 
             record = RemoveOneRecord(filename , line_num)
             print(f'record : {record}')
@@ -141,6 +142,8 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
             print(f'record : {record}')
             TraingFile = 'IDS/TrainingList.txt'
             WriteRecordIntoFile(TraingFile , record)
+        else:
+            print(patterns[0])
         
         line_num += 1
         time.sleep(0.1)
