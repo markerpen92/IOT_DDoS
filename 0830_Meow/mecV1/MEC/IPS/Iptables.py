@@ -106,7 +106,8 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 def GetRecordToTrain(BadIP=None , GoodIP=None):
     print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")
-    GoodTargetIP, BadTargetIP =None
+    GoodTargetIP =None 
+    BadTargetIP =None
     if BadIP == None and GoodIP == None : 
         print("retrunnnnn1")
         return
