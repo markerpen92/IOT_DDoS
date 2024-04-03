@@ -102,7 +102,7 @@ def DefenseSys() :
             SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
             BadIP , GoodIP = Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
             GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP)
-            time.sleep(0.5)
+            #time.sleep(0.5)
         except Exception as e :
             #print(f"<Error> DetectAndDefenseSys : {e}")#n0 vul3 ????????????
             
@@ -135,6 +135,11 @@ def EndMEC(sig , frame) :
         fileAPath = './Measurement/Record/MeasureConnectedTime.txt'
         fileBPath = './Measurement/Record/MeasureCPUOccupy.txt'
         fileCPath = './Measurement/Record/MeasureTraffic.txt'
+        fileDPath = './IDS/TrainingList.txt'
+        fileEPath = './IDS/record.txt'
+        fileFPath = './IPS/record.txt'
+        fileGPath = './TraficFeaturesForTranning.txt'
+        
         with open(fileAPath , 'w') as fileA : 
             fileA.write('')
             fileA.close()
@@ -149,6 +154,26 @@ def EndMEC(sig , frame) :
             fileC.write('')
             fileC.close()
             print(f'\nClean file-{fileCPath}')
+
+        with open(fileDPath , 'w') as fileC : 
+            fileC.write('')
+            fileC.close()
+            print(f'\nClean file-{fileDPath}')
+
+        with open(fileEPath , 'w') as fileC : 
+            fileC.write('')
+            fileC.close()
+            print(f'\nClean file-{fileEPath}')
+
+        with open(fileFPath , 'w') as fileC : 
+            fileC.write('')
+            fileC.close()
+            print(f'\nClean file-{fileFPath}')
+
+        with open(fileGPath , 'w') as fileC : 
+            fileC.write('')
+            fileC.close()
+            print(f'\nClean file-{fileGPath}')
 
         cmd = "sudo iptables -F"
         os.system(cmd)

@@ -147,4 +147,4 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
             WriteRecordIntoFile(TraingFile , record)
         
         line_num += 1
-        time.sleep(10)
+        time.sleep(3)
