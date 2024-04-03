@@ -136,6 +136,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         elif GoodTargetIP == patterns[0] :
             record = RemoveOneRecord(filename , line_num)
             record = GoodRole + record
+            print(f'record : {record}')
             TraingFile = 'IDS/TrainingList.txt'
             WriteRecordIntoFile(TraingFile , record)
         
