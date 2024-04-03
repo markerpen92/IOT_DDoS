@@ -124,6 +124,8 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
     OneRecord = ''
     while OneRecord != None : 
         OneRecord = ReadOneRecord(filename , line_num)
+        if OneRecord == None : 
+            return
         patterns = OneRecord.split(' ')
 
         #print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
