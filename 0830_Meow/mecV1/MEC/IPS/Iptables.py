@@ -67,7 +67,7 @@ def WriteRecordIntoFile(filename , record) :
         file.close()
 
 
-def addBadString(filename):
+
     
 
 
