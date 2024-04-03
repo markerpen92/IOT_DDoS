@@ -106,8 +106,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 def GetRecordToTrain(BadIP=None , GoodIP=None):
     print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")
-    GoodTargetIP=None
-    BadIP = None
+    GoodTargetIP, BadTargetIP, GoodRole, BadRole =None
     if BadIP == None and GoodIP == None : 
         print("retrunnnnn1")
         return
@@ -128,7 +127,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         patterns = OneRecord.split(' ')
 
         #print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
-        if BadTargetIP == patterns[0] : 
+        if  BadTargetIP == patterns[0] : 
             record = RemoveOneRecord(filename , line_num)
             record = BadRole + record
             TraingFile = 'IDS/TrainingList.txt'

@@ -123,7 +123,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
 
 
-            PacketFeatureInptstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[WindowSize]-{packet[TCP].window}\t[PayloadData]-{PayloadData}"
+            PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {PayloadData}"
             
             if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
