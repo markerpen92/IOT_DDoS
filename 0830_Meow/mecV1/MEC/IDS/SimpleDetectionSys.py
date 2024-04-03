@@ -69,7 +69,7 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
                 print(f"SrcIP:{srcip} - TrustValue Back to 100\n\n\n")
                 IOTDevicesInfo[srcip]["TrustValue"] = 100
                 CleanerList = 'IPS/CleanerList.txt'
-                append_string_to_file(CleanerList , srcip)
+                append_string_to_file(srcip, CleanerList)
 
 
             NetworkTimeInfo['NetworkTimeArray'].append(datetime.now())
