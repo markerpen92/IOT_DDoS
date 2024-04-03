@@ -130,50 +130,29 @@ def main() :
 
 
 
+
+
+
 def EndMEC(sig , frame) : 
+
     try : 
-        fileAPath = './Measurement/Record/MeasureConnectedTime.txt'
-        fileBPath = './Measurement/Record/MeasureCPUOccupy.txt'
-        fileCPath = './Measurement/Record/MeasureTraffic.txt'
-        fileDPath = './IDS/TrainingList.txt'
-        fileEPath = './IDS/record.txt'
-        fileFPath = './IPS/record.txt'
-        fileGPath = './TraficFeaturesForTranning.txt'
-        
-        with open(fileAPath , 'w') as fileA : 
-            fileA.write('')
-            fileA.close()
-            print(f'\nClean file-{fileAPath}')
+        filepathes = [
+            './Measurement/Record/MeasureConnectedTime.txt' , 
+            './Measurement/Record/MeasureCPUOccupy.txt' , 
+            './Measurement/Record/MeasureTraffic.txt' , 
+            './IDS/TrainingList.txt',
+            './IDS/record.txt',
+            './IPS/record.txt',
+            './IPS/SuspiciousList.txt',
+            './IPS/CleanerList.txt'
+        ]
 
-        with open(fileBPath , 'w') as fileB : 
-            fileB.write('')
-            fileB.close()
-            print(f'\nClean file-{fileBPath}')
+        for filepath in filepathes : 
+            with open(filepath , 'w') as file : 
+                file.write('')
+                file.close()
+                print(f'\nClean file-{filepath}')
 
-        with open(fileCPath , 'w') as fileC : 
-            fileC.write('')
-            fileC.close()
-            print(f'\nClean file-{fileCPath}')
-
-        with open(fileDPath , 'w') as fileC : 
-            fileC.write('')
-            fileC.close()
-            print(f'\nClean file-{fileDPath}')
-
-        with open(fileEPath , 'w') as fileC : 
-            fileC.write('')
-            fileC.close()
-            print(f'\nClean file-{fileEPath}')
-
-        with open(fileFPath , 'w') as fileC : 
-            fileC.write('')
-            fileC.close()
-            print(f'\nClean file-{fileFPath}')
-
-        with open(fileGPath , 'w') as fileC : 
-            fileC.write('')
-            fileC.close()
-            print(f'\nClean file-{fileGPath}')
 
         cmd = "sudo iptables -F"
         os.system(cmd)
@@ -184,8 +163,6 @@ def EndMEC(sig , frame) :
     except Exception as e : 
             print(f"<Error> EndMEC : {e}")
             exit()
-
-
 
 
 def GetCNNmodel() : 
