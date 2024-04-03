@@ -90,8 +90,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
         print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")
         os.system(cmd)
     if GoodIP != None : 
-        if type(BadIP) == str :
-            GoodIP = GoodIP.replace('\n','')  #fix IP./r error!
+        GoodIP = GoodIP.replace('\n','')  #fix IP./r error!
 
     return BadIP , GoodIP 
 
