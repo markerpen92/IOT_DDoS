@@ -126,7 +126,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         if OneRecord == None : 
             return
         patterns = OneRecord.split(' ')
-        print(patterns[0])
+        print(f'patterns {patterns[0]}')
         print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
         
         if  BadTargetIP == patterns[0] : 
