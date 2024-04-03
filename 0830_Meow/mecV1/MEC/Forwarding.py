@@ -103,13 +103,13 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             elif UDP in packet : 
                 ProtocalType = "UDP"
 
-            print(f'==Show packet features==')
-            print(f'packet windows size: {packet[TCP].window}')
-            if Raw in packet : 
-                print(f'packet paylaod data: {packet[Raw].load.decode("utf-8")}')
-            else : 
-                print(f'None payload data')
-            print("-------------------------------------------------------------------------------------")
+            # print(f'==Show packet features==')
+            # print(f'packet windows size: {packet[TCP].window}')
+            # if Raw in packet : 
+            #     print(f'packet paylaod data: {packet[Raw].load.decode("utf-8")}')
+            # else : 
+            #     print(f'None payload data')
+            # print("-------------------------------------------------------------------------------------")
 
             CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin)
             GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)

@@ -113,16 +113,16 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 def GetRecordToTrain(BadIP=None , GoodIP=None):
     print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")
-    print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")
-    print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")
-    print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")    
+ 
     if BadIP == None and GoodIP == None : 
         print("retrunnnnn1")
         return
     elif BadIP != None : 
+        print(f'BadIP : {BadIP}')
         BadRole = 'BAD '
         BadTargetIP = BadIP
     elif GoodIP!= None :
+        print(f'GoodIP : {GoodIP}')
         GoodRole = 'GOOD '
         GoodTargetIP = GoodIP
     print("meowmeowmeowmeow")
