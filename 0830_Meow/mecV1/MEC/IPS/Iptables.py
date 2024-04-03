@@ -43,7 +43,7 @@ def RemoveOneRecord(filename , lineNum) :
     with file_lock : 
         with open(filename , 'r+') as file :
             lines = file.readlines()
-            
+        
             if lines : 
                 line = lines.pop(lineNum)
                 file.seek(0)
@@ -147,4 +147,4 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
             WriteRecordIntoFile(TraingFile , record)
         
         line_num += 1
-        time.sleep(1.0)
+        time.sleep(10)
