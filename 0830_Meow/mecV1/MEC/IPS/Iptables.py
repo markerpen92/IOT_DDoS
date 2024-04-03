@@ -76,27 +76,19 @@ def Iptables(IOTDevicesInfo , BlockList) :
     GoodIP = RemoveOneRecord(cln_filename , 0)
     if BadIP == None and GoodIP == None : 
         time.sleep(1.0)
-        return None ,None 
-    print(f"Ban Bad User : {BadIP}")
-
-    #BAD IP
-    # with open("./TraficFeaturesForTranning.txt", 'r') as file:
-    #     lines = file.readlines()
-    # with open("./ADDrole.txt", 'w') as output_file:
-    #     for line in lines:
-    #         if BadIP in line:
-    #             output_file.write('BAD ' + line)
-    #         else:
-    #             output_file.write('GOOD ' + line)
-        
-    BlockList.append(BadIP)
-    if type(BadIP) == str : 
-        BadIP = BadIP.replace('\n','')  #fix IP./r error!
-    print(IOTDevicesInfo[BadIP]['TrustValue'])
-    del IOTDevicesInfo[BadIP]
-    cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
-    print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")
-    os.system(cmd)
+        return None ,None
+    if BadIP != None : 
+            
+        print(f"Ban Bad User : {BadIP}")
+            
+        BlockList.append(BadIP)
+        if type(BadIP) == str : 
+            BadIP = BadIP.replace('\n','')  #fix IP./r error!
+        print(IOTDevicesInfo[BadIP]['TrustValue'])
+        del IOTDevicesInfo[BadIP]
+        cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
+        print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")
+        os.system(cmd)
 
     return BadIP , GoodIP 
 
