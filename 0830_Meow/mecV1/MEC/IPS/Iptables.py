@@ -95,9 +95,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
     #             output_file.write('GOOD ' + line)
         
     BlockList.append(BadIP)
-    
     BadIP = BadIP.replace('\n','')  #fix IP./r error!
-    print(f'meow ------------{IOTDevicesInfo}')
     print(IOTDevicesInfo[BadIP]['TrustValue'])
     del IOTDevicesInfo[BadIP]
     cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
@@ -125,20 +123,21 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         print(f'GoodIP : {GoodIP}')
         GoodRole = 'GOOD '
         GoodTargetIP = GoodIP
-    print("meowmeowmeowmeow")
+    print("Reading file :./TraficFeaturesForTranning.txt")
     filename = "./TraficFeaturesForTranning.txt"
-    print("endendendne")
     line_num = 0
     OneRecord = ''
     while OneRecord != None : 
         OneRecord = ReadOneRecord(filename , line_num)
         patterns = OneRecord.split(' ')
 
+        print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
         if BadTargetIP == patterns[0] : 
             record = RemoveOneRecord(filename , line_num)
             record = BadRole + record
             TraingFile = 'IDS/TrainingList.txt'
             WriteRecordIntoFile(TraingFile , record)
+            input("Success write into TrainingList.txt")
         elif GoodTargetIP == patterns[0] :
             record = RemoveOneRecord(filename , line_num)
             record = GoodRole + record
