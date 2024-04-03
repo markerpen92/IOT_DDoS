@@ -89,6 +89,9 @@ def Iptables(IOTDevicesInfo , BlockList) :
         cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
         print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")
         os.system(cmd)
+    if GoodIP != None : 
+        if type(BadIP) == str :
+            GoodIP = GoodIP.replace('\n','')  #fix IP./r error!
 
     return BadIP , GoodIP 
 
