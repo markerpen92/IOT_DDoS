@@ -127,12 +127,6 @@ def main() :
 
 
 
-
-
-
-
-
-
 def EndMEC(sig , frame) : 
 
     try : 
