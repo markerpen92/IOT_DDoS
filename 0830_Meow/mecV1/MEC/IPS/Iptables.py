@@ -90,7 +90,8 @@ def Iptables(IOTDevicesInfo , BlockList) :
     #             output_file.write('GOOD ' + line)
         
     BlockList.append(BadIP)
-    BadIP = BadIP.replace('\n','')  #fix IP./r error!
+    if type(BadIP) == str : 
+        BadIP = BadIP.replace('\n','')  #fix IP./r error!
     print(IOTDevicesInfo[BadIP]['TrustValue'])
     del IOTDevicesInfo[BadIP]
     cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
