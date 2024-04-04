@@ -39,6 +39,7 @@ def ReadOneRecord(filename , lineNum) :
 
 
 def RemoveOneRecord(filename , lineNum) : 
+    print("start-1")
     file_lock = threading.Lock()
     with file_lock : 
         with open(filename , 'r+') as file :
@@ -50,8 +51,10 @@ def RemoveOneRecord(filename , lineNum) :
                 file.writelines(lines)
                 file.truncate()
                 file.close()
+                print("end-1")
                 return line
             else : 
+                print("end-2")
                 return None  
         
 
