@@ -136,7 +136,6 @@ def EndMEC(sig , frame) :
             './IPS/record.txt',
             './IPS/SuspiciousList.txt',
             './IPS/CleanerList.txt',
-            './TraficFeaturesForTranning.txt'
         ]
 
         for filepath in filepathes : 
