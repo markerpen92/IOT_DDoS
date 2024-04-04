@@ -119,8 +119,8 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         print(f'GoodIP : {GoodIP}')
         GoodRole = 'GOOD '
         GoodTargetIP = GoodIP
-    print("Reading file :./TraficFeaturesForTranning.txt")
-    filename = "./TraficFeaturesForTranning.txt"
+    print("Reading file :./IPS/record.txt")
+    filename = "./IPS/record.txt"
     line_num = 0
     OneRecord = ''
 
