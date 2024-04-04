@@ -74,6 +74,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
     # BadIP = ReadSuspiciousFile(filename)
     BadIP = RemoveOneRecord(sus_filename , 0)
     GoodIP = RemoveOneRecord(cln_filename , 0)
+    print(f'BadIP : {BadIP} || GoodIP : {GoodIP}')
     if BadIP == None and GoodIP == None : 
         time.sleep(1.0)
         return None ,None
@@ -96,11 +97,8 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 
 
-
-
-
 def GetRecordToTrain(BadIP=None , GoodIP=None):
-    print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")
+    #print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")
     GoodTargetIP =None 
     BadTargetIP =None
     BadRole = None
@@ -127,7 +125,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
             return
         patterns = OneRecord.split(' ')
         print(f'patterns {patterns[0]}')
-        print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
+        #print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
         
         if  BadTargetIP == patterns[0] : 
             record = RemoveOneRecord(filename , line_num)
