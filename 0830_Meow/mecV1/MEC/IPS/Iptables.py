@@ -24,6 +24,7 @@ def ReadSuspiciousFile(filename) :
 
 
 def ReadOneRecord(filename , lineNum) : 
+    
     file_lock = threading.Lock()
     with file_lock : 
         with open(filename , 'r+') as file :
@@ -123,18 +124,13 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
     line_num = 0
     OneRecord = ''
 
-   
+    print(f'BadGetIP : {BadTargetIP} || GoodIP : {GoodTargetIP}')
     while OneRecord != None : 
         try: 
             OneRecord = ReadOneRecord(filename , line_num)
             if OneRecord == None : 
                 return
             patterns = OneRecord.split(' ')
-            print(f'patterns {patterns[0]}')
-            #print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
-            print(f'BadGetIP : {BadTargetIP} || GoodIP : {GoodTargetIP}')
-            print(f'{BadTargetIP == patterns[0] }')
-            print(f'{GoodTargetIP == patterns[0] }')
             if  BadTargetIP == patterns[0]:
                 record = RemoveOneRecord(filename , line_num)
                 print(f'record : {record}')
@@ -143,7 +139,6 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
                 WriteRecordIntoFile(TraingFile , record)
                 print("Success write into TrainingList.txt")
             elif GoodTargetIP == patterns[0] :
-
                 record = RemoveOneRecord(filename , line_num)
                 record = GoodRole + record
                 print(f'record : {record}')
@@ -157,4 +152,5 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
             time.sleep(0.1)
         except Exception as e :
             print(f"<Error> while : {e}")
-            time.sleep(2.0)
+            time.sleep(0.5)
+            return 
