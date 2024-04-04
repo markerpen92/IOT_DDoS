@@ -123,8 +123,9 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
     line_num = 0
     OneRecord = ''
 
-    try:
-        while OneRecord != None : 
+   
+    while OneRecord != None : 
+        try: 
             OneRecord = ReadOneRecord(filename , line_num)
             if OneRecord == None : 
                 return
@@ -154,6 +155,6 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         
             line_num += 1
             time.sleep(0.1)
-    except Exception as e :
-        print(f"<Error> while : {e}")
-        time.sleep(2.0)
+        except Exception as e :
+            print(f"<Error> while : {e}")
+            time.sleep(2.0)
