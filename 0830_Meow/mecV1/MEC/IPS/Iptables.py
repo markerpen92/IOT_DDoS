@@ -122,34 +122,38 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
     filename = "./TraficFeaturesForTranning.txt"
     line_num = 0
     OneRecord = ''
-    while OneRecord != None : 
-        OneRecord = ReadOneRecord(filename , line_num)
-        if OneRecord == None : 
-            return
-        patterns = OneRecord.split(' ')
-        print(f'patterns {patterns[0]}')
-        #print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
-        print(f'BadGetIP : {BadTargetIP} || GoodIP : {GoodTargetIP}')
-        print(f'{BadTargetIP == patterns[0] }')
-        print(f'{GoodTargetIP == patterns[0] }')
-        if  BadTargetIP == patterns[0]:
-            record = RemoveOneRecord(filename , line_num)
-            print(f'record : {record}')
-            record = BadRole + record
-            TraingFile = 'IDS/TrainingList.txt'
-            WriteRecordIntoFile(TraingFile , record)
-            print("Success write into TrainingList.txt")
-        elif GoodTargetIP == patterns[0] :
 
-            record = RemoveOneRecord(filename , line_num)
-            record = GoodRole + record
-            print(f'record : {record}')
-            TraingFile = 'IDS/TrainingList.txt'
-            print(f'Sucdess write into TrainingList.txt - GOOOOOOOOOOOOOOOOOOOOD')
-            WriteRecordIntoFile(TraingFile , record)
-        else:
-            print(patterns[0])
-    
-        line_num += 1
-        time.sleep(0.1)
-    
+    try:
+        while OneRecord != None : 
+            OneRecord = ReadOneRecord(filename , line_num)
+            if OneRecord == None : 
+                return
+            patterns = OneRecord.split(' ')
+            print(f'patterns {patterns[0]}')
+            #print(f'BadTargetIP : {BadTargetIP} || GoodTargetIP : {GoodTargetIP}')
+            print(f'BadGetIP : {BadTargetIP} || GoodIP : {GoodTargetIP}')
+            print(f'{BadTargetIP == patterns[0] }')
+            print(f'{GoodTargetIP == patterns[0] }')
+            if  BadTargetIP == patterns[0]:
+                record = RemoveOneRecord(filename , line_num)
+                print(f'record : {record}')
+                record = BadRole + record
+                TraingFile = 'IDS/TrainingList.txt'
+                WriteRecordIntoFile(TraingFile , record)
+                print("Success write into TrainingList.txt")
+            elif GoodTargetIP == patterns[0] :
+
+                record = RemoveOneRecord(filename , line_num)
+                record = GoodRole + record
+                print(f'record : {record}')
+                TraingFile = 'IDS/TrainingList.txt'
+                print(f'Sucdess write into TrainingList.txt - GOOOOOOOOOOOOOOOOOOOOD')
+                WriteRecordIntoFile(TraingFile , record)
+            else:
+                print(patterns[0])
+        
+            line_num += 1
+            time.sleep(0.1)
+    except Exception as e :
+        print(f"<Error> while : {e}")
+        time.sleep(2.0)
