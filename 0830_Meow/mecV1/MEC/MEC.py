@@ -115,9 +115,6 @@ def DefenseSys() :
 
 
 
-
-
-
 def main() : 
     os.system("sudo iptables-save > iptables.conf")
     threading.Thread(target=ForwardpktAndGetService).start()
@@ -138,7 +135,8 @@ def EndMEC(sig , frame) :
             './IDS/record.txt',
             './IPS/record.txt',
             './IPS/SuspiciousList.txt',
-            './IPS/CleanerList.txt'
+            './IPS/CleanerList.txt',
+            './TraficFeaturesForTranning.txt'
         ]
 
         for filepath in filepathes : 
