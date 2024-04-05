@@ -30,11 +30,6 @@ from IPS.Iptables import GetRecordToTrain
 
 
 
-# parser = argparse.ArgumentParser(description='client ip')
-
-# parser.add_argument('--ip', type=str, default='192.168.0.1')
-# self_ip = parser.parse_args().ip
-
 Pred_model = CNN_Model(pkt_features=10)
 Tran_model = CNN_Model(pkt_features=10)
 
@@ -119,7 +114,7 @@ def main() :
     os.system("sudo iptables-save > iptables.conf")
     threading.Thread(target=ForwardpktAndGetService).start()
     threading.Thread(target=GetIOTDevicesInfo).start()
-    #threading.Thread(target=DetectSys).start() # CNN
+    # threading.Thread(target=DetectSys).start() # CNN
     threading.Thread(target=DefenseSys).start()
 
 

@@ -52,10 +52,8 @@ def RemoveOneRecord(filename , lineNum) :
                 file.writelines(lines)
                 file.truncate()
                 file.close()
-                print("end-1")
                 return line
             else : 
-                print("end-2")
                 return None  
         
 
@@ -75,17 +73,16 @@ def WriteRecordIntoFile(filename , record) :
 def Iptables(IOTDevicesInfo , BlockList) : 
     sus_filename = "IPS/SuspiciousList.txt"
     cln_filename = "IPS/CleanerList.txt"
-    # BadIP = ReadSuspiciousFile(filename)
+
     BadIP = RemoveOneRecord(sus_filename , 0)
     GoodIP = RemoveOneRecord(cln_filename , 0)
-    print(f'BadIP : {BadIP} || GoodIP : {GoodIP}')
+
     if BadIP == None and GoodIP == None : 
         time.sleep(1.0)
         return None ,None
+
     if BadIP != None : 
-            
         print(f"Ban Bad User : {BadIP}")
-            
         BlockList.append(BadIP)
         if type(BadIP) == str : 
             BadIP = BadIP.replace('\n','')  #fix IP./r error!
@@ -94,6 +91,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
         cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
         print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")
         os.system(cmd)
+        
     if GoodIP != None : 
         GoodIP = GoodIP.replace('\n','')  #fix IP./r error!
 
@@ -102,7 +100,6 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 
 def GetRecordToTrain(BadIP=None , GoodIP=None):
-    #print(f"BadIP : {BadIP} || GoodIP : {GoodIP}")
     GoodTargetIP =None 
     BadTargetIP =None
     BadRole = None
@@ -119,13 +116,13 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
         print(f'GoodIP : {GoodIP}')
         GoodRole = 'GOOD '
         GoodTargetIP = GoodIP
-    print("Reading file :./IPS/record.txt")
+
     filename = "./IPS/record.txt"
     line_num = 0
     OneRecord = ''
 
-    print(f'BadGetIP : {BadTargetIP} || GoodIP : {GoodTargetIP}')
     while OneRecord != None : 
+
         try: 
             OneRecord = ReadOneRecord(filename , line_num)
             if OneRecord == None : 
@@ -143,14 +140,12 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
                 record = GoodRole + record
                 print(f'record : {record}')
                 TraingFile = 'IDS/TrainingList.txt'
-                print(f'Sucdess write into TrainingList.txt - GOOOOOOOOOOOOOOOOOOOOD')
                 WriteRecordIntoFile(TraingFile , record)
-            else:
-                print(patterns[0])
         
             line_num += 1
             time.sleep(0.1)
+
         except Exception as e :
-            print(f"<Error> while : {e}")
+            print(f"<Error> GetRecordToTrain-While : {e}")
             time.sleep(0.5)
             return 

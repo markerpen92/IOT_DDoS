@@ -58,18 +58,20 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
                 input_string = f'IP:{srcip} - ConnectTime:{ConnectedTime} - DecreaseTrust(Dispersion*10):{Dispersion*10} - NowTrust:{IOTDevicesInfo[srcip]["TrustValue"]}'
                 append_string_to_file(input_string , DefenseRecord)
                 IOTDevicesInfo[srcip]["IOTInfoIsChanged"] = False
+
             for dstip, connection_count in IOTDevicesInfo[srcip]['connection_count'].items():
                 if connection_count >= 5 :
                     ConnectionCountArg = 10
                     IOTDevicesInfo[srcip]["TrustValue"] -= ConnectionCountArg * connection_count
                     input_string = f'IP:{srcip} - ConnectTime:{ConnectedTime} - DecreaseTrust(connection_count*{ConnectionCountArg}):{5 * connection_count} - NowTrust:{IOTDevicesInfo[srcip]["TrustValue"]}'
                     append_string_to_file(input_string, DefenseRecord)
+
             # print(f"Exe Time : {NetworkTimeInfo['MECtotalExeTime']}\n\n\n\n")
             if int(NetworkTimeInfo['MECtotalExeTime']%20)<0.001 and NetworkTimeInfo['MECtotalExeTime']>20 and IOTDevicesInfo[srcip]["TrustValue"]>=60 : 
                 print(f"SrcIP:{srcip} - TrustValue Back to 100\n\n\n")
                 IOTDevicesInfo[srcip]["TrustValue"] = 100
                 CleanerList = 'IPS/CleanerList.txt'
-                append_string_to_file(srcip, CleanerList)
+                append_string_to_file(CleanerList , srcip)
 
 
             NetworkTimeInfo['NetworkTimeArray'].append(datetime.now())
@@ -78,6 +80,7 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
             if IOTDevicesInfo[srcip]["TrustValue"] < 30 : 
                 append_string_to_file(srcip , SuspiciousFile)
                 continue
+
                 
     except Exception as e : 
         traceback_str = traceback.format_exc()

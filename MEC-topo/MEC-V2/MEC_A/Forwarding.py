@@ -7,16 +7,15 @@ import traceback
 # main function : packetParse
 
 # Forwarding
-#LS_IP = "10.0.0.3"
-RS_IP = ["140.1.1.2","140.1.2.2"]
-WhiteList = ["140.1.1.2","140.1.2.2","192.168.10.1","192.168.20.2","192.168.30.1","192.168.40.2"]
+LS_IP = "10.0.0.3"
+RS_IP = "12.0.0.4"
+WhiteList = [RS_IP,"10.0.0.1"]
 ResponseList = []
 
 # Write Record in 'Connect time' file  &  'Traffic' file  &  'CPU usage rate' file
 ConnectedTimeRecord = "./Measurement/Record/MeasureConnectedTime.txt"
 TrafficRecord = "./Measurement/Record/MeasureTraffic.txt"
 CPUOccupyRecord = "./Measurement/Record/MeasureCPUOccupy.txt"
-PacketFeatureRecord = "./IPS/record.txt"
 
 
 def append_string_to_file(input_string, filename) :
@@ -24,11 +23,6 @@ def append_string_to_file(input_string, filename) :
     try :
         with lock : 
             with open(filename, 'a+') as file :
-                #filter Bad characters
-                input_string = input_string.replace('\r', '')   # Data processing(HTML)
-                input_string = input_string.replace('\n', '')   # Data processing(HTML) 
-                input_string = input_string.replace('\r\n', '') # Data processing(HTML)
-                input_string = input_string.replace('\n\r', '') # Data processing(HTML) 
                 file.write(input_string + '\n')
                 file.close()
 
@@ -87,7 +81,6 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
         packet = IP(data)
         # print("Receive Packet info : " , end="")
         # print(packet.summary())
-        # pirnt(packet.show())
         DstIP = packet[IP].dst
         SrcIP = packet[IP].src
         DstPort = packet[IP].dport
@@ -102,16 +95,8 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                     SynOrFin = "FIN"
             elif UDP in packet : 
                 ProtocalType = "UDP"
-
-            # print(f'==Show packet features==')
-            # print(f'packet windows size: {packet[TCP].window}')
-            # if Raw in packet : 
-            #     print(f'packet paylaod data: {packet[Raw].load.decode("utf-8")}')
-            # else : 
-            #     print(f'None payload data')
-            # print("-------------------------------------------------------------------------------------")
-
             CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin)
+
             GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)
 
             PayloadData = "0"
@@ -121,16 +106,11 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
-
-
-            PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {PayloadData}"
             
-            if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
-            append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(TrafficInputstr , TrafficRecord)
             append_string_to_file(CPUUseRateInputstr , CPUOccupyRecord)
-            
+
             ResponseList.append(SrcIP)
 
             if ReplyRequest != None : 
