@@ -128,6 +128,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             PayloadData = "0"
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
+                PacketFeatureInptstr = packet[Raw].load
             ReplyRequest = ServiceProvide(PayloadData)
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
@@ -138,7 +139,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             
         
             # PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {encodeHTTPPayload}"
-            PacketFeatureInptstr = packet[Raw].load
+            
             print(PacketFeatureInptstr)
 
             if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
