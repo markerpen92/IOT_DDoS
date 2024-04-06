@@ -126,20 +126,17 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)
 
             PayloadData = "0"
-            PacketFeatureInptstr = ""
+            RawhttpPayload = ""
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
-                PacketFeatureInptstr = packet[Raw].load
+                RawhttpPayload = f"{packet[Raw].load}"
             ReplyRequest = ServiceProvide(PayloadData)
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
             
-            # encodeHTTPPayload = str(packet[TCP].payload)
-            # print(f'TCP Paylaod: {encodeHTTPPayload}')
-            
-        
-            # PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {encodeHTTPPayload}"
+       
+            PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {RawhttpPayload}"
             
             print(PacketFeatureInptstr)
 
