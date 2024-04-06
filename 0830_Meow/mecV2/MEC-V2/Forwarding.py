@@ -126,7 +126,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)
 
             PayloadData = "0"
-            RawhttpPayload = ""
+            RawhttpPayload = "None"
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
                 RawhttpPayload = f"{packet[Raw].load}"

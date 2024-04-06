@@ -143,12 +143,16 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
             
             if  BadTargetIP == patterns[0]:
                 record = RemoveOneRecord(filename , line_num)
+                nessaryPatterns = record.split(' ')
+                record = nessaryPatterns [2] + nessaryPatterns[3]  #Extracting Featuers For trainnign 
                 record = BadRole + record
                 TraingFile = 'IDS/TrainingList.txt'
                 WriteRecordIntoFile(TraingFile , record)
 
             elif GoodTargetIP == patterns[0] :
                 record = RemoveOneRecord(filename , line_num)
+                nessaryPatterns = record.split(' ')
+                record = nessaryPatterns [2] + nessaryPatterns[3]  #Extracting Featuers For trainnign 
                 record = GoodRole + record
                 TraingFile = 'IDS/TrainingList.txt'
                 WriteRecordIntoFile(TraingFile , record)
