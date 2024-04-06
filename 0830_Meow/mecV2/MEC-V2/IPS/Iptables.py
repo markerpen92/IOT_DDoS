@@ -59,14 +59,26 @@ def RemoveOneRecord(filename , lineNum) :
 
 
 def WriteRecordIntoFile(filename , record) : 
-    
+    lines_seen = set()
     with open(filename , 'r+') as file :
         lines = file.readlines()
+        file.seek(0)
         lines.append(record)
         
-        file.writelines(lines)
+        # file.writelines(lines)
         file.truncate()
+        for line in lines:
+            if line not in lines_seen:
+                file.write(line)
+                lines_seen.add(line)
         file.close()
+
+
+
+
+
+
+
 
 
 
