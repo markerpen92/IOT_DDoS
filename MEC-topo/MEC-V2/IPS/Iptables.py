@@ -40,7 +40,6 @@ def ReadOneRecord(filename , lineNum) :
 
 
 def RemoveOneRecord(filename , lineNum) : 
-    print("start-1")
     file_lock = threading.Lock()
     with file_lock : 
         with open(filename , 'r+') as file :
