@@ -68,7 +68,7 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
             endTime = datetime.strptime(IOTDevicesInfo[srcip]["EndTime"], "%a %b %d %H:%M:%S %Y")
             connectedTime = (endTime-startTime).total_seconds()
             IOTDevicesInfo[srcip]['ConnectedTime'] = connectedTime
-            print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
+            # print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
         
         # For UDP Connected Time (not real connected time , this function is easy to know thr)
         elif IOTDevicesInfo[srcip]['StartTime'] == 0 and IOTDevicesInfo[srcip]["ProtocalType"] == "UDP" : 
@@ -82,7 +82,7 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
             endTime = datetime.strptime(IOTDevicesInfo[srcip]["EndTime"], "%a %b %d %H:%M:%S %Y")
             connectedTime = (endTime-startTime).total_seconds()
             IOTDevicesInfo[srcip]['ConnectedTime'] = connectedTime
-            print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
+            # print(f"Connected Time from IP[{srcip}] is - {IOTDevicesInfo[srcip]['ConnectedTime']} || time : {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount--{IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n\n\n\n")
 
 
 
