@@ -215,6 +215,7 @@ class CNN_Model(nn.Module):
 
                 for idx , Input in enumerate(Inputs) : 
                     patterns = Input.split(' ')
+                    print(patterns)
                     srcip = patterns[0]
                     pkt = np.array(patterns[1:])
                     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
