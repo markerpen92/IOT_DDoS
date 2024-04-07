@@ -8,3 +8,7 @@
 
 
 -2-
+
+	Apache Server build
+
+	cmd : python3 -m http.server8080
