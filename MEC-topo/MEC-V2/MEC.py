@@ -30,8 +30,8 @@ from IPS.Iptables import GetRecordToTrain
 
 
 
-Pred_model = CNN_Model(pkt_features=10)
-Tran_model = CNN_Model(pkt_features=10)
+Pred_model = CNN_Model(pkt_features=2)
+Tran_model = CNN_Model(pkt_features=2)
 
 NetworkTimeInfo = {
     'NetworkTimeArray' : deque([datetime.now()] , maxlen=2) ,  # real time array
