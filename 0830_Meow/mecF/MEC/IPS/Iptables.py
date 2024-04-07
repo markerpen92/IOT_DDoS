@@ -149,6 +149,6 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
             time.sleep(0.1)
 
         except Exception as e :
-            print(f"<Error> GetRecordToTrain-While : {e}")
+            # print(f"<Error> GetRecordToTrain-While : {e}")
             time.sleep(0.5)
             return 

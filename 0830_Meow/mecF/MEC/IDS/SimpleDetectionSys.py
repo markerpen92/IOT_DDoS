@@ -74,7 +74,7 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
 
             for dstip, connection_count in IOTDevicesInfo[srcip]['connection_count'].items():
                 if connection_count >= 5 :
-                    ConnectionCountArg = 10
+                    ConnectionCountArg = 5
                     IOTDevicesInfo[srcip]["TrustValue"] -= ConnectionCountArg * connection_count
                     input_string = f'IP:{srcip} - ConnectTime:{ConnectedTime} - DecreaseTrust(connection_count*{ConnectionCountArg}):{5 * connection_count} - NowTrust:{IOTDevicesInfo[srcip]["TrustValue"]}'
                     append_string_to_file(input_string, DefenseRecord)
