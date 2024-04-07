@@ -83,7 +83,6 @@ def GetConnectedCount(srcip , dstip , IOTDevicesInfo , SynOrFin) :
         }
         IOTDevicesInfo[srcip]["connection_count"].update(ConnectedCountInfo)
     else : 
-        # print("INININININ\n\n\n")
         if SynOrFin == "SYN" : 
             IOTDevicesInfo[srcip]["connection_count"][dstip] += 1
         if SynOrFin == "FIN" : 
@@ -113,14 +112,6 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                     SynOrFin = "FIN"
             elif UDP in packet : 
                 ProtocalType = "UDP"
-
-            # print(f'==Show packet features==')
-            # print(f'packet windows size: {packet[TCP].window}')
-            # if Raw in packet : 
-            #     print(f'packet paylaod data: {packet[Raw].load.decode("utf-8")}')
-            # else : 
-            #     print(f'None payload data')
-            # print("-------------------------------------------------------------------------------------")
 
             CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin)
             GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)

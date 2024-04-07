@@ -59,15 +59,20 @@ def RemoveOneRecord(filename , lineNum) :
 
 
 def WriteRecordIntoFile(filename , record) : 
-    
+    lines_seen = set()
     with open(filename , 'r+') as file :
         lines = file.readlines()
+        file.seek(0)
         lines.append(record)
         
-        file.writelines(lines)
+        # file.writelines(lines)
         file.truncate()
+        for line in lines:
+            if line not in lines_seen:
+                file.write(line)
+                lines_seen.add(line)
         file.close()
-
+        
 
 
 def Iptables(IOTDevicesInfo , BlockList) : 
@@ -83,7 +88,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
     if BadIP != None : 
         print(f"Ban Bad User : {BadIP}")
-        BlockList.append(BadIP)
+        BlockList.add(BadIP)
         if type(BadIP) == str : 
             BadIP = BadIP.replace('\n','')  #fix IP./r error!
         print(IOTDevicesInfo[BadIP]['TrustValue'])
@@ -99,7 +104,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 
 
-def GetRecordToTrain(BadIP=None , GoodIP=None):
+def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
     GoodTargetIP =None 
     BadTargetIP =None
     BadRole = None
@@ -129,13 +134,15 @@ def GetRecordToTrain(BadIP=None , GoodIP=None):
                 return
             patterns = OneRecord.split(' ')
             
-            if  BadTargetIP == patterns[0]:
+            if  BadTargetIP == patterns[0] or (BadTargetIP in BlockList) :
                 record = RemoveOneRecord(filename , line_num)
                 record = BadRole + record
                 TraingFile = 'IDS/TrainingList.txt'
                 WriteRecordIntoFile(TraingFile , record)
+                if BadTargetIP not in BlockList : 
+                    BlockList.add(BadTargetIP)
 
-            elif GoodTargetIP == patterns[0] :
+            elif GoodTargetIP == patterns[0] and (GoodTargetIP not in BlockList) :
                 record = RemoveOneRecord(filename , line_num)
                 record = GoodRole + record
                 TraingFile = 'IDS/TrainingList.txt'
