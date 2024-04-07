@@ -1,5 +1,6 @@
 import threading
 import os
+import time
 import numpy as np
 import torch
 import torch.nn as nn
@@ -177,7 +178,11 @@ class CNN_Model(nn.Module):
 
             train_accuracy = 100 * correct_time / (total_train+0.003)
             TrainingAccuracy.append(train_accuracy)
-            TrainingLoss.append(train_loss.data)
+            try : 
+                TrainingLoss.append(train_loss.data)
+            except Exception as e : 
+                time.sleep(2.0)
+                return
 
             if round%100==0 : 
                 print(f"Round<{round}> - accu : {train_accuracy}\n")
@@ -222,7 +227,7 @@ class CNN_Model(nn.Module):
                             file.write(Input + '\n')
                             
                     else : 
-                        print(srcip, 'is detected')
+                        print('~'*20 , srcip , 'is detected' , '~'*20)
                         sus_file = 'IPS/suspicious.txt'
                         susFile_lock = threading.Lock()
 
