@@ -55,7 +55,7 @@ def GetTraffic(IOTDevicesInfo , BlockList) :
         IOTDevicesInfo[srcip]["PktAmount"] += 1
         IOTDevicesInfo[srcip]["TotalRxBytes"] += int(pktsize)
         if IOTDevicesInfo[srcip]["ConnectedTime"] == 0 : 
-            print(f"<Warning Event> SrcIP[{srcip}] ConnectedTime is 0 -> {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount : {IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n")
+            # print(f"<Warning Event> SrcIP[{srcip}] ConnectedTime is 0 -> {IOTDevicesInfo[srcip]['StartTime']} ~ {IOTDevicesInfo[srcip]['EndTime']} || PktAmount : {IOTDevicesInfo[srcip]['PktAmount']} || TrustValue-{IOTDevicesInfo[srcip]['TrustValue']}\n\n\n")
             IOTDevicesInfo[srcip]["Throughput"] = IOTDevicesInfo[srcip]["TotalRxBytes"]*8.0/1000000/1
             return
         IOTDevicesInfo[srcip]["Throughput"] = IOTDevicesInfo[srcip]["TotalRxBytes"]*8.0/1000000/IOTDevicesInfo[srcip]["ConnectedTime"]
