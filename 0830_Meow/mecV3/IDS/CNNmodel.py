@@ -227,6 +227,13 @@ class CNN_Model(nn.Module):
                             
                     else : 
                         print(srcip, 'is detected')
+                        sus_file = 'IPS/suspicious.txt'
+                        susFile_lock = threading.Lock()
+
+                        with susFile_lock:
+                            with open(sus_file , 'a+')as file :
+                                file.write(srcip + '\n')
+                                file.close()
                         '''
                         if predicted is 1 -> Block the IP
                         '''
