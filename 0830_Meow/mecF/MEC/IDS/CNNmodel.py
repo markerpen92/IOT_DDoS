@@ -241,7 +241,7 @@ class CNN_Model(nn.Module):
                     print("ewerwe",predicted)
                     # print('~'*20 , output , '~'*20)
 
-                    if predicted : 
+                    if predicted == 'tensor([0])': 
                         reocrdfile = 'IPS/record.txt'
                         with open(reocrdfile , 'a+')as file :
                             file.write(Input + '\n')
