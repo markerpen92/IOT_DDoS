@@ -195,7 +195,7 @@ class CNN_Model(nn.Module):
 
 
 
-    def PredictModel(self , training_model) : 
+    def PredictModel(self , training_model , BlockList=None) : 
         if self.FinishTraining : 
             self.UpdateModel()
             self.FinishTraining = False
@@ -217,6 +217,15 @@ class CNN_Model(nn.Module):
                     patterns = Input.split(' ')
                     # print(patterns)
                     srcip = patterns[0]
+
+                    if srcip in BlockList : 
+                        try : 
+                            NewContext.remove(idx)
+                            continue
+                        except Exception as e : 
+                            continue
+                        
+
                     patterns = patterns[:-1]
                     pkt = np.array(patterns[1:])
                     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
@@ -251,8 +260,7 @@ class CNN_Model(nn.Module):
                     try : 
                         NewContext.remove(idx)
                     except Exception as e : 
-                        time.sleep(0.5)
-                        return
+                        continue
                     # NewContext[idx] = ' '
 
                 # print('New Con - ' , NewContext)
