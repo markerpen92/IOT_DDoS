@@ -91,8 +91,8 @@ def DetectSys_Predict() :
             # Tran_model.TrainingModel(testing_model=Pred_model)
             
         except Exception as e : 
-            print(f"<Error> DetectSys_Predict : {e}")
-            time.sleep(2.0)
+            # print(f"<Error> DetectSys_Predict : {e}")
+            time.sleep(0.5)
             continue
 
 def DetectSys_Train() : 
