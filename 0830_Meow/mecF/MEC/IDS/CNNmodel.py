@@ -248,7 +248,7 @@ class CNN_Model(nn.Module):
                         if predicted is 1 -> Block the IP
                         '''
                     
-                    # NewContext.remove(idx)
+                    NewContext.remove(idx)
                     # NewContext[idx] = ' '
 
                 # print('New Con - ' , NewContext)
@@ -258,7 +258,7 @@ class CNN_Model(nn.Module):
                 #     if line != ' ' : 
                 #         print(line,line)
                 #         file.write(line)
-                file.writelines('')
+                file.writelines(NewContext)
                 file.close()
 
 
