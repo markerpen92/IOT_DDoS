@@ -99,8 +99,9 @@ def DetectSys_Train() :
     while 1 : 
         try : 
             # Pred_model.PredictModel(training_model=Tran_model)
+            time.sleep(30.0)
             Tran_model.TrainingModel(testing_model=Pred_model)
-            time.sleep(20.0)
+            time.sleep(30.0)
             
         except Exception as e : 
             print(f"<Error> DetectSys_Train : {e}")
