@@ -135,7 +135,8 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
 
             PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {PayloadData}"
-            
+            print(PayloadData , end='\n\n\n\n')
+
             if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
