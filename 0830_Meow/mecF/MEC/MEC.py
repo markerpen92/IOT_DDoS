@@ -84,13 +84,26 @@ def GetIOTDevicesInfo() :
 
 
 
-def DetectSys() : 
+def DetectSys_Predict() : 
     while 1 : 
         try : 
-            threading.Thread(target=Pred_model.PredictModel , args=(Tran_model,)).start()
-            threading.Thread(target=Tran_model.TrainingModel , args=(Pred_model,)).start()
+            Pred_model.PredictModel(training_model=Tran_model)
+            # Tran_model.TrainingModel(testing_model=Pred_model)
+            
         except Exception as e : 
-            print(f"<Error> DetectSys : {e}")
+            print(f"<Error> DetectSys_Predict : {e}")
+            time.sleep(2.0)
+            continue
+
+def DetectSys_Train() : 
+    while 1 : 
+        try : 
+            # Pred_model.PredictModel(training_model=Tran_model)
+            Tran_model.TrainingModel(testing_model=Pred_model)
+            time.sleep(20.0)
+            
+        except Exception as e : 
+            print(f"<Error> DetectSys_Train : {e}")
             time.sleep(2.0)
             continue
 
@@ -122,7 +135,8 @@ def main() :
     os.system("sudo iptables-save > iptables.conf")
     threading.Thread(target=ForwardpktAndGetService).start()
     threading.Thread(target=GetIOTDevicesInfo).start()
-    threading.Thread(target=DetectSys).start() # CNN45646
+    threading.Thread(target=DetectSys_Predict).start() # CNN45646
+    threading.Thread(target=DetectSys_Train).start()   # CNN54732
     threading.Thread(target=DefenseSys).start()
 
 

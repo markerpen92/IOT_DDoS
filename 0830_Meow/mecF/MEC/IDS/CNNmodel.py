@@ -120,9 +120,9 @@ class CNN_Model(nn.Module):
                         role = patterns[0]
 
                         if role=='GOOD' : 
-                            self.DataLoader.append((patterns[1:]) , [0])
+                            self.DataLoader.append(((training_data[1:]) , [0]))
                         elif role=='BAD' : 
-                            self.DataLoader.append((patterns[1:]) , [1])
+                            self.DataLoader.append(((training_data[1:]) , [1]))
 
                     file.write('')
                     file.close()
@@ -178,7 +178,7 @@ class CNN_Model(nn.Module):
                     his.append(0)
 
 
-            train_accuracy = 100 * correct_time / total_train
+            train_accuracy = 100 * correct_time / (total_train+0.003)
             TrainingAccuracy.append(train_accuracy)
             TrainingLoss.append(train_loss.data)
 
