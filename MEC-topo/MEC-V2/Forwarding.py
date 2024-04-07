@@ -144,7 +144,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             condiction_count = 0
 
 
-            for condiction , pattern in patterns.items() : 
+            for condiction , pattern in patterns.items : 
                 matches = re.findall(pattern , PayloadData)
 
                 if condiction==1 and matches : 
