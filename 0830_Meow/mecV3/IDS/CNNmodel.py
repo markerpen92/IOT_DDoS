@@ -6,7 +6,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 # from sklearn.model_selection import train_test_split
-import matplotlib.pyplot as plt
 
 
 
