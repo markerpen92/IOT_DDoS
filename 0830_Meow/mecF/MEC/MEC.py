@@ -87,7 +87,7 @@ def GetIOTDevicesInfo() :
 def DetectSys_Predict() : 
     while 1 : 
         try : 
-            Pred_model.PredictModel(training_model=Tran_model)
+            Pred_model.PredictModel(training_model=Tran_model , BlockList=BlockList)
             # Tran_model.TrainingModel(testing_model=Pred_model)
             
         except Exception as e : 

@@ -218,7 +218,8 @@ class CNN_Model(nn.Module):
                     # print(patterns)
                     srcip = patterns[0]
 
-                    if srcip in BlockList : 
+                    print('BLO : ' , BlockList)
+                    if BlockList != None and srcip in BlockList : 
                         try : 
                             NewContext.remove(idx)
                             continue
