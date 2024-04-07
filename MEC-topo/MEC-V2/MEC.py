@@ -30,17 +30,8 @@ from IPS.Iptables import GetRecordToTrain
 
 
 
-ModelPath = './IDS/model.pth'
-
-Pred_model = CNN_Model(pkt_features=2)
-Tran_model = CNN_Model(pkt_features=2)
-
-if os.path.exists(ModelPath) : 
-    Pred_model.UpdateModel()
-    Tran_model.UpdateModel()
-
-
-
+Pred_model = CNN_Model(pkt_features=10)
+Tran_model = CNN_Model(pkt_features=10)
 
 NetworkTimeInfo = {
     'NetworkTimeArray' : deque([datetime.now()] , maxlen=2) ,  # real time array
@@ -48,7 +39,7 @@ NetworkTimeInfo = {
 }
 
 IOTDevicesInfo = {}
-BlockList = set()
+BlockList = []
 
 
 
@@ -105,12 +96,13 @@ def DefenseSys() :
         try : 
             SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
             BadIP , GoodIP = Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
-            GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP , BlockList=BlockList)
+            GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP)
             #time.sleep(0.5)
         except Exception as e :
+            #print(f"<Error> DetectAndDefenseSys : {e}")#n0 vul3 ????????????
             
             traceback_str = traceback.format_exc()
-            print(f"<IDS Error> : {e}")
+            print(f"<Error> : {e}")
             print(f"Traceback: {traceback_str}")
             time.sleep(2.0)
    

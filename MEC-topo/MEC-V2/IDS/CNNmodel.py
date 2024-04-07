@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # Create CNN Model
 class CNN_Model(nn.Module):
-    def __init__(self , pkt_features , mask1=1 , mask2=1):
+    def __init__(self , pkt_features , mask1=3 , mask2=3):
         super(CNN_Model, self).__init__()
         self.FinishTraining = False
         self.Finish_FedLR_Training = False
@@ -95,7 +95,7 @@ class CNN_Model(nn.Module):
 
 
 
-    def TrainingModel(self , testing_model=None , test_dataloader=None) : 
+    def TrainingModel(self , testing_model , test_dataloader=None) : 
         # self.TrainNetwork = self.copy()
         TrainingLoss = []
         TrainingAccuracy = []
@@ -158,9 +158,7 @@ class CNN_Model(nn.Module):
             print(f'Round[{round}] - accu : {train_accuracy}\n')
         
         self.SaveModel()
-
-        if testing_model != None : 
-            testing_model.FinishTraining = True
+        testing_model.FinishTraining = True
 
 
 

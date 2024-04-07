@@ -40,6 +40,7 @@ def ReadOneRecord(filename , lineNum) :
 
 
 def RemoveOneRecord(filename , lineNum) : 
+    print("start-1")
     file_lock = threading.Lock()
     with file_lock : 
         with open(filename , 'r+') as file :
@@ -58,17 +59,13 @@ def RemoveOneRecord(filename , lineNum) :
 
 
 def WriteRecordIntoFile(filename , record) : 
-    lines_seen = set()
+    
     with open(filename , 'r+') as file :
         lines = file.readlines()
-        file.seek(0)
         lines.append(record)
+        
+        file.writelines(lines)
         file.truncate()
-
-        for line in lines:
-            if line not in lines_seen:
-                file.write(line)
-                lines_seen.add(line)
         file.close()
 
 
@@ -86,7 +83,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
     if BadIP != None : 
         print(f"Ban Bad User : {BadIP}")
-        BlockList.add(BadIP)
+        BlockList.append(BadIP)
         if type(BadIP) == str : 
             BadIP = BadIP.replace('\n','')  #fix IP./r error!
         print(IOTDevicesInfo[BadIP]['TrustValue'])
@@ -102,13 +99,14 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 
 
-def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
+def GetRecordToTrain(BadIP=None , GoodIP=None):
     GoodTargetIP =None 
     BadTargetIP =None
     BadRole = None
     GoodRole = None
 
     if BadIP == None and GoodIP == None : 
+        print("retrunnnnn1")
         return
     elif BadIP != None : 
         print(f'BadIP : {BadIP}')
@@ -131,15 +129,13 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
                 return
             patterns = OneRecord.split(' ')
             
-            if  BadTargetIP == patterns[0] or (BadTargetIP in BlockList) :
+            if  BadTargetIP == patterns[0]:
                 record = RemoveOneRecord(filename , line_num)
                 record = BadRole + record
                 TraingFile = 'IDS/TrainingList.txt'
                 WriteRecordIntoFile(TraingFile , record)
-                if BadTargetIP not in BlockList : 
-                    BlockList.add(BadTargetIP)
 
-            elif GoodTargetIP == patterns[0] and (GoodTargetIP not in BlockList) :
+            elif GoodTargetIP == patterns[0] :
                 record = RemoveOneRecord(filename , line_num)
                 record = GoodRole + record
                 TraingFile = 'IDS/TrainingList.txt'
