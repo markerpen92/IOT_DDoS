@@ -142,7 +142,7 @@ class CNN_Model(nn.Module):
 
         for round in range(self.TrainingEpisodes) : 
             total_train = correct_time = 0
-            his = []
+            train_loss = None
 
             for i , (pkt , label) in enumerate(data_loader) : 
 
@@ -173,9 +173,6 @@ class CNN_Model(nn.Module):
                 total_train += 1
                 if predicted == label : 
                     correct_time += 1
-                    his.append(1)
-                else : 
-                    his.append(0)
 
 
             train_accuracy = 100 * correct_time / (total_train+0.003)
