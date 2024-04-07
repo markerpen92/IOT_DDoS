@@ -236,6 +236,7 @@ class CNN_Model(nn.Module):
                     pkt_tensor = Variable(pkt_tensor.view(self.input_shape))
 
                     output = self.forward(pkt_tensor)
+                    print(f'meowhecker' {output})
                     predicted = torch.max(output.data , 1)[1]
 
                     # print('~'*20 , output , '~'*20)
