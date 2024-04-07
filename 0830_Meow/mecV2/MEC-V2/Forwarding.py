@@ -126,49 +126,20 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)
 
             PayloadData = "0"
+            RawhttpPayload = "0"
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
+                RawhttpPayload = f"{packet[Raw].load}"
             ReplyRequest = ServiceProvide(PayloadData)
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
+            
+       
+            PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {RawhttpPayload}"
 
-
-
-            PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {PayloadData}"
-            patterns = {
-                1 : r'Connection: keep-alive' , 
-                2 : r'Connection: keep-alive(?![\r\n])' , 
-                3 : r'Connection: keep-alive\r\n(?![\r\n])' , 
-                4 : r'Content-Length: (\d+)\r\n'
-            }
-
-            Patterns_of_Payload = ''
-            condiction_count = 0
-
-
-            for condiction , pattern in patterns.items : 
-                matches = re.findall(pattern , PayloadData)
-
-                if condiction==1 and matches : 
-                    Patterns_of_Payload += '1 '
-                    condiction_count += 1
-
-                elif (condiction==2 or condiction==3) and matches : 
-                    Patterns_of_Payload += '1 '
-                    condiction_count += 1
-
-                elif condiction==3 and matches : 
-                    Patterns_of_Payload += f'{matches}'
-                    condiction_count += 1
-
-
-            if condiction_count >= 2 : 
-                PayloadData = Patterns_of_Payload
-                PacketFeatureInptstr = f"{packet[TCP].window} {PayloadData}"
-                # print(PayloadData , end='\n\n\n\n')
-                if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
-           
+            if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
+            append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(TrafficInputstr , TrafficRecord)
             append_string_to_file(CPUUseRateInputstr , CPUOccupyRecord)

@@ -7,16 +7,15 @@ import traceback
 # main function : packetParse
 
 # Forwarding
-#LS_IP = "10.0.0.3"
-RS_IP = ["140.1.1.2","140.1.2.2"]
-WhiteList = ["140.1.1.2","140.1.2.2","192.168.10.1","192.168.20.2","192.168.30.1","192.168.40.2"]
+LS_IP = "10.0.0.3"
+RS_IP = "12.0.0.4"
+WhiteList = [RS_IP,"10.0.0.1"]
 ResponseList = []
 
 # Write Record in 'Connect time' file  &  'Traffic' file  &  'CPU usage rate' file
 ConnectedTimeRecord = "./Measurement/Record/MeasureConnectedTime.txt"
 TrafficRecord = "./Measurement/Record/MeasureTraffic.txt"
 CPUOccupyRecord = "./Measurement/Record/MeasureCPUOccupy.txt"
-PacketFeatureRecord = "./IPS/record.txt"
 
 
 def append_string_to_file(input_string, filename) :
@@ -24,20 +23,11 @@ def append_string_to_file(input_string, filename) :
     try :
         with lock : 
             with open(filename, 'a+') as file :
-                #filter Bad characters
-                input_string = input_string.replace('\r', '')   # Data processing(HTML)
-                input_string = input_string.replace('\n', '')   # Data processing(HTML) 
-                input_string = input_string.replace('\r\n', '') # Data processing(HTML)
-                input_string = input_string.replace('\n\r', '') # Data processing(HTML) 
                 file.write(input_string + '\n')
                 file.close()
 
     except Exception as e :
         print(f'Error Msg : {e}')
-
-
-
-
 
 def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) : 
     if SrcIP in IOTDevicesInfo : 
@@ -60,19 +50,12 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
         }
         IOTDevicesInfo.update(Info)
 
-
-
-
 '''
 File Record : 
     Connected TIme Record - [srcip , protocaltype , SynOrFin , PktTime]
     Traffic Record - [srcip , dstip , dstport , pktsize]
     CPU Record - [srcip , dstip , dstport , service]
 '''
-
-
-
-
 
 def GetConnectedCount(srcip , dstip , IOTDevicesInfo , SynOrFin) : 
     if SynOrFin == "None" : 
@@ -92,13 +75,12 @@ def GetConnectedCount(srcip , dstip , IOTDevicesInfo , SynOrFin) :
     # print(f"Connection count from {srcip} to {dstip} : {IOTDevicesInfo[srcip]['connection_count'][dstip]}\n\n\n")
 
 
-
-
-
 def packetParse(ThePacket , IOTDevicesInfo , BlockList) : 
     try : 
         data = ThePacket.get_payload()
         packet = IP(data)
+        # print("Receive Packet info : " , end="")
+        # print(packet.summary())
         DstIP = packet[IP].dst
         SrcIP = packet[IP].src
         DstPort = packet[IP].dport
@@ -113,16 +95,8 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                     SynOrFin = "FIN"
             elif UDP in packet : 
                 ProtocalType = "UDP"
-
-            # print(f'==Show packet features==')
-            # print(f'packet windows size: {packet[TCP].window}')
-            # if Raw in packet : 
-            #     print(f'packet paylaod data: {packet[Raw].load.decode("utf-8")}')
-            # else : 
-            #     print(f'None payload data')
-            # print("-------------------------------------------------------------------------------------")
-
             CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin)
+
             GetConnectedCount(SrcIP , DstIP , IOTDevicesInfo , SynOrFin)
 
             PayloadData = "0"
@@ -132,47 +106,11 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
-
-
-
-            PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {PayloadData}"
-            patterns = {
-                1 : r'Connection: keep-alive' , 
-                2 : r'Connection: keep-alive(?![\r\n])' , 
-                3 : r'Connection: keep-alive\r\n(?![\r\n])' , 
-                4 : r'Content-Length: (\d+)\r\n'
-            }
-
-            Patterns_of_Payload = ''
-            condiction_count = 0
-
-
-            for condiction , pattern in patterns.items : 
-                matches = re.findall(pattern , PayloadData)
-
-                if condiction==1 and matches : 
-                    Patterns_of_Payload += '1 '
-                    condiction_count += 1
-
-                elif (condiction==2 or condiction==3) and matches : 
-                    Patterns_of_Payload += '1 '
-                    condiction_count += 1
-
-                elif condiction==3 and matches : 
-                    Patterns_of_Payload += f'{matches}'
-                    condiction_count += 1
-
-
-            if condiction_count >= 2 : 
-                PayloadData = Patterns_of_Payload
-                PacketFeatureInptstr = f"{packet[TCP].window} {PayloadData}"
-                # print(PayloadData , end='\n\n\n\n')
-                if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
-           
+            
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(TrafficInputstr , TrafficRecord)
             append_string_to_file(CPUUseRateInputstr , CPUOccupyRecord)
-            
+
             ResponseList.append(SrcIP)
 
             if ReplyRequest != None : 
@@ -189,7 +127,6 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             ResponseList.remove(DstIP)
             ThePacket.accept()
             return
-
 
     except Exception as e : 
         print("Now In Exp")

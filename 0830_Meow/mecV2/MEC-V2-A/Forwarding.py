@@ -35,10 +35,6 @@ def append_string_to_file(input_string, filename) :
     except Exception as e :
         print(f'Error Msg : {e}')
 
-
-
-
-
 def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) : 
     if SrcIP in IOTDevicesInfo : 
         return
@@ -60,19 +56,12 @@ def CreateIOTDevicesInfo(IOTDevicesInfo , SrcIP , ProtocalType , SynOrFin) :
         }
         IOTDevicesInfo.update(Info)
 
-
-
-
 '''
 File Record : 
     Connected TIme Record - [srcip , protocaltype , SynOrFin , PktTime]
     Traffic Record - [srcip , dstip , dstport , pktsize]
     CPU Record - [srcip , dstip , dstport , service]
 '''
-
-
-
-
 
 def GetConnectedCount(srcip , dstip , IOTDevicesInfo , SynOrFin) : 
     if SynOrFin == "None" : 
@@ -92,13 +81,13 @@ def GetConnectedCount(srcip , dstip , IOTDevicesInfo , SynOrFin) :
     # print(f"Connection count from {srcip} to {dstip} : {IOTDevicesInfo[srcip]['connection_count'][dstip]}\n\n\n")
 
 
-
-
-
 def packetParse(ThePacket , IOTDevicesInfo , BlockList) : 
     try : 
         data = ThePacket.get_payload()
         packet = IP(data)
+        # print("Receive Packet info : " , end="")
+        # print(packet.summary())
+        # pirnt(packet.show())
         DstIP = packet[IP].dst
         SrcIP = packet[IP].src
         DstPort = packet[IP].dport
@@ -134,41 +123,10 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             CPUUseRateInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[ReplyRequest]-{ReplyRequest}"
 
 
-
             PacketFeatureInptstr = f"{SrcIP} {DstIP} {packet[TCP].window} {PayloadData}"
-            patterns = {
-                1 : r'Connection: keep-alive' , 
-                2 : r'Connection: keep-alive(?![\r\n])' , 
-                3 : r'Connection: keep-alive\r\n(?![\r\n])' , 
-                4 : r'Content-Length: (\d+)\r\n'
-            }
-
-            Patterns_of_Payload = ''
-            condiction_count = 0
-
-
-            for condiction , pattern in patterns.items : 
-                matches = re.findall(pattern , PayloadData)
-
-                if condiction==1 and matches : 
-                    Patterns_of_Payload += '1 '
-                    condiction_count += 1
-
-                elif (condiction==2 or condiction==3) and matches : 
-                    Patterns_of_Payload += '1 '
-                    condiction_count += 1
-
-                elif condiction==3 and matches : 
-                    Patterns_of_Payload += f'{matches}'
-                    condiction_count += 1
-
-
-            if condiction_count >= 2 : 
-                PayloadData = Patterns_of_Payload
-                PacketFeatureInptstr = f"{packet[TCP].window} {PayloadData}"
-                # print(PayloadData , end='\n\n\n\n')
-                if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
-           
+            
+            if SrcIP not in RS_IP :append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
+            append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(ConnectedTimeInputstr , ConnectedTimeRecord)
             append_string_to_file(TrafficInputstr , TrafficRecord)
             append_string_to_file(CPUUseRateInputstr , CPUOccupyRecord)
@@ -189,7 +147,6 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             ResponseList.remove(DstIP)
             ThePacket.accept()
             return
-
 
     except Exception as e : 
         print("Now In Exp")
