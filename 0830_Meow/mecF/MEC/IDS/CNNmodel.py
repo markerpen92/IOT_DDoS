@@ -221,6 +221,8 @@ class CNN_Model(nn.Module):
                     output = self.forward(InputData)
                     predicted = torch.max(output.data , 1)[1]
 
+                    print('~'*20 , output , '~'*20)
+
                     if predicted : 
                         reocrdfile = 'IPS/record.txt'
                         with open(reocrdfile , 'a+')as file :
