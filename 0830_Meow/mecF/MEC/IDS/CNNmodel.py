@@ -218,7 +218,7 @@ class CNN_Model(nn.Module):
                     # print(patterns)
                     srcip = patterns[0]
                     print('Bf' , patterns)
-                    patterns = patterns[1:-1]
+                    patterns = patterns[:-1]
                     print('Af' , patterns)
                     pkt = np.array(patterns[1:])
                     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
