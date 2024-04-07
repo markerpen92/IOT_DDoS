@@ -36,8 +36,8 @@ Pred_model = CNN_Model(pkt_features=4)
 Tran_model = CNN_Model(pkt_features=4)
 
 if os.path.exists(ModelPath) : 
-    Pred_model.UpdateModel()
-    Tran_model.UpdateModel()
+    Pred_model.UpdateModel(ModelPath)
+    Tran_model.UpdateModel(ModelPath)
 
 
 
