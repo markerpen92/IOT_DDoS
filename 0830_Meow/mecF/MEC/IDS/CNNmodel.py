@@ -253,7 +253,7 @@ class CNN_Model(nn.Module):
 
                         with susFile_lock:
                             with open(sus_file , 'a+')as file :
-                                file.write(srcip)
+                                file.write(srcip + '\n')
                                 file.close()
                         
                         '''
