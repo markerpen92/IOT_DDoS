@@ -89,7 +89,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
         BlockList.add(BadIP)
         if type(BadIP) == str : 
             BadIP = BadIP.replace('\n','')  #fix IP./r error!
-            
+
         del IOTDevicesInfo[BadIP]
         cmd = f'sudo iptables -t filter -I FORWARD -j DROP -s {BadIP}'
         print(f"IOTDevicesInfo : {IOTDevicesInfo} || CMD : {cmd}")
@@ -133,11 +133,29 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
             
             if  BadTargetIP == patterns[0] or (BadTargetIP in BlockList) :
                 record = RemoveOneRecord(filename , line_num)
-                record = BadRole + record
-                TraingFile = 'IDS/TrainingList.txt'
-                WriteRecordIntoFile(TraingFile , record)
-                if BadTargetIP not in BlockList : 
-                    BlockList.add(BadTargetIP)
+
+                record_patterns = record.split(' ')
+
+                condiction_count = 0
+
+                if record_patterns[0] == 0 : #window size
+                    pass
+
+                if record_patterns[1] == 1 : #keep alive
+                    condiction_count += 1
+
+                if record_patterns[2] == 1 : #\r\n or not
+                    condiction_count += 1
+
+                if record_patterns[3] != 0 : # content length
+                    condiction_count += 1
+
+                if condiction_count >= 2 : 
+                    record = BadRole + record
+                    TraingFile = 'IDS/TrainingList.txt'
+                    WriteRecordIntoFile(TraingFile , record)
+                    if BadTargetIP not in BlockList : 
+                        BlockList.add(BadTargetIP)
 
             elif GoodTargetIP == patterns[0] and (GoodTargetIP not in BlockList) :
                 record = RemoveOneRecord(filename , line_num)
