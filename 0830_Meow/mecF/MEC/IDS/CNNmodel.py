@@ -214,8 +214,9 @@ class CNN_Model(nn.Module):
                 NewContext = Inputs.copy()
 
                 for idx , Input in enumerate(Inputs) : 
+                    Input = Input.replace('\n', '')
                     patterns = Input.split(' ')
-                    print(patterns)
+                    # print(patterns)
                     srcip = patterns[0]
                     pkt = np.array(patterns[1:])
                     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
