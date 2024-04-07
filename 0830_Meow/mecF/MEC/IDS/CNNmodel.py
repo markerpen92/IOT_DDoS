@@ -248,7 +248,11 @@ class CNN_Model(nn.Module):
                         if predicted is 1 -> Block the IP
                         '''
                     
-                    NewContext.remove(idx)
+                    try : 
+                        NewContext.remove(idx)
+                    except Exception as e : 
+                        time.sleep(0.5)
+                        return
                     # NewContext[idx] = ' '
 
                 # print('New Con - ' , NewContext)
