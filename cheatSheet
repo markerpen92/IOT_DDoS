@@ -1,0 +1,22 @@
+# Docker
+
+
+砍掉Image 方法
+docker rmi ubuntu:sshd1  #<REPOSITORY:TAG>
+
+
+container Name 衝突 解法
+
+docker stop "<container ID>"
+docker rm "<container ID>"
+
+進入dockeMahcine
+docker exec -it mn."name" bash   /  docker exec -it mn.MEC1 bash 
+telnet localhost 2604 (OSPF)
+show ip ospf ? 
+## Zebra 
+
+docker images(Checker Images), docker pull kathara/quagga (Download Images)
+Defaut accout password zebra / (meow)
+
+
