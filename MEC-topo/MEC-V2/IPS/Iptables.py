@@ -64,15 +64,14 @@ def WriteRecordIntoFile(filename , record) :
         lines = file.readlines()
         file.seek(0)
         lines.append(record)
-        
-        # file.writelines(lines)
         file.truncate()
+
         for line in lines:
             if line not in lines_seen:
                 file.write(line)
                 lines_seen.add(line)
         file.close()
-        
+
 
 
 def Iptables(IOTDevicesInfo , BlockList) : 
@@ -111,7 +110,6 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
     GoodRole = None
 
     if BadIP == None and GoodIP == None : 
-        print("retrunnnnn1")
         return
     elif BadIP != None : 
         print(f'BadIP : {BadIP}')
