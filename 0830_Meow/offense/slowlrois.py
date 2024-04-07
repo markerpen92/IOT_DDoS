@@ -5,7 +5,7 @@ import ssl
 import socket 
 
 targetIP = "140.1.1.2"
-targetPort= 8080
+targetPort= 80
 targetHostName = None
 socketExistsList = []
 

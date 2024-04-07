@@ -19,7 +19,7 @@ ResponseList = []
 ConnectedTimeRecord = "./Measurement/Record/MeasureConnectedTime.txt"
 TrafficRecord = "./Measurement/Record/MeasureTraffic.txt"
 CPUOccupyRecord = "./Measurement/Record/MeasureCPUOccupy.txt"
-PacketFeatureRecord = "./IPS/record.txt"
+PacketFeatureRecord = "./IDS/record.txt"
 
 
 
