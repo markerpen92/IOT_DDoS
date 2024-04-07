@@ -216,9 +216,14 @@ class CNN_Model(nn.Module):
                 for idx , Input in enumerate(Inputs) : 
                     patterns = Input.split(' ')
                     srcip = patterns[0]
-                    InputData = np.array(patterns[1:])
+                    pkt = np.array(patterns[1:])
+                    pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
+                    # pkt = [[item] for item in pkt]
+                    
+                    pkt_tensor = torch.tensor(pkt)
+                    pkt_tensor = Variable(pkt_tensor.view(self.input_shape))
 
-                    output = self.forward(InputData)
+                    output = self.forward(pkt_tensor)
                     predicted = torch.max(output.data , 1)[1]
 
                     print('~'*20 , output , '~'*20)
