@@ -168,7 +168,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
             
             PayloadData = Patterns_of_Payload
-            PacketFeatureInptstr = f"{packet[TCP].window} {PayloadData}"
+            PacketFeatureInptstr = f"{SrcIP} {packet[TCP].window} {PayloadData}"
             # print(PayloadData , end='\n\n\n\n')
             if SrcIP not in RS_IP :
                 append_string_to_file(PacketFeatureInptstr, PacketFeatureRecord)
