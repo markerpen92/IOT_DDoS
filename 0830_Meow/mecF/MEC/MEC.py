@@ -122,7 +122,7 @@ def main() :
     os.system("sudo iptables-save > iptables.conf")
     threading.Thread(target=ForwardpktAndGetService).start()
     threading.Thread(target=GetIOTDevicesInfo).start()
-    # threading.Thread(target=DetectSys).start() # CNN
+    threading.Thread(target=DetectSys).start() # CNN45646
     threading.Thread(target=DefenseSys).start()
 
 
