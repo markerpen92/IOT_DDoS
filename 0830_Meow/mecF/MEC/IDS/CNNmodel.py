@@ -249,15 +249,16 @@ class CNN_Model(nn.Module):
                         '''
                     
                     # NewContext.remove(idx)
-                    NewContext[idx] = ' '
+                    # NewContext[idx] = ' '
 
-                print('New Con - ' , NewContext)
+                # print('New Con - ' , NewContext)
                 file.seek(0)
                 file.truncate()
-                for line in NewContext : 
-                    if line != ' ' : 
-                        print(line,line)
-                        file.write(line)
+                # for line in NewContext : 
+                #     if line != ' ' : 
+                #         print(line,line)
+                #         file.write(line)
+                file.writelines('')
                 file.close()
 
 
