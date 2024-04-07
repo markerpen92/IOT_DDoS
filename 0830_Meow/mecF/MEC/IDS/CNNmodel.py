@@ -214,7 +214,7 @@ class CNN_Model(nn.Module):
                 NewContext = Inputs.copy()
 
                 for idx , Input in enumerate(Inputs) : 
-                    Input = Input.replace('\n', '')
+                    Input = Input.replace('\n', ' ')
                     patterns = Input.split(' ')
                     # print(patterns)
                     srcip = patterns[0]
