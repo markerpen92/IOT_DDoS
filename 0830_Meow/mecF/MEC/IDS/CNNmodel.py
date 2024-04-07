@@ -240,7 +240,7 @@ class CNN_Model(nn.Module):
 
                     # print('~'*20 , output , '~'*20)
 
-                    if predicted : 
+                    if not predicted : 
                         reocrdfile = 'IPS/record.txt'
                         with open(reocrdfile , 'a+')as file :
                             file.write(Input + '\n')
