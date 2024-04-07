@@ -35,11 +35,11 @@ ModelPath = './IDS/model.pth'
 Pred_model = CNN_Model(pkt_features=4)
 Tran_model = CNN_Model(pkt_features=4)
 
-if os.path.exists(ModelPath) : 
-    Pred_model.UpdateModel(ModelPath)
-    print('Predict-Model Loaded Successfully')
-    Tran_model.UpdateModel(ModelPath)
-    print('Tran-Model Loaded Successfully')
+# if os.path.exists(ModelPath) : 
+#     Pred_model.UpdateModel(ModelPath)
+#     print('Predict-Model Loaded Successfully')
+#     Tran_model.UpdateModel(ModelPath)
+#     print('Tran-Model Loaded Successfully')
 
 
 
