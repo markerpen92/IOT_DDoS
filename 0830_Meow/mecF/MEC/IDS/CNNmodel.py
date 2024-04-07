@@ -251,6 +251,7 @@ class CNN_Model(nn.Module):
                     # NewContext.remove(idx)
                     NewContext[idx] = ' '
 
+                print('New Con - ' , NewContext)
                 file.seek(0)
                 file.truncate()
                 for line in NewContext : 
