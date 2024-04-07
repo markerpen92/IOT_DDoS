@@ -149,7 +149,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                 if condiction==1 : 
                     if matches : 
                         Patterns_of_Payload += '1 '
-                    else
+                    else:
                         Patterns_of_Payload += '0 '
 
                 elif (condiction==2 or condiction==3) : 
