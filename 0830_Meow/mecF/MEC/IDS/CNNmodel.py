@@ -246,15 +246,16 @@ class CNN_Model(nn.Module):
                             file.write(Input + '\n')
                             
                     else : 
-                        print('~'*20 , srcip , 'is detected' , '~'*20)
+                        print('\n\n' , '~'*20 , srcip , 'is detected by CNN45646' , '~'*20 , '\n\n')
                         BlockList.add(srcip)
                         sus_file = 'IPS/suspicious.txt'
                         susFile_lock = threading.Lock()
 
                         with susFile_lock:
                             with open(sus_file , 'a+')as file :
-                                file.write(srcip + '\n')
+                                file.write(srcip)
                                 file.close()
+                        
                         '''
                         if predicted is 1 -> Block the IP
                         '''
