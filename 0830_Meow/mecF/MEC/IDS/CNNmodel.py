@@ -248,7 +248,7 @@ class CNN_Model(nn.Module):
                         if predicted is 1 -> Block the IP
                         '''
                     
-                    NewContext.remove(idx)
+                    # NewContext.remove(idx)
                     NewContext[idx] = ' '
 
                 file.seek(0)
