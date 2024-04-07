@@ -217,9 +217,7 @@ class CNN_Model(nn.Module):
                     patterns = Input.split(' ')
                     # print(patterns)
                     srcip = patterns[0]
-                    print('Bf' , patterns)
                     patterns = patterns[:-1]
-                    print('Af' , patterns)
                     pkt = np.array(patterns[1:])
                     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
                     # pkt = [[item] for item in pkt]
@@ -230,7 +228,7 @@ class CNN_Model(nn.Module):
                     output = self.forward(pkt_tensor)
                     predicted = torch.max(output.data , 1)[1]
 
-                    print('~'*20 , output , '~'*20)
+                    # print('~'*20 , output , '~'*20)
 
                     if predicted : 
                         reocrdfile = 'IPS/record.txt'
@@ -249,12 +247,16 @@ class CNN_Model(nn.Module):
                         '''
                         if predicted is 1 -> Block the IP
                         '''
-
+                    
                     NewContext.remove(idx)
+                    NewContext[idx] = ' '
 
                 file.seek(0)
                 file.truncate()
-                file.writelines(NewContext)
+                for line in NewContext : 
+                    if line != ' ' : 
+                        print(line,line)
+                        file.write(line)
                 file.close()
 
 
