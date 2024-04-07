@@ -82,6 +82,8 @@ def SimpleDetectionSystem(IOTDevicesInfo , BlockList , NetworkTimeInfo) :
 
             # print(f"Exe Time : {NetworkTimeInfo['MECtotalExeTime']}\n\n\n\n")
             if int(NetworkTimeInfo['MECtotalExeTime']%20)<0.001 and NetworkTimeInfo['MECtotalExeTime']>20 and IOTDevicesInfo[srcip]["TrustValue"]>=60 : 
+                if srcip in BlockList : 
+                    return
                 print(f"SrcIP:{srcip} - TrustValue Back to 100\n\n\n")
                 IOTDevicesInfo[srcip]["TrustValue"] = 100
                 CleanerList = 'IPS/CleanerList.txt'

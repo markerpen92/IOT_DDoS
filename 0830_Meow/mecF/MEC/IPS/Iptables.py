@@ -114,7 +114,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
         print(f'BadIP : {BadIP}')
         BadRole = 'BAD '
         BadTargetIP = BadIP
-    elif GoodIP!= None :
+    elif GoodIP!= None and GoodIP not in BlockList :
         print(f'GoodIP : {GoodIP}')
         GoodRole = 'GOOD '
         GoodTargetIP = GoodIP
