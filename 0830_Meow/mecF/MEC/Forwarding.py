@@ -130,7 +130,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
                 RawPayloadData = packet[Raw].load
-                RawPayloadDataStr = f'RawPayloadData'
+                RawPayloadDataStr = f'{RawPayloadData}'
             ReplyRequest = ServiceProvide(PayloadData)
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
