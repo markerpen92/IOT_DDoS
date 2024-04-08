@@ -270,9 +270,9 @@ class CNN_Model(nn.Module):
                         print(f"Traceback: {traceback_str}")
 
                             
-                    print('ININININ\n\n')
+                    # print('ININININ\n\n')
                     predicted = ''
-                    if output[0] > output[1] : 
+                    if output[0][0] > output[0][1] : 
                         predicted == 'tensor([0])'
                     else : 
                         predicted == 'tensor([1])'
