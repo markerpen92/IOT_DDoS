@@ -7,12 +7,12 @@ import time
 
 
 from CNNmodel import CNN_Model
-from MEC_A.MEC import MEC as mecA
-from MEC_B.MEC import MEC as mecB
+# from MEC_A.MEC import MEC as mecA
+# from MEC_B.MEC import MEC as mecB
 
 
-modelA = mecA.GetCNNmodel()
-modelB = mecB.GetCNNmodel()
+# modelA = mecA.GetCNNmodel()
+# modelB = mecB.GetCNNmodel()
 
 patterns_size = 4
 
