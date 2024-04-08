@@ -269,7 +269,7 @@ class CNN_Model(nn.Module):
 
 
                         if pkt_list[1] >= 1 and pkt_list[2] >= 1 : 
-                            output[0][1] += 0.1
+                            output[0][1] += 0.3
                         elif pkt_list[1] == 0 and pkt_list[2] == 0 : 
                             output[0][0] += 0.3
 
@@ -286,8 +286,10 @@ class CNN_Model(nn.Module):
                     # print('ININININ\n\n')
                     predicted = ''
                     if output[0][0] > output[0][1] : 
+                        print('ININININ\n\n')
                         predicted == 'tensor([0])'
                     else : 
+                        print('OUOUOUOU\n\n')
                         predicted == 'tensor([1])'
                     # predicted = torch.max(output.data , 1)[1]
                     
