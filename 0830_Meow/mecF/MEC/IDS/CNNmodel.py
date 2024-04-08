@@ -239,7 +239,7 @@ class CNN_Model(nn.Module):
                     print('~'*20 , output , '~'*20)
 
 
-                    pkt_list = pkt.tolist()
+                    pkt_list = [pkt.tolist()]
                     print(pkt_list)
                     
                     susp_condictions = 0 
