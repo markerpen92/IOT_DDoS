@@ -245,7 +245,7 @@ class CNN_Model(nn.Module):
                     susp_condictions = 0 
                     try : 
                         for idx , feature in enumerate(pkt_list) :  
-                            print(pkt_list)
+                            print(pkt_list[0] , pkt_list[1] , pkt_list[2] , pkt_list[3])
 
                             if idx == 0 : #window size
                                 level = 0.01
