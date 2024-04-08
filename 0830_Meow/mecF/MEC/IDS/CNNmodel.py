@@ -236,12 +236,41 @@ class CNN_Model(nn.Module):
                     pkt_tensor = Variable(pkt_tensor.view(self.input_shape))
 
                     output = self.forward(pkt_tensor)
-                    print('output:', output)
+
+                    susp_condictions = 0 
+                    for idx , feature in enumerate(output.data) :  
+                        if idx == 0 : #window size
+                            level = 0.1
+                            WindowSize_var = 1000
+                            output[1] += feature/WindowSize_var * level
+
+                        elif idx == 1 : # keep alive
+                            if feature != 1.0 : 
+                                susp_condictions += 1
+                            else : 
+                                output[0] += 0.1
+
+                        elif idx == 2 : # \r\n or not
+                            if feature != 1.0 : 
+                                susp_condictions += 1
+                            else : 
+                                output[0] += 0.1
+                        
+                        elif idx == 3 : # Content-Length
+                            level = 0.1
+                            ContentLength_var = 1000
+                            output[1] += feature/ContentLength_var * level
+
+                    if susp_condictions >= 2 : 
+                        output[1] += 0.2
+                            
+                        
+
                     predicted = torch.max(output.data , 1)[1]
-                    print("ewerwe",predicted)
+                    
                     # print('~'*20 , output , '~'*20)
 
-                    if predicted == 'tensor([0])': 
+                    if not predicted == 'tensor([0])': 
                         reocrdfile = 'IPS/record.txt'
                         with open(reocrdfile , 'a+')as file :
                             file.write(Input + '\n')
