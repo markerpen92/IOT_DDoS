@@ -239,7 +239,7 @@ class CNN_Model(nn.Module):
                     # print('~'*20 , output , '~'*20)
 
                     susp_condictions = 0 
-                    for idx , feature in enumerate(output.data) :  
+                    for idx , feature in enumerate(pkt) :  
                         if idx == 0 : #window size
                             level = 0.1
                             WindowSize_var = 1000
