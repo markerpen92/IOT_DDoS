@@ -287,10 +287,10 @@ class CNN_Model(nn.Module):
                     predicted = ''
                     if output[0][0] > output[0][1] : 
                         print('ININININ\n\n')
-                        predicted == 'tensor([0])'
+                        predicted = 'tensor([0])'
                     else : 
                         print('OUOUOUOU\n\n')
-                        predicted == 'tensor([1])'
+                        predicted = 'tensor([1])'
                     # predicted = torch.max(output.data , 1)[1]
                     
                     # print('~'*20 , output , '~'*20)
