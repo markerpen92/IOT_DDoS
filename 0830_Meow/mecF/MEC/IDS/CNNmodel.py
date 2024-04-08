@@ -2,6 +2,7 @@ import threading
 import os
 import time
 import numpy as np
+import traceback
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -243,23 +244,30 @@ class CNN_Model(nn.Module):
                     print(pkt_list)
 
 
-                    levelA = 0.01
-                    WindowSize_var = 10000
-                    output[1] += pkt_list[0]/WindowSize_var * levelA
+                    try : 
 
-                    if pkt_list[1] >= 1 : 
-                        output[1] += 0.1
-                    else : 
-                        output[0] += 0.1
+                        levelA = 0.01
+                        WindowSize_var = 10000
+                        output[1] += pkt_list[0]/WindowSize_var * levelA
 
-                    if pkt_list[2] >= 1 : 
-                        output[1] += 0.1
-                    else : 
-                        output[0] += 0.1 
+                        if pkt_list[1] >= 1 : 
+                            output[1] += 0.1
+                        else : 
+                            output[0] += 0.1
 
-                    levelB = 0.01
-                    ContentLength_var = 1000
-                    output[1] += pkt_list[0]/ContentLength_var * levelB
+                        if pkt_list[2] >= 1 : 
+                            output[1] += 0.1
+                        else : 
+                            output[0] += 0.1 
+
+                        levelB = 0.01
+                        ContentLength_var = 1000
+                        output[1] += pkt_list[0]/ContentLength_var * levelB
+
+                    except Exception as e : 
+                        traceback_str = traceback.format_exc()
+                        print(f'Error Msg : {e}')
+                        print(f"Traceback: {traceback_str}")
 
                             
                     print('ININININ\n\n')
