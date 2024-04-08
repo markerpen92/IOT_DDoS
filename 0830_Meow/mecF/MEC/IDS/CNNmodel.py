@@ -216,7 +216,7 @@ class CNN_Model(nn.Module):
                 if Inputs == [] : 
                     return
                 
-                print(Inputs)
+                # print(Inputs)
 
                 NewContext = Inputs.copy()
 
