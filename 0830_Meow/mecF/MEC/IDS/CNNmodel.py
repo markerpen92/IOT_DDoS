@@ -239,7 +239,7 @@ class CNN_Model(nn.Module):
                     # print('~'*20 , output , '~'*20)
 
 
-                    print(pkt)
+                    # print(pkt)
                     
                     susp_condictions = 0 
                     for idx , feature in enumerate(pkt) :  
@@ -268,7 +268,7 @@ class CNN_Model(nn.Module):
                     if susp_condictions >= 2 : 
                         output[1] += 0.2
                             
-                    print('ININININ\n\n')
+                    # print('ININININ\n\n')
 
                     predicted = torch.max(output.data , 1)[1]
                     
