@@ -175,7 +175,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                         Patterns_of_Payload += '0'
 
 
-            
+            print(Patterns_of_Payload)
             PayloadData = Patterns_of_Payload
             PacketFeatureInptstr = f"{SrcIP} {packet[TCP].window} {PayloadData}"
             # print(PayloadData , end='\n\n\n\n')
