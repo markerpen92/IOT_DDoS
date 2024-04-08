@@ -267,7 +267,7 @@ class CNN_Model(nn.Module):
                             level = 0.1
                             ContentLength_var = 1000
                             output[1] += feature/ContentLength_var * level
-
+                    print('out for loop')
                     if susp_condictions >= 2 : 
                         output[1] += 0.2
                             
