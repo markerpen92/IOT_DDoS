@@ -126,8 +126,10 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
 
             PayloadData = "0"
+            RawPayloadData = "0"
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
+                RawPayloadData = packet[Raw].load
             ReplyRequest = ServiceProvide(PayloadData)
             ConnectedTimeInputstr = f"[Src IP]-{SrcIP}\t[ProtocalType]-{ProtocalType}\t[Syn or Fin]-{SynOrFin}\t[PktTime]-{time.ctime()}"
             TrafficInputstr = f"[Src IP]-{SrcIP}\t[Dst IP]-{DstIP}\t[Dstport]-{DstPort}\t[PktSize]-{len(PayloadData)}"
@@ -143,11 +145,11 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
             Patterns_of_Payload = ''
 
-            print(PayloadData)
+            print(RawPayloadData)
 
 
             for condiction , pattern in patterns.items() : 
-                matches = re.search(pattern, PayloadData)
+                matches = re.search(pattern, RawPayloadData)
 
                 if condiction==1 : 
                     if matches : 
