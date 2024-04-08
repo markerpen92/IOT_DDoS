@@ -62,6 +62,6 @@ def GetTraffic(IOTDevicesInfo , BlockList) :
 
     except Exception as e : 
         traceback_str = traceback.format_exc()
-        print(f"<Error> MeasureTraffic : {e}")
-        print(f"Traceback : {traceback_str}")
+        # print(f"<Error> MeasureTraffic : {e}")
+        # print(f"Traceback : {traceback_str}")
         time.sleep(2.0)

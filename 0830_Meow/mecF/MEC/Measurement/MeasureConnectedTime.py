@@ -97,8 +97,8 @@ def GetConnectedTime(IOTDevicesInfo , BlockList) :
 
     except Exception as e : 
         traceback_str = traceback.format_exc()
-        print(f"<Error> MeasureConnectedTime : {e}")
-        print(f"Traceback: {traceback_str}")
+        # print(f"<Error> MeasureConnectedTime : {e}")
+        # print(f"Traceback: {traceback_str}")
         time.sleep(2.0)
 
 

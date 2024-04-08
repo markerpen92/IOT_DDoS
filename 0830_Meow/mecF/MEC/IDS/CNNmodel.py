@@ -271,7 +271,7 @@ class CNN_Model(nn.Module):
                         if pkt_list[1] >= 1 and pkt_list[2] >= 1 : 
                             output[0][1] += 0.1
                         elif pkt_list[1] == 0 and pkt_list[2] == 0 : 
-                            output[0][0] += 0.1
+                            output[0][0] += 0.3
 
                         levelB = 0.01
                         ContentLength_var = 1000
