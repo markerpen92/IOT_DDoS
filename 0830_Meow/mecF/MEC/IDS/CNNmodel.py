@@ -243,6 +243,8 @@ class CNN_Model(nn.Module):
                     
                     susp_condictions = 0 
                     for idx , feature in enumerate(pkt) :  
+                        print(feature)
+
                         if idx == 0 : #window size
                             level = 0.01
                             WindowSize_var = 10000
@@ -269,8 +271,12 @@ class CNN_Model(nn.Module):
                         output[1] += 0.2
                             
                     # print('ININININ\n\n')
-
-                    predicted = torch.max(output.data , 1)[1]
+                    predicted = ''
+                    if output[0] > output[1] : 
+                        predicted == 'tensor([0])'
+                    else : 
+                        predicted == 'tensor([1])'
+                    # predicted = torch.max(output.data , 1)[1]
                     
                     print('~'*20 , output , '~'*20)
 
