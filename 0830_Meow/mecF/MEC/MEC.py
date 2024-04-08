@@ -106,7 +106,7 @@ def DetectSys_Train() :
             # time.sleep(30.0)
             
         except Exception as e : 
-            print(f"<Error> DetectSys_Train : {e}")
+            #print(f"<Error> DetectSys_Train : {e}")
             time.sleep(2.0)
             continue
 
