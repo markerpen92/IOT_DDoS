@@ -214,6 +214,7 @@ class CNN_Model(nn.Module):
                 Inputs = file.readlines()
                 
                 if Inputs == [] : 
+                    time.sleep(1.0)
                     return
                 
                 # print(Inputs)
