@@ -338,7 +338,7 @@ class CNN_Model(nn.Module):
 
 
 
-    def SaveModel(self , gen_path) : 
+    def SaveModel(self) : 
         torch.save(self.state_dict(), 'model.pth')
 
 
@@ -352,5 +352,6 @@ class CNN_Model(nn.Module):
 
 
 
-    def FedLearning(self , fdpth='/root/IOT_DDoS/MEC-topo/MECa') : 
-        self.load_state_dict(torch.load(fdpth))
+    def FedLearning(self) : 
+        fd_pth = '../models/global_model.pth'
+        self.load_state_dict(torch.load(fd_pth))

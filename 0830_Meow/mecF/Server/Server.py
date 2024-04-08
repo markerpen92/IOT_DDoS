@@ -6,7 +6,7 @@ import os
 import time
 
 
-from MEC_A.MEC.IDS.CNNmodel import CNN_Model
+from CNNmodel import CNN_Model
 from MEC_A.MEC import MEC as mecA
 from MEC_B.MEC import MEC as mecB
 
@@ -14,16 +14,30 @@ from MEC_B.MEC import MEC as mecB
 modelA = mecA.GetCNNmodel()
 modelB = mecB.GetCNNmodel()
 
-patterns_size = 10
+patterns_size = 4
 
 
 class Server:
     def __init__(self, clients):
         self.clients = clients
         self.global_model = CNN_Model(pkt_features=patterns_size)
-        self.save_dir = './models/' 
-        if not os.path.exists(self.save_dir):
-            os.makedirs(self.save_dir)
+        '''
+        loaded
+        '''
+
+        self.gen_1 = '/root/IOT_DDoS/MEC-topo/MECa/model.pyh'
+        self.gen_2 = '/root/IOT_DDoS/MEC-topo/MECb/model.pth'
+
+        if not os.path.exists(self.gen_1):
+            os.makedirs(self.gen_1)
+        if not os.path.exists(self.gen_2):
+            os.makedirs(self.gen_2)
+
+        self.clients[0].UpdateModel(self.gen_1)
+        self.clients[1].UpdateModel(self.gen_2)
+
+
+
 
     def aggregate(self):
         for client in self.clients:
@@ -41,7 +55,8 @@ class Server:
             self.save_model()
 
     def save_model(self):
-        torch.save(self.global_model.state_dict(), os.path.join(self.save_dir, 'global_model.pth'))
+        torch.save(self.global_model.state_dict(), os.path.join(self.gen_1, 'global_model.pth'))
+        torch.save(self.global_model.state_dict(), os.path.join(self.gen_2, 'global_model.pth'))
 
 
 
@@ -50,13 +65,21 @@ if __name__ == '__main__':
     num_clients = 2
     num_samples = 100
 
+    modelA = CNN_Model(pkt_features=patterns_size)
+    modelB = CNN_Model(pkt_features=patterns_size)
+
     # create server
     clients = [modelA , modelB]
     server = Server(clients)
 
-    # feder lr
-    rounds = 10
-    interval = 5
-    for _ in range(rounds):
-        server.federated_learning(rounds=1)
-        time.sleep(interval)
+
+    while 1 : 
+        # feder lr
+        rounds = 10
+        interval = 5
+        for _ in range(rounds):
+            print(f'The Rounds : {rounds}')
+            server.federated_learning(rounds=1)
+            time.sleep(interval)
+
+        time.sleep(60.0)
