@@ -236,10 +236,10 @@ class CNN_Model(nn.Module):
                     pkt_tensor = Variable(pkt_tensor.view(self.input_shape))
 
                     output = self.forward(pkt_tensor)
-                    # print('~'*20 , output , '~'*20)
+                    print('~'*20 , output , '~'*20)
 
 
-                    # print(pkt)
+                    print(pkt)
                     
                     susp_condictions = 0 
                     for idx , feature in enumerate(pkt) :  
