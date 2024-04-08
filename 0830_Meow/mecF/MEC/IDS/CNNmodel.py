@@ -240,9 +240,10 @@ class CNN_Model(nn.Module):
 
 
                     print(pkt)
+                    pkt_list = pkt.tolist()
                     
                     susp_condictions = 0 
-                    for idx , feature in enumerate(pkt) :  
+                    for idx , feature in enumerate(pkt_list) :  
                         print(feature)
 
                         if idx == 0 : #window size
