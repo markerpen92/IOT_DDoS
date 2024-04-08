@@ -248,17 +248,17 @@ class CNN_Model(nn.Module):
 
                         levelA = 0.01
                         WindowSize_var = 10000
-                        output[1] += pkt_list[0]/WindowSize_var * levelA
+                        output[0][1] += pkt_list[0]/WindowSize_var * levelA
 
                         if pkt_list[1] >= 1 : 
-                            output[1] += 0.1
+                            output[0][1] += 0.1
                         else : 
-                            output[0] += 0.1
+                            output[0][0] += 0.1
 
                         if pkt_list[2] >= 1 : 
-                            output[1] += 0.1
+                            output[0][1] += 0.1
                         else : 
-                            output[0] += 0.1 
+                            output[0][0] += 0.1 
 
                         levelB = 0.01
                         ContentLength_var = 1000
