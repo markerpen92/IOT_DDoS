@@ -167,7 +167,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                     else : 
                         Patterns_of_Payload += '0 '
 
-                elif condiction==3 : 
+                elif condiction==4 : 
                     if matches : 
                         print('hahaha----3')
                         Patterns_of_Payload += f'{matches}'
