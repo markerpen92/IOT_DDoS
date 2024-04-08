@@ -243,31 +243,34 @@ class CNN_Model(nn.Module):
                     print(pkt_list)
                     
                     susp_condictions = 0 
-                    for idx , feature in enumerate(pkt_list) :  
-                        print(feature)
+                    try : 
+                        for idx , feature in enumerate(pkt_list) :  
+                            print(feature)
 
-                        if idx == 0 : #window size
-                            level = 0.01
-                            WindowSize_var = 10000
-                            output[1] += feature/WindowSize_var * level
+                            if idx == 0 : #window size
+                                level = 0.01
+                                WindowSize_var = 10000
+                                output[1] += feature/WindowSize_var * level
 
-                        elif idx == 1 : # keep alive
-                            if feature != 1.0 : 
-                                susp_condictions += 1
-                            else : 
-                                output[0] += 0.1
+                            elif idx == 1 : # keep alive
+                                if feature != 1.0 : 
+                                    susp_condictions += 1
+                                else : 
+                                    output[0] += 0.1
 
-                        elif idx == 2 : # \r\n or not
-                            if feature != 1.0 : 
-                                susp_condictions += 1
-                            else : 
-                                output[0] += 0.1
-                        
-                        elif idx == 3 : # Content-Length
-                            level = 0.1
-                            ContentLength_var = 1000
-                            output[1] += feature/ContentLength_var * level
-                    print('out for loop')
+                            elif idx == 2 : # \r\n or not
+                                if feature != 1.0 : 
+                                    susp_condictions += 1
+                                else : 
+                                    output[0] += 0.1
+                            
+                            elif idx == 3 : # Content-Length
+                                level = 0.1
+                                ContentLength_var = 1000
+                                output[1] += feature/ContentLength_var * level
+                    except Exception as e : 
+                        print(e)
+                    
                     if susp_condictions >= 2 : 
                         output[1] += 0.2
                             
