@@ -244,8 +244,8 @@ class CNN_Model(nn.Module):
                     susp_condictions = 0 
                     for idx , feature in enumerate(pkt) :  
                         if idx == 0 : #window size
-                            level = 0.1
-                            WindowSize_var = 1000
+                            level = 0.01
+                            WindowSize_var = 10000
                             output[1] += feature/WindowSize_var * level
 
                         elif idx == 1 : # keep alive
@@ -274,7 +274,7 @@ class CNN_Model(nn.Module):
                     
                     print('~'*20 , output , '~'*20)
 
-                    if not predicted == 'tensor([0])': 
+                    if predicted == 'tensor([0])': 
                         reocrdfile = 'IPS/record.txt'
                         with open(reocrdfile , 'a+')as file :
                             file.write(Input + '\n')
