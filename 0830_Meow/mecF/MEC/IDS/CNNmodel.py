@@ -298,6 +298,7 @@ class CNN_Model(nn.Module):
                             
                     else : 
                         print('\n\n' , '~'*20 , srcip , 'is detected by CNN45646' , '~'*20 , '\n\n')
+                        print(pkt_list , output)
                         BlockList.add(srcip)
                         sus_file = 'IPS/SuspiciousList.txt'
                         susFile_lock = threading.Lock()
