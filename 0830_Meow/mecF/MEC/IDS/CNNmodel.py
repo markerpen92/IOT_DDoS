@@ -238,6 +238,9 @@ class CNN_Model(nn.Module):
                     output = self.forward(pkt_tensor)
                     # print('~'*20 , output , '~'*20)
 
+
+                    print(pkt)
+                    
                     susp_condictions = 0 
                     for idx , feature in enumerate(pkt) :  
                         if idx == 0 : #window size
