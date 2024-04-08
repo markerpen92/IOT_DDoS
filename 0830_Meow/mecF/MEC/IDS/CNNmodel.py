@@ -239,8 +239,8 @@ class CNN_Model(nn.Module):
                     print('~'*20 , output , '~'*20)
 
 
-                    print(pkt)
                     pkt_list = pkt.tolist()
+                    print(pkt_list)
                     
                     susp_condictions = 0 
                     for idx , feature in enumerate(pkt_list) :  
