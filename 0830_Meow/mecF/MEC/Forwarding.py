@@ -142,7 +142,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                 1: r'Connection: keep-alive',
                 2: r'Connection: keep-alive\r\n(?!.*\r\n\r\n)',
                 3: r'Connection: keep-alive(?![\r\n])',
-                4: r'Content-Length: (\d+)(?=\r\n)'
+                4: r'Content-Length: (\d+)'
             }
 
             Patterns_of_Payload = ''
@@ -168,6 +168,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                         Patterns_of_Payload += '0 '
 
                 elif condiction==4 : 
+                    print('Codt--------4')
                     if matches : 
                         print('hahaha----3')
                         Patterns_of_Payload += f'{matches}'
