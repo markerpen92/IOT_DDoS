@@ -127,6 +127,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
             PayloadData = "0"
             RawPayloadData = "0"
+            RawPayloadDataStr = "0"
             if Raw in packet : 
                 PayloadData = packet[Raw].load.decode('utf-8' , 'ignore')
                 RawPayloadData = packet[Raw].load
