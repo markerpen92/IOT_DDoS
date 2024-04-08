@@ -212,6 +212,7 @@ class CNN_Model(nn.Module):
         with file_lock : 
             with open(DetectFile , 'r+') as file : 
                 Inputs = file.readlines()
+                print(Inputs)
                 NewContext = Inputs.copy()
 
                 for idx , Input in enumerate(Inputs) : 
