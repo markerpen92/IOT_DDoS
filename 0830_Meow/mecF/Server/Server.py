@@ -25,7 +25,7 @@ class Server:
         loaded
         '''
 
-        self.gen_1 = '/root/IOT_DDoS/MEC-topo/MECa/model.pyh'
+        self.gen_1 = '/root/IOT_DDoS/MEC-topo/MECa/model.pth'
         self.gen_2 = '/root/IOT_DDoS/MEC-topo/MECb/model.pth'
 
         if not os.path.exists(self.gen_1):
