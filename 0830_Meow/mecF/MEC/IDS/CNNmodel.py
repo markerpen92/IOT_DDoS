@@ -262,7 +262,7 @@ class CNN_Model(nn.Module):
 
                         levelB = 0.01
                         ContentLength_var = 1000
-                        output[1] += pkt_list[0]/ContentLength_var * levelB
+                        output[0][1] += pkt_list[0]/ContentLength_var * levelB
 
                     except Exception as e : 
                         traceback_str = traceback.format_exc()
