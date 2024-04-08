@@ -143,6 +143,8 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
             Patterns_of_Payload = ''
 
+            print(PayloadData)
+
 
             for condiction , pattern in patterns.items() : 
                 matches = re.findall(pattern , PayloadData)
@@ -161,6 +163,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
                 elif condiction==3 : 
                     if matches : 
+                        print('hahaha')
                         Patterns_of_Payload += f'{matches}'
                     else : 
                         Patterns_of_Payload += '0'
