@@ -135,10 +135,10 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
 
             patterns = {
-                1 : r'Connection: keep-alive' , 
-                2 : r'Connection: keep-alive(?![\r\n])' , 
-                3 : r'Connection: keep-alive\r\n(?![\r\n])' , 
-                4 : r'Content-Length: (\d+)\r\n'
+                1: r'Connection: keep-alive',
+                2: r'Connection: keep-alive\r\n(?!.*\r\n\r\n)',
+                3: r'Connection: keep-alive(?![\r\n])',
+                4: r'Content-Length: (\d+)'
             }
 
             Patterns_of_Payload = ''
@@ -147,23 +147,25 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
 
             for condiction , pattern in patterns.items() : 
-                matches = re.findall(pattern , PayloadData)
+                matches = re.search(pattern, PayloadData)
 
                 if condiction==1 : 
                     if matches : 
+                        print('hahaha----1')
                         Patterns_of_Payload += '1 '
                     else:
                         Patterns_of_Payload += '0 '
 
                 elif (condiction==2 or condiction==3) : 
                     if matches : 
+                        print('hahaha----2')
                         Patterns_of_Payload += '1 '
                     else : 
                         Patterns_of_Payload += '0 '
 
                 elif condiction==3 : 
                     if matches : 
-                        print('hahaha')
+                        print('hahaha----3')
                         Patterns_of_Payload += f'{matches}'
                     else : 
                         Patterns_of_Payload += '0'
