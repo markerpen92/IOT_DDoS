@@ -244,6 +244,7 @@ class CNN_Model(nn.Module):
                     
                     susp_condictions = 0 
                     try : 
+                        print(len(pkt_list))
                         for idx , feature in enumerate(pkt_list) :  
                             print(feature)
 
