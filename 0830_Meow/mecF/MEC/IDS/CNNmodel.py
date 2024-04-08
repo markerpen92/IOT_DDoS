@@ -265,7 +265,7 @@ class CNN_Model(nn.Module):
                     if susp_condictions >= 2 : 
                         output[1] += 0.2
                             
-                        
+                    print('ININININ\n\n')
 
                     predicted = torch.max(output.data , 1)[1]
                     
