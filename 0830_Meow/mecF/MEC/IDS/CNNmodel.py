@@ -262,7 +262,7 @@ class CNN_Model(nn.Module):
                     output[1] += pkt_list[0]/ContentLength_var * levelB
 
                             
-                    # print('ININININ\n\n')
+                    print('ININININ\n\n')
                     predicted = ''
                     if output[0] > output[1] : 
                         predicted == 'tensor([0])'
