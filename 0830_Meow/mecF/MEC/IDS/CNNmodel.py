@@ -241,39 +241,26 @@ class CNN_Model(nn.Module):
 
                     pkt_list = pkt.tolist()
                     print(pkt_list)
-                    
-                    susp_condictions = 0 
-                    try : 
-                        for idx in range(len(pkt_list)) :   
-                            print(pkt_list[idx])
-                            feature = pkt_list[idx]
 
-                            if idx == 0 : #window size
-                                level = 0.01
-                                WindowSize_var = 10000
-                                output[1] += feature/WindowSize_var * level
 
-                            elif idx == 1 : # keep alive
-                                if feature != 1.0 : 
-                                    susp_condictions += 1
-                                else : 
-                                    output[0] += 0.1
+                    levelA = 0.01
+                    WindowSize_var = 10000
+                    output[1] += pkt_list[0]/WindowSize_var * levelA
 
-                            elif idx == 2 : # \r\n or not
-                                if feature != 1.0 : 
-                                    susp_condictions += 1
-                                else : 
-                                    output[0] += 0.1
-                            
-                            elif idx == 3 : # Content-Length
-                                level = 0.1
-                                ContentLength_var = 1000
-                                output[1] += feature/ContentLength_var * level
-                    except Exception as e : 
-                        print(e)
-                    
-                    if susp_condictions >= 2 : 
-                        output[1] += 0.2
+                    if pkt_list[1] >= 1 : 
+                        output[1] += 0.1
+                    else : 
+                        output[0] += 0.1
+
+                    if pkt_list[2] >= 1 : 
+                        output[1] += 0.1
+                    else : 
+                        output[0] += 0.1 
+
+                    levelB = 0.01
+                    ContentLength_var = 1000
+                    output[1] += pkt_list[0]/ContentLength_var * levelB
+
                             
                     # print('ININININ\n\n')
                     predicted = ''
