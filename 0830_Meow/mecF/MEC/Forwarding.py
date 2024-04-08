@@ -142,7 +142,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                 1: r'Connection: keep-alive',
                 2: r'Connection: keep-alive\r\n(?!.*\r\n\r\n)',
                 3: r'Connection: keep-alive(?![\r\n])',
-                4: r'Content-Length: (\d+)'
+                4: r'Content-Length: (\d+)(?=\r\n)'
             }
 
             Patterns_of_Payload = ''
