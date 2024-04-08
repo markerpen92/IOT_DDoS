@@ -269,7 +269,7 @@ class CNN_Model(nn.Module):
 
                     predicted = torch.max(output.data , 1)[1]
                     
-                    # print('~'*20 , output , '~'*20)
+                    print('~'*20 , output , '~'*20)
 
                     if not predicted == 'tensor([0])': 
                         reocrdfile = 'IPS/record.txt'
