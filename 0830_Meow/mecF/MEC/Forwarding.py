@@ -146,8 +146,6 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             }
 
             Patterns_of_Payload = ''
-
-            print(RawPayloadDataStr)
             already_happen = False
 
 
@@ -169,8 +167,8 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
                 elif condiction==4 : 
                     if matches : 
-                        print('hahaha----3')
-                        Patterns_of_Payload += f'{matches}'
+                        content_length = matches.group(1)
+                        Patterns_of_Payload += f'{content_length}'
                     else : 
                         Patterns_of_Payload += '0'
 
