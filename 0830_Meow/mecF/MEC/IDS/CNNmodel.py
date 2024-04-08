@@ -109,6 +109,7 @@ class CNN_Model(nn.Module):
         file_lock = threading.Lock()
         
         TrainingFile = 'IDS/TrainingList.txt'
+        # training_data = []
 
         if os.path.exists(TrainingFile) : 
             with file_lock : 
@@ -122,9 +123,9 @@ class CNN_Model(nn.Module):
                         role = patterns[0]
 
                         if role=='GOOD' : 
-                            self.DataLoader.append(((training_data[1:]) , [0]))
+                            self.DataLoader.append(((patterns[1:]) , [0]))
                         elif role=='BAD' : 
-                            self.DataLoader.append(((training_data[1:]) , [1]))
+                            self.DataLoader.append(((patterns[1:]) , [1]))
 
                     file.write('')
                     file.close()
