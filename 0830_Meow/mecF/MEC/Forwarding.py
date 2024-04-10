@@ -166,7 +166,9 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
 
                 elif condiction == 3 : 
                     if matches : 
-                        Patterns_of_Payload[-2:] = '1 '
+                        Patterns_of_Payload_list = list(Patterns_of_Payload)
+                        Patterns_of_Payload_list[-2:] = '1 '
+                        Patterns_of_Payload = "".join(Patterns_of_Payload_list)
                     else : 
                         continue
 
