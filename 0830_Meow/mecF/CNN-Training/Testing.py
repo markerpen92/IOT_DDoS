@@ -113,12 +113,12 @@ for label , patterns in TestingData :
         output[0][1] += pkt_list[0]/ContentLength_var * levelB
 
 
-        if output[0][0]>output[0][1] and label=='GOOD' : 
+        if output[0][0]>output[0][1] and label=='good' : 
             accuracy_time += 1
-        elif output[0][0]<output[0][1] and label=='BAD' :
+        elif output[0][0]<output[0][1] and label=='bad' :
             accuracy_time += 1
 
-        print(f'label-pkt:{label,pkt} && Out:{output}' , '\n\n')
+        print(f'label-pkt:{label,pkt} && Out:----@{output[0][0] , output[0][1]}@----' , '\n\n')
 
         total_time += 1
         test_accuracy = accuracy_time/total_time
