@@ -253,6 +253,7 @@ class CNN_Model(nn.Module):
 
 
                     try : 
+
                         levelA = 0.0001
                         WindowSize_var = 10000
                         output[0][1] += pkt_list[0]/WindowSize_var * levelA
