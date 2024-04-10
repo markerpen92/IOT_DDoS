@@ -57,6 +57,7 @@ result = []
 for line in lines:
     label, numbers = line.split(' ', 1)
     numbers = [int(x) for x in numbers.split(',')]
+    print(numbers)
     result.append([label, numbers])
 
 TestingData = result
