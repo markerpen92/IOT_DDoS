@@ -16,7 +16,7 @@ ModelPath = './model.pth'
 
 if os.path.exists(ModelPath) : 
     MEC_testing.UpdateModel(pth=ModelPath)
-    print('Loading Successful')
+    print('Loading Successful\n\n\n')
 
 
 
@@ -57,7 +57,6 @@ result = []
 for line in lines:
     label, numbers = line.split(' ', 1)
     numbers = [int(x) for x in numbers.split(',')]
-    print(numbers)
     result.append([label, numbers])
 
 TestingData = result
@@ -89,6 +88,8 @@ for label , patterns in TestingData :
 
     try : 
 
+        print(f'Output at first : {output}')
+
         '''-------------------------------------------------------------'''
         levelA = 0.0001
         WindowSize_var = 10000
@@ -118,7 +119,7 @@ for label , patterns in TestingData :
         if pkt_list[1] >= 1 and pkt_list[2] >= 1 : 
             output[0][1] += 0.3
             print(f'Get n&r -> Now output:{output}')
-            
+
         elif pkt_list[1] == 0 and pkt_list[2] == 0 : 
             output[0][0] += 0.3
             print(f'normal n&r -> Now output:{output}')
