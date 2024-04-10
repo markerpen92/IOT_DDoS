@@ -74,7 +74,7 @@ total_time    = 0
 
 
 for label , patterns in TestingData : 
-    pkt = np.array(patterns[1:])
+    pkt = np.array(patterns)
     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
     # pkt = [[item] for item in pkt]
 
