@@ -88,6 +88,8 @@ for label , patterns in TestingData :
 
     try : 
 
+        output = torch.clamp(output , min=0 , max=1)
+
         print(f'Output at first : {output}')
         output_list = output.tolist()
 
