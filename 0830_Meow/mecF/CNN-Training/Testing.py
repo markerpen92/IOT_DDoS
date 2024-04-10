@@ -90,7 +90,11 @@ for label , patterns in TestingData :
     try : 
         levelA = 0.0001
         WindowSize_var = 10000
-        output[0][1] += pkt_list[0]/WindowSize_var * levelA
+        the_value = pkt_list[0]/WindowSize_var * levelA
+        if the_value >= 1.0 : 
+            the_value = 1.0
+
+        output[0][1] += the_value
         print(f'Win-Size:{pkt_list[0]/WindowSize_var * levelA} -> Now output:{output}')
 
         if pkt_list[1] >= 1 : 
@@ -113,7 +117,10 @@ for label , patterns in TestingData :
 
         levelB = 0.01
         ContentLength_var = 1000
-        output[0][1] += pkt_list[3]/ContentLength_var * levelB
+        the_value = pkt_list[3]/ContentLength_var * levelB
+        if the_value >= 1.0 : 
+            the_value = 1.0
+        output[0][1] += the_value
         print(f'Cont-len:{pkt_list[3]/ContentLength_var * levelB} -> Now output:{output}')
 
 
