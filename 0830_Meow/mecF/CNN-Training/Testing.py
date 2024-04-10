@@ -107,23 +107,23 @@ for label , patterns in TestingData :
         '''-------------------------------------------------------------'''
 
         if pkt_list[1] >= 1 : 
-            output[0][1] += 0.01
+            output_list[0][1] += 0.01
         else : 
-            output[0][0] += 0.1
+            output_list[0][0] += 0.1
 
         if pkt_list[2] >= 1 : 
-            output[0][1] += 0.01
+            output_list[0][1] += 0.01
         else : 
-            output[0][0] += 0.1 
+            output_list[0][0] += 0.1 
 
 
         if pkt_list[1] >= 1 and pkt_list[2] >= 1 : 
-            output[0][1] += 0.3
-            print(f'Get n&r -> Now output:{output}')
+            output_list[0][1] += 0.3
+            print(f'Get n&r -> Now output_list:{output_list}')
 
         elif pkt_list[1] == 0 and pkt_list[2] == 0 : 
-            output[0][0] += 0.3
-            print(f'normal n&r -> Now output:{output}')
+            output_list[0][0] += 0.3
+            print(f'normal n&r -> Now output_list:{output_list}')
 
         '''-------------------------------------------------------------'''
 
@@ -134,19 +134,21 @@ for label , patterns in TestingData :
         if the_value >= 0.9 : 
             the_value = 0.9
 
-        output[0][1] += the_value
-        output[0][0] -= the_value
+        output_list[0][1] += the_value
+        output_list[0][0] -= the_value
 
-        print(f'Cont-len:{pkt_list[3]/ContentLength_var * levelB} -> Now output:{output}')
+        print(f'Cont-len:{pkt_list[3]/ContentLength_var * levelB} -> Now output_list:{output_list}')
 
         '''-------------------------------------------------------------'''
+
+        output = torch.tensor(output_list)
 
         if output[0][0]>output[0][1] and label=='good' : 
             accuracy_time += 1
         elif output[0][0]<output[0][1] and label=='bad' :
             accuracy_time += 1
 
-        print(f'label-pkt:{label,pkt} && Out:----@{output[0][0] , output[0][1]}@----' , '\n\n')
+        print(f'label-pkt:{label,pkt} && Out:----@{output_list[0][0] , output_list[0][1]}@----' , '\n\n')
 
         total_time += 1
         test_accuracy = accuracy_time/total_time
