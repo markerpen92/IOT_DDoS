@@ -88,14 +88,21 @@ for label , patterns in TestingData :
     pkt_list = pkt.tolist()
 
     try : 
+
+        '''-------------------------------------------------------------'''
         levelA = 0.0001
         WindowSize_var = 10000
         the_value = pkt_list[0]/WindowSize_var * levelA
+
         if the_value >= 1.0 : 
             the_value = 1.0
 
         output[0][1] += the_value
+        output[0][0] -= the_value
+
         print(f'Win-Size:{pkt_list[0]/WindowSize_var * levelA} -> Now output:{output}')
+
+        '''-------------------------------------------------------------'''
 
         if pkt_list[1] >= 1 : 
             output[0][1] += 0.01
@@ -111,18 +118,26 @@ for label , patterns in TestingData :
         if pkt_list[1] >= 1 and pkt_list[2] >= 1 : 
             output[0][1] += 0.3
             print(f'Get n&r -> Now output:{output}')
+            
         elif pkt_list[1] == 0 and pkt_list[2] == 0 : 
             output[0][0] += 0.3
             print(f'normal n&r -> Now output:{output}')
 
+        '''-------------------------------------------------------------'''
+
         levelB = 0.01
         ContentLength_var = 1000
         the_value = pkt_list[3]/ContentLength_var * levelB
+
         if the_value >= 1.0 : 
             the_value = 1.0
+
         output[0][1] += the_value
+        output[0][0] -= the_value
+
         print(f'Cont-len:{pkt_list[3]/ContentLength_var * levelB} -> Now output:{output}')
 
+        '''-------------------------------------------------------------'''
 
         if output[0][0]>output[0][1] and label=='good' : 
             accuracy_time += 1
