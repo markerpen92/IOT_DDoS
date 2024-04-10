@@ -91,6 +91,7 @@ for label , patterns in TestingData :
         levelA = 0.0001
         WindowSize_var = 10000
         output[0][1] += pkt_list[0]/WindowSize_var * levelA
+        print(f'Win-Size:{pkt_list[0]/WindowSize_var * levelA}')
 
         if pkt_list[1] >= 1 : 
             output[0][1] += 0.01
@@ -105,12 +106,15 @@ for label , patterns in TestingData :
 
         if pkt_list[1] >= 1 and pkt_list[2] >= 1 : 
             output[0][1] += 0.3
+            print(f'Get n&r')
         elif pkt_list[1] == 0 and pkt_list[2] == 0 : 
             output[0][0] += 0.3
+            print(f'normal n&r')
 
         levelB = 0.01
         ContentLength_var = 1000
         output[0][1] += pkt_list[3]/ContentLength_var * levelB
+        print(f'Cont-len:{pkt_list[3]/ContentLength_var * levelB}')
 
 
         if output[0][0]>output[0][1] and label=='good' : 
