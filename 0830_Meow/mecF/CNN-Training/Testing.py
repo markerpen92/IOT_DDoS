@@ -89,6 +89,7 @@ for label , patterns in TestingData :
     try : 
 
         print(f'Output at first : {output}')
+        output_list = output.tolist()
 
         '''-------------------------------------------------------------'''
         levelA = 0.0001
@@ -98,8 +99,8 @@ for label , patterns in TestingData :
         if the_value >= 0.9 : 
             the_value = 0.9
 
-        output[0][1] += the_value
-        output[0][0] -= the_value
+        output_list[0][1] += the_value
+        output_list[0][0] -= the_value
 
         print(f'Win-Size:{pkt_list[0]/WindowSize_var * levelA} -> Now output:{output}')
 
