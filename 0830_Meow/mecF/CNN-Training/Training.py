@@ -23,9 +23,46 @@ if os.path.exists(ModelPath) :
 
 
 
-TestingData = [
-    ['label' , [0,1,2,3,4]] , 
-]
+
+data = """
+good 29200,0,0,0 
+good 58,0,0,0
+good 58,0,0,0 
+bad 58,1,1,100000000
+good 29200,0,0,0  
+good 58,0,0,0
+good 58,0,0,0 
+good 29200,0,0,0
+bad 58,1,1,100000000
+good 29200,0,0,0  
+good 58,0,0,0
+good 58,0,0,0 
+good 29200,0,0,0
+bad 58,1,1,100000000
+good 29200,0,0,0  
+good 58,0,0,0
+good 58,0,0,0 
+good 29200,0,0,0
+bad 58,1,1,100000000
+good 29200,0,0,0  
+good 58,0,0,0
+good 58,0,0,0 
+good 29200,0,0,0
+"""
+
+lines = data.strip().split('\n')
+
+result = []
+
+for line in lines:
+    label, numbers = line.split(' ', 1)
+    numbers = [int(x) for x in numbers.split(',')]
+    result.append([label, numbers])
+
+TestingData = result
+
+
+
 
 
 
@@ -89,3 +126,5 @@ for label , patterns in TestingData :
 
 
 print(f'Total Test Accuracy : {test_accuracy}')
+
+
