@@ -79,6 +79,8 @@ for label , patterns in TestingData :
     pkt_tensor = torch.tensor(pkt)
     pkt_tensor = Variable(pkt_tensor.view(MEC_testing.input_shape))
 
+    print(label , pkt_tensor , '\n\n')
+
     output = MEC_testing.forward(pkt_tensor)
 
     pkt_list = pkt.tolist()
