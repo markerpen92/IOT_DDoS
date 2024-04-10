@@ -52,7 +52,39 @@ bad 58,1,1,100
 bad 58,0,1,100
 """
 
-lines = data.strip().split('\n')
+
+data2="""
+good 29200,0,0,0 
+good 58,0,0,0
+good 58,0,0,0 
+bad 58,1,1,0
+good 29200,0,0,0 
+good 29200,0,0,0 
+good 58,0,0,0
+good 58,0,0,0 
+bad 58,1,1,0
+good 29200,0,0,0 
+good 29200,0,0,0 
+good 58,0,0,0
+good 58,0,0,0 
+bad 58,1,1,0
+good 29200,0,0,0 
+good 29200,0,0,0 
+good 58,0,0,0
+good 58,0,0,0 
+bad 58,1,1,0
+good 29200,0,0,0 
+good 29200,0,0,0 
+good 58,0,0,0
+good 58,0,0,0 
+bad 58,1,1,0
+good 29200,0,0,0 
+
+"""
+
+# lines = data.strip().split('\n')
+
+lines = data2.strip().split('\n')
 
 result = []
 
