@@ -77,8 +77,6 @@ for label , patterns in TestingData :
     pkt = np.array(patterns)
     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
     # pkt = [[item] for item in pkt]
-
-    print(label , pkt , '\n\n')
     
     pkt_tensor = torch.tensor(pkt)
     pkt_tensor = Variable(pkt_tensor.view(MEC_testing.input_shape))
@@ -119,6 +117,8 @@ for label , patterns in TestingData :
             accuracy_time += 1
         elif output[0][0]<output[0][1] and label=='BAD' :
             accuracy_time += 1
+
+        print(f'label-pkt:{label,pkt} && Out:{output}' , '\n\n')
 
         total_time += 1
         test_accuracy = accuracy_time/total_time
