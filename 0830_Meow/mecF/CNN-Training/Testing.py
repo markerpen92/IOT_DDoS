@@ -95,8 +95,8 @@ for label , patterns in TestingData :
         WindowSize_var = 10000
         the_value = pkt_list[0]/WindowSize_var * levelA
 
-        if the_value >= 1.0 : 
-            the_value = 1.0
+        if the_value >= 0.9 : 
+            the_value = 0.9
 
         output[0][1] += the_value
         output[0][0] -= the_value
@@ -130,8 +130,8 @@ for label , patterns in TestingData :
         ContentLength_var = 1000
         the_value = pkt_list[3]/ContentLength_var * levelB
 
-        if the_value >= 1.0 : 
-            the_value = 1.0
+        if the_value >= 0.9 : 
+            the_value = 0.9
 
         output[0][1] += the_value
         output[0][0] -= the_value
