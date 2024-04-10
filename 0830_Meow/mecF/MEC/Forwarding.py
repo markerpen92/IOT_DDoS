@@ -146,7 +146,7 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
             }
 
             Patterns_of_Payload = ''
-            already_happen = False
+            # already_happen = False
 
 
             for condiction , pattern in patterns.items() : 
@@ -158,12 +158,17 @@ def packetParse(ThePacket , IOTDevicesInfo , BlockList) :
                     else:
                         Patterns_of_Payload += '0 '
 
-                elif (condiction==2 or condiction==3) and not already_happen : 
+                elif condiction==2 : 
                     if matches : 
                         Patterns_of_Payload += '1 '
-                        already_happen = True
                     else : 
                         Patterns_of_Payload += '0 '
+
+                elif condiction == 3 : 
+                    if matches : 
+                        Patterns_of_Payload[-2:] = '1 '
+                    else : 
+                        continue
 
                 elif condiction==4 : 
                     if matches : 
