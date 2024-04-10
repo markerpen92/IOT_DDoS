@@ -49,6 +49,7 @@ good 58,0,0,0
 good 58,0,0,0 
 good 29200,0,0,0
 bad 58,1,1,100
+bad 58,0,1,100
 """
 
 lines = data.strip().split('\n')
