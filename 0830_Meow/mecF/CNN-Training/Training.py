@@ -75,11 +75,13 @@ for label , patterns in TestingData :
     pkt = np.array(patterns[1:])
     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
     # pkt = [[item] for item in pkt]
+
+    print(label , pkt , '\n\n')
     
     pkt_tensor = torch.tensor(pkt)
     pkt_tensor = Variable(pkt_tensor.view(MEC_testing.input_shape))
 
-    print(label , pkt_tensor , '\n\n')
+    
 
     output = MEC_testing.forward(pkt_tensor)
 
