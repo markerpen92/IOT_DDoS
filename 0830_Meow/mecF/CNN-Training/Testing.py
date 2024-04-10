@@ -110,7 +110,7 @@ for label , patterns in TestingData :
 
         levelB = 0.01
         ContentLength_var = 1000
-        output[0][1] += pkt_list[0]/ContentLength_var * levelB
+        output[0][1] += pkt_list[3]/ContentLength_var * levelB
 
 
         if output[0][0]>output[0][1] and label=='good' : 
@@ -131,6 +131,6 @@ for label , patterns in TestingData :
 
 
 
-print(f'Total Test Accuracy : {test_accuracy}')
+print(f'Total Test Accuracy : {test_accuracy*100}%')
 
 
