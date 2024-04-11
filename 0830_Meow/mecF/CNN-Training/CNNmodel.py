@@ -198,6 +198,9 @@ class CNN_Model(nn.Module):
 
 
     def PredictModel(self , training_model , BlockList=None) : 
+        print('---------------------' , '333333' , '---------------------') 
+
+
         if self.FinishTraining : 
             self.UpdateModel()
             self.FinishTraining = False
@@ -209,6 +212,8 @@ class CNN_Model(nn.Module):
 
         DetectFile = 'IDS/record.txt'
         file_lock = threading.Lock()
+
+        print('---------------------' , '444444' , '---------------------')
 
         with file_lock : 
             with open(DetectFile , 'r+') as file : 
