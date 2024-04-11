@@ -143,8 +143,11 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None , CleanList=None)
                 print('INININ---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---INININ')
 
                 if record_patterns[1:] in CleanList : 
+                    print('INININ---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---INININ')
                     return
+                
                 else : 
+                    print('OOOOO---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---OOOOO')
                     record = BadRole + record + '\n'
                     TraingFile = 'IDS/TrainingList.txt'
                     WriteRecordIntoFile(TraingFile , record)
