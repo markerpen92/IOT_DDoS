@@ -91,7 +91,7 @@ def GetIOTDevicesInfo() :
             GetConnectedTime(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
             GetTraffic(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
         except Exception as e :
-            print(f"<Error> GetIOTDevicesInfo : {e}")#21312
+            print(f"<Error> GetIOTDevicesInfo : {e}")#21312213123
             time.sleep(2.0)
             continue
 
