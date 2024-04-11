@@ -243,8 +243,6 @@ class CNN_Model(nn.Module):
                     
                     pkt_tensor = torch.tensor(pkt)
 
-                    print(pkt)
-
                     pkt_tensor = Variable(pkt_tensor.view(self.input_shape))
 
                     output = self.forward(pkt_tensor)
