@@ -238,6 +238,7 @@ class CNN_Model(nn.Module):
 
                     patterns = patterns[:-1]
                     pkt = np.array(patterns[1:])
+                    print(pkt)
                     pkt = np.array([np.array(item, dtype=np.float32) for item in pkt])
                     # pkt = [[item] for item in pkt]
                     
