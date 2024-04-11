@@ -289,7 +289,7 @@ class CNN_Model(nn.Module):
                     except Exception as e : 
                         traceback_str = traceback.format_exc()
                         print(f'Error Msg : {e}')
-                        print(f"Traceback: {traceback_str}")
+                        traceback_str = traceback.format_exc()
 
                             
                     # print('ININININ\n\n')

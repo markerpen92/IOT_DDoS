@@ -91,7 +91,7 @@ def GetIOTDevicesInfo() :
             GetConnectedTime(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
             GetTraffic(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
         except Exception as e :
-            print(f"<Error> GetIOTDevicesInfo : {e}")
+            print(f"<Error> GetIOTDevicesInfo : {e}")#21312
             time.sleep(2.0)
             continue
 
@@ -104,7 +104,7 @@ def DetectSys_Predict() :
     while 1 : 
         try : 
             print('---------------------' , '111' , '---------------------')
-            Pred_model.PredictModel(training_model=Tran_model , BlockList=BlockList)
+            Pred_model.PredictModel(training_model=None , BlockList=BlockList)
             # Tran_model.TrainingModel(testing_model=Pred_model)
             
         except Exception as e : 
