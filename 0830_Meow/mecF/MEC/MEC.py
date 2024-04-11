@@ -133,7 +133,7 @@ def DefenseSys() :
     while 1 : 
         # pass
         try : 
-            SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
+            # SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
             BadIP , GoodIP = Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
             GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP , BlockList=BlockList , CleanList=CleanerDB.Cleaners)
             #time.sleep(0.5)
