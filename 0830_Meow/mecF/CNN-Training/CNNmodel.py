@@ -227,6 +227,8 @@ class CNN_Model(nn.Module):
                     # print(patterns)
                     srcip = patterns[0]
 
+                    print('---------------------' , '22222' , '---------------------')
+
                     # print('BLO : ' , BlockList)
                     if BlockList != None and srcip in BlockList : 
                         try : 
