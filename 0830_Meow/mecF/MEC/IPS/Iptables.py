@@ -135,19 +135,20 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None , CleanList=None)
                 return
             patterns = OneRecord.split(' ')
             
-            if  BadTargetIP == patterns[0] or (patterns[0] in BlockList) :
+            if  BadTargetIP == patterns[0] :
                 record = RemoveOneRecord(filename , line_num).replace('\n','')
+
+                if patterns[0] in BlockList : 
+                    return
 
                 record_patterns = record.split(' ')
 
-                print('INININ---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---INININ')
-
                 if record_patterns[1:] in CleanList : 
-                    print('INININ---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---INININ')
+                    # print('INININ---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---INININ')
                     return
                 
                 else : 
-                    print('OOOOO---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---OOOOO')
+                    # print('OOOOO---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---OOOOO')
                     record = BadRole + record + '\n'
                     TraingFile = 'IDS/TrainingList.txt'
                     WriteRecordIntoFile(TraingFile , record)
