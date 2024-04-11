@@ -153,6 +153,7 @@ class CNN_Model(nn.Module):
                 # pkt = [[item] for item in pkt]
                 
                 pkt_tensor = torch.tensor(pkt)
+                print('TTTTTTTTTTTTTTTTTTTTTTTTTTT')
                 pkt_tensor = Variable(pkt_tensor.view(self.input_shape))
 
                 label = torch.tensor(label)
