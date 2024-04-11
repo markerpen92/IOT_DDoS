@@ -109,6 +109,8 @@ def DetectSys_Predict() :
             
         except Exception as e : 
             print(f"<Error> DetectSys_Predict : {e}")
+            traceback_str = traceback.format_exc()
+            traceback_str = traceback.format_exc()
             time.sleep(0.5)
             continue
 
