@@ -8,8 +8,10 @@ class JsonFile() :
         self.Cleaners  = None
 
         with open(self.FilePath) as file : 
+            print("INININININ")
             dict = json.load(file)
-            self.Cleaners = dict['Cleaner']
+            self.Cleaners = dict['Cleaners']
+            print(self.Cleaners)
     
 
 

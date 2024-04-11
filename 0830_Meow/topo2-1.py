@@ -22,9 +22,9 @@ ATTACKER2 = net.addHost('ATTACKER2')
 
 # Router-Node 
 
-MEC1 = net.addDocker('MEC1', dimage="kathara/quagga:v1.1", volumes=["/home/user/Desktop/iotMecDDos/0830_Meow/DynamicRoutingOSPF/MEC1/quagga:/etc/quagga"])
-RS = net.addDocker('RS', dimage="kathara/quagga:v1.1", volumes=["/home/user/Desktop/iotMecDDos/0830_Meow/DynamicRoutingOSPF/RS/quagga:/etc/quagga"])
-MEC2 = net.addDocker('MEC2', dimage="kathara/quagga:v1.1", volumes=["/home/user/Desktop/iotMecDDos/0830_Meow/DynamicRoutingOSPF/MEC2/quagga:/etc/quagga"])
+MEC1 = net.addDocker('MEC1', dimage="kathara/quagga:v1.3", volumes=["/home/user/Desktop/iotMecDDos/0830_Meow/DynamicRoutingOSPF/MEC1/quagga:/etc/quagga"])
+RS = net.addDocker('RS', dimage="kathara/quagga:v1.3", volumes=["/home/user/Desktop/iotMecDDos/0830_Meow/DynamicRoutingOSPF/RS/quagga:/etc/quagga"])
+MEC2 = net.addDocker('MEC2', dimage="kathara/quagga:v1.3", volumes=["/home/user/Desktop/iotMecDDos/0830_Meow/DynamicRoutingOSPF/MEC2/quagga:/etc/quagga"])
 
 # Linking the Node  
 
