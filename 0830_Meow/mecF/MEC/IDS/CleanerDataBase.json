@@ -1,7 +1,7 @@
-[
-    "IsModify" : false , 
-    "Cleaner"  : [
-        [29200,0,0,0 ] , 
-        [58,0,0,0],
+{
+    "IsModify": false,
+    "Cleaners": [
+        [29200, 0, 0, 0],
+        [58, 0, 0, 0]
     ]
-]
+}
