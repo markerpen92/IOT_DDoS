@@ -140,6 +140,8 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None , CleanList=None)
 
                 record_patterns = record.split(' ')
 
+                print('INININ---' , f'record:{record_patterns[1:]} & clinlist:{CleanList}' , '---INININ')
+
                 if record_patterns[1:] in CleanList : 
                     return
                 else : 
@@ -147,7 +149,6 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None , CleanList=None)
                     TraingFile = 'IDS/TrainingList.txt'
                     WriteRecordIntoFile(TraingFile , record)
 
-                    # print('INININ---' , f'record:{record_patterns} & clinlist:{CleanList}' , '---INININ')
 
                     if BadTargetIP not in BlockList : 
                         BlockList.add(BadTargetIP)
