@@ -136,7 +136,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None , CleanList=None)
             patterns = OneRecord.split(' ')
             
             if  BadTargetIP == patterns[0] or (patterns[0] in BlockList) :
-                record = RemoveOneRecord(filename , line_num)
+                record = RemoveOneRecord(filename , line_num).replace('\n','')
 
                 record_patterns = record.split(' ')
 
