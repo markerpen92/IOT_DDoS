@@ -107,7 +107,7 @@ def DetectSys_Predict() :
             # Tran_model.TrainingModel(testing_model=Pred_model)
             
         except Exception as e : 
-            # print(f"<Error> DetectSys_Predict : {e}")
+            print(f"<Error> DetectSys_Predict : {e}")
             time.sleep(0.5)
             continue
 
@@ -170,7 +170,7 @@ def main() :
     threading.Thread(target=DetectSys_Predict).start() # CNN45646
     threading.Thread(target=DetectSys_Train).start()   # CNN54732
     threading.Thread(target=DefenseSys).start()
-    # threading.Thread(target=CheckFileUpdate).start()
+    threading.Thread(target=CheckFileUpdate).start()
 
 
 
