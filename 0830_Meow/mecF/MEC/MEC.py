@@ -23,6 +23,7 @@ from Measurement.MeasureTraffic import GetTraffic
 
 from IDS.SimpleDetectionSys import SimpleDetectionSystem
 from IDS.CNNmodel import CNN_Model
+from IDS.CleanerDataBase import JsonFile
 
 
 from IPS.Iptables import Iptables
@@ -40,6 +41,19 @@ if os.path.exists(ModelPath) :
     print('Predict-Model Loaded Successfully')
     Tran_model.UpdateModel(ModelPath)
     print('Tran-Model Loaded Successfully')
+
+
+
+
+CleanerDB_Path = './IDS/CleanerDataBase.json'
+CleanerDB = None
+
+if os.path.exists(CleanerDB_Path) : 
+    CleanerDB = JsonFile(CleanerDB_Path)
+    print('Cleaner.json Loaded Successfully')
+else : 
+    print('Cleaner.json Loaded Failled')
+
 
 
 
@@ -121,7 +135,7 @@ def DefenseSys() :
         try : 
             SimpleDetectionSystem(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList , NetworkTimeInfo=NetworkTimeInfo)
             BadIP , GoodIP = Iptables(IOTDevicesInfo=IOTDevicesInfo , BlockList=BlockList)
-            GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP , BlockList=BlockList)
+            GetRecordToTrain(BadIP=BadIP , GoodIP=GoodIP , BlockList=BlockList , CleanList=CleanerDB.Cleaners)
             #time.sleep(0.5)
         except Exception as e :
             
@@ -134,13 +148,29 @@ def DefenseSys() :
 
 
 
+
+
+def CheckFileUpdate() : 
+    while 1 :
+        try : 
+            CleanerDB.Read()
+        except Exception as e :
+            print(f"<Error> CheckFileUpdate : {e}")
+            time.sleep(2.0)
+            continue
+
+
+
+
+
 def main() : 
     os.system("sudo iptables-save > iptables.conf")
     threading.Thread(target=ForwardpktAndGetService).start()
     threading.Thread(target=GetIOTDevicesInfo).start()
-    # threading.Thread(target=DetectSys_Predict).start() # CNN45646
-    # threading.Thread(target=DetectSys_Train).start()   # CNN54732
-    # threading.Thread(target=DefenseSys).start()
+    threading.Thread(target=DetectSys_Predict).start() # CNN45646
+    threading.Thread(target=DetectSys_Train).start()   # CNN54732
+    threading.Thread(target=DefenseSys).start()
+    threading.Thread(target=CheckFileUpdate).start()
 
 
 
@@ -174,10 +204,6 @@ def EndMEC(sig , frame) :
     except Exception as e : 
             print(f"<Error> EndMEC : {e}")
             exit()
-
-
-def GetCNNmodel() : 
-    return Pred_model
 
 
 

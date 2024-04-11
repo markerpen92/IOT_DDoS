@@ -106,7 +106,7 @@ def Iptables(IOTDevicesInfo , BlockList) :
 
 
 
-def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
+def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None , CleanList=None):
     GoodTargetIP =None 
     BadTargetIP =None
     BadRole = None
@@ -135,31 +135,35 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None):
                 return
             patterns = OneRecord.split(' ')
             
-            if  BadTargetIP == patterns[0] or (BadTargetIP in BlockList) :
+            if  BadTargetIP == patterns[0] or (patterns[0] in BlockList) :
                 record = RemoveOneRecord(filename , line_num)
 
                 record_patterns = record.split(' ')
 
-                condiction_count = 0
-
-                if record_patterns[0] == 0 : #window size
-                    pass
-
-                if record_patterns[1] == 1 : #keep alive
-                    condiction_count += 1
-
-                if record_patterns[2] == 1 : #\r\n or not
-                    condiction_count += 1
-
-                if record_patterns[3] != 0 : # content length
-                    condiction_count += 1
-
-                if condiction_count >= 2 : 
+                if record_patterns in CleanList : 
+                    return
+                else : 
                     record = BadRole + record
                     TraingFile = 'IDS/TrainingList.txt'
                     WriteRecordIntoFile(TraingFile , record)
                     if BadTargetIP not in BlockList : 
                         BlockList.add(BadTargetIP)
+
+                # condiction_count = 0
+                # if record_patterns[0] == 0 : #window size
+                #     pass
+                # if record_patterns[1] == 1 : #keep alive
+                #     condiction_count += 1
+                # if record_patterns[2] == 1 : #\r\n or not
+                #     condiction_count += 1
+                # if record_patterns[3] != 0 : # content length
+                #     condiction_count += 1
+                # if condiction_count >= 2 : 
+                #     record = BadRole + record
+                #     TraingFile = 'IDS/TrainingList.txt'
+                #     WriteRecordIntoFile(TraingFile , record)
+                #     if BadTargetIP not in BlockList : 
+                #         BlockList.add(BadTargetIP)
 
             elif GoodTargetIP == patterns[0] and (GoodTargetIP not in BlockList) :
                 record = RemoveOneRecord(filename , line_num)
