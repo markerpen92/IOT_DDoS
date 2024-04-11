@@ -296,11 +296,8 @@ class CNN_Model(nn.Module):
                     
                     # print('~'*20 , output , '~'*20)
 
-
-                    print('INININININININININ-----666')
                     if predicted == 'tensor([0])': 
                         reocrdfile = 'IPS/record.txt'
-                        print('INININININININININ')
                         with open(reocrdfile , 'a+')as recordfile :
                             recordfile.write(Input + '\n')
                             recordfile.close()
@@ -324,6 +321,7 @@ class CNN_Model(nn.Module):
                     try : 
                         NewContext.remove(idx)
                     except Exception as e : 
+                        print(e)
                         continue
                     # NewContext[idx] = ' '
 
