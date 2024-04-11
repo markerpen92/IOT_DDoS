@@ -104,13 +104,13 @@ def DetectSys_Predict() :
     while 1 : 
         try : 
             print('---------------------' , '111' , '---------------------')
-            Pred_model.PredictModel(training_model=None , BlockList=BlockList)
+            Pred_model.PredictModel(training_model=Tran_model , BlockList=BlockList)
             # Tran_model.TrainingModel(testing_model=Pred_model)
             
         except Exception as e : 
             print(f"<Error> DetectSys_Predict : {e}")
             traceback_str = traceback.format_exc()
-            traceback_str = traceback.format_exc()
+            print(traceback_str)
             time.sleep(0.5)
             continue
 
