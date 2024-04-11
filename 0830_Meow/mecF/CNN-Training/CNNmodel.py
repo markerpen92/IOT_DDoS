@@ -298,8 +298,9 @@ class CNN_Model(nn.Module):
 
                     if predicted == 'tensor([0])': 
                         reocrdfile = 'IPS/record.txt'
-                        with open(reocrdfile , 'a+')as file :
-                            file.write(Input + '\n')
+                        with open(reocrdfile , 'a+')as recordfile :
+                            recordfile.write(Input + '\n')
+                            recordfile.close()
                             
                     else : 
                         print('\n\n' , '~'*20 , srcip , 'is detected by CNN45646' , '~'*20 , '\n\n')
@@ -309,9 +310,9 @@ class CNN_Model(nn.Module):
                         susFile_lock = threading.Lock()
 
                         with susFile_lock:
-                            with open(sus_file , 'a+')as file :
-                                file.write(srcip + '\n')
-                                file.close()
+                            with open(sus_file , 'a+')as susfile :
+                                susfile.write(srcip + '\n')
+                                susfile.close()
                         
                         '''
                         if predicted is 1 -> Block the IP
