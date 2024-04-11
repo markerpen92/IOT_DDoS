@@ -146,6 +146,9 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None , CleanList=None)
                     record = BadRole + record
                     TraingFile = 'IDS/TrainingList.txt'
                     WriteRecordIntoFile(TraingFile , record)
+
+                    print('INININ---' , f'record:{record_patterns} & clinlist:{CleanList}' , '---INININ')
+
                     if BadTargetIP not in BlockList : 
                         BlockList.add(BadTargetIP)
 
