@@ -298,6 +298,7 @@ class CNN_Model(nn.Module):
 
                     if predicted == 'tensor([0])': 
                         reocrdfile = 'IPS/record.txt'
+                        print('INININININININININ')
                         with open(reocrdfile , 'a+')as recordfile :
                             recordfile.write(Input + '\n')
                             recordfile.close()
