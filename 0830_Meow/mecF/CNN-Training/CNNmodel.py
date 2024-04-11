@@ -296,6 +296,8 @@ class CNN_Model(nn.Module):
                     
                     # print('~'*20 , output , '~'*20)
 
+
+                    print('INININININININININ-----666')
                     if predicted == 'tensor([0])': 
                         reocrdfile = 'IPS/record.txt'
                         print('INININININININININ')
