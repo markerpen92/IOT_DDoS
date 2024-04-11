@@ -145,7 +145,7 @@ def GetRecordToTrain(BadIP=None , GoodIP=None , BlockList=None , CleanList=None)
                 if record_patterns[1:] in CleanList : 
                     return
                 else : 
-                    record = BadRole + record
+                    record = BadRole + record + '\n'
                     TraingFile = 'IDS/TrainingList.txt'
                     WriteRecordIntoFile(TraingFile , record)
 
